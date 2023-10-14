@@ -1,4 +1,5 @@
-import { content } from './data/content';
-const App = () => {
-  
-};
+import { App } from './components/App.js';
+import { content } from './data/content.js';
+
+const body = document.body;
+const app = App(body, content);

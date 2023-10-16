@@ -1,3 +1,5 @@
 export const content = {
-  header: {},
+  title: 'PacerGame',
+  header: {
+  },
 };

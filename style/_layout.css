@@ -31,6 +31,8 @@ p {
 body {
   min-height: 100vh;
   display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 html, body {
   width: 100%;

@@ -1,5 +1,7 @@
 export const content = {
-  title: 'PacerGame',
   header: {
+  },
+  main: {
+    title: 'PacerGame',
   },
 };

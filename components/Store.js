@@ -7,7 +7,7 @@ class Store {
   
   init = (initialState, callback) => {
     this.$textareaText = initialState.textareaText;
-    callback(this.$textareaText);
+    callback({ textareaText: this.$textareaText });
   }
   
     get textareaText() {

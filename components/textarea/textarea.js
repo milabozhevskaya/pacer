@@ -8,7 +8,7 @@ class Textarea extends Element {
     this.node.oninput = (e) => callback(e.target.value);
   }
 
-  update = (text) => (this.node.value = text);
+  update = (text) => this.node.value = text;
 }
 
 export { Textarea };

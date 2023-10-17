@@ -1,6 +1,6 @@
 import { Element } from "./Element.js";
 import { Main } from "./Main.js";
-import { Header } from "./Header.js";
+import { Header } from "./header/Header.js";
 
 class View extends Element {
   constructor({ parent, controller, store, content }) {

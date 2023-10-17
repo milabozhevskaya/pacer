@@ -1,4 +1,5 @@
 import { Element } from "./Element.js";
+import { Rules } from "./Rules.js";
 import { Textarea } from "./textarea/textarea.js";
 
 class Main extends Element {
@@ -16,6 +17,7 @@ class Main extends Element {
     this.title = new Element({
       parent: this.container.node,
       tagName: "h1",
+      className: "main__title title",
       content: content.title,
     });
 
@@ -23,6 +25,12 @@ class Main extends Element {
       this.container.node,
       controller.changeTextareaText
     );
+
+    this.rules = new Rules({
+      parent: this.container.node,
+      className: "main",
+      content: content.rules,
+    });
   }
 
   updateTextareaText = (text) => this.textarea.update(text);

@@ -1,6 +1,6 @@
 import { Element } from "./Element.js";
-import { Rules } from "./Rules.js";
-import { Textarea } from "./textarea/textarea.js";
+import { Rules } from "./rules/Rules.js";
+import { Textarea } from "./textarea/Textarea.js";
 
 class Main extends Element {
   constructor({ parent, className, controller, content }) {

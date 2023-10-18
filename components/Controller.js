@@ -12,10 +12,11 @@ class Controller {
 
     onstorage = (e) => {
       if (e.key !== "pacer") return;
-      const { textareaText } = LocalStorageData.fromJson(
+      const { textareaText, selfBeliefPoints } = LocalStorageData.fromJson(
         JSON.parse(e.newValue || "")
       );
-      this.store.textareaText = textareaText;
+      if (this.store.textareaText !== textareaText) this.store.textareaText = textareaText;
+      if (this.store.selfBeliefPoints !== selfBeliefPoints) this.store.selfBeliefPoints = selfBeliefPoints;
     };
   }
 
@@ -37,12 +38,16 @@ class Controller {
     } catch (e) {
       return new LocalStorageData({
         textareaText: "",
+        selfBeliefPoints: "0",
       });
     }
   };
 
   changeTextareaText = (text) => {
     this.store.textareaText = text;
+  };
+  changeSelfBeliefPoints = (points) => {
+    this.store.selfBeliefPoints = points;
   };
 }
 

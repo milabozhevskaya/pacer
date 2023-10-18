@@ -17,8 +17,11 @@ class Header extends Element {
     this.selfBeliefPoints = new SelfBeliefPoints({
       parent: this.container.node,
       className: "header",
+      controller: controller.changeSelfBeliefPoints,
     });
   }
+
+  updateSelfBeliefPoints = (points) => this.selfBeliefPoints.update(points);
 }
 
 export { Header };

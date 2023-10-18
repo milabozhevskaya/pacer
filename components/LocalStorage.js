@@ -1,6 +1,7 @@
 class LocalStorageData {
-  constructor({ textareaText }) {
+  constructor({ textareaText, selfBeliefPoints }) {
     this.textareaText = textareaText;
+    this.selfBeliefPoints = selfBeliefPoints;
   }
 
   static toJson(data) {
@@ -19,6 +20,13 @@ class LocalStorageData {
 
     if (this.instanceOfISourcesLStorage(data, "textareaText")) {
       initData.textareaText = data.textareaText;
+    } else {
+      throw new Error("Not property in localstorage");
+    }
+
+    if (this.instanceOfISourcesLStorage(data, "selfBeliefPoints")) {
+      initData.textareaText = data.textareaText;
+      initData.selfBeliefPoints = data.selfBeliefPoints;
     } else {
       throw new Error("Not property in localstorage");
     }

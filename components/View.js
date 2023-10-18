@@ -25,9 +25,13 @@ class View extends Element {
 
   init = (initialData) => {
     this.main.updateTextareaText(initialData.textareaText);
+    this.header.updateSelfBeliefPoints(initialData.selfBeliefPoints);
 
     this.store.onChangeTextareaText.add((textareaText) =>
-    this.main.updateTextareaText(textareaText)
+      this.main.updateTextareaText(textareaText)
+    );
+    this.store.onChangeSelfBeliefPoints.add((selfBeliefPoints) =>
+      this.header.updateSelfBeliefPoints(selfBeliefPoints)
     );
   };
 }

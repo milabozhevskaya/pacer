@@ -6,6 +6,7 @@ export const styles = {
   border: '1px solid #eb8d3c54',
   color: '#7c4747',
   transition: '.4s ease-in-out',
+  display: 'flex',
   onfocus: {
     color: '#b75621',
     border: '1px solid #f0ad73',

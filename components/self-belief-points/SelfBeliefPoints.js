@@ -55,20 +55,24 @@ class SelfBeliefPoints extends Element {
     };
     this.input.node.oninput = (event) => {
       if (!this.flag) {
-        this.update(this.input.node.value);
+        this.span.node.innerHTML = this.input.node.value;
       }
     };
     this.input.node.onchange = () => {
-      this.input.node.value = parseInt(this.input.node.value);
-      this.update(this.input.node.value);
+      const value = (parseInt(this.input.node.value) || '0').toString();
+      this.input.node.value = value;
+      this.span.node.innerHTML = value;
+      controller(value);
     };
-    this.input.node.onkeyup = (event) => {
+    this.input.node.onkeyup = () => {
       this.flag = false;
     };
   }
 
   update = (points) => {
+    if (this.input.node.value === points) return;
     this.span.node.innerText = points;
+    this.input.node.value = points;
   };
 }
 

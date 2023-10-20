@@ -1,5 +1,9 @@
 export const content = {
-  header: {},
+  header: {
+    calendar: {
+      button: "Календарь",
+    },
+  },
   main: {
     title: "PacerGame",
     rules: {

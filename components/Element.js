@@ -1,9 +1,9 @@
 class Element {
   constructor({
     parent = null,
-    tagName = 'div',
-    className = '',
-    content = '',
+    tagName = "div",
+    className = "",
+    content = "",
     styles = {},
   }) {
     const element = document.createElement(tagName);
@@ -14,7 +14,10 @@ class Element {
     Object.assign(this.node.style, styles);
     return this;
   }
-  
+
+  updateContent(content) {
+    this.node.innerHTML = content;
+  }
 
   destroy() {
     this.node.remove();

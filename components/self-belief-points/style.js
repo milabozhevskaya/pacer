@@ -19,7 +19,7 @@ export const styles = {
     position: 'relative',
   },
   span: {
-    minWidth: '44px',
+    minWidth: '40px',
     minHeight: '44px',
     textAlign: 'center',
     padding: '0 15px',

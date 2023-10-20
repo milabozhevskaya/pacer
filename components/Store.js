@@ -4,11 +4,13 @@ class Store {
   constructor() {
     this.$textareaText = "";
     this.$selfBeliefPoints = "0";
+    this.$time = "";
   }
 
   init = (initialState, callback) => {
     this.$textareaText = initialState.textareaText;
     this.$selfBeliefPoints = initialState.selfBeliefPoints;
+    this.$time = initialState.time;
     callback(this.computeDataForLocalStorage());
   };
 
@@ -32,6 +34,14 @@ class Store {
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   }
 
+  get date() {
+    return this.$time;
+  }
+
+  set date(value) {
+    this.$time = value;
+  }
+
   onChangeTextareaText = new Signal();
   onChangeSelfBeliefPoints = new Signal();
 
@@ -39,6 +49,7 @@ class Store {
   computeDataForLocalStorage = () => ({
     textareaText: this.$textareaText,
     selfBeliefPoints: this.$selfBeliefPoints,
+    time: this.$time,
   });
 }
 

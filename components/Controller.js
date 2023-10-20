@@ -1,10 +1,11 @@
 import { LocalStorageData } from "./LocalStorage.js";
+import { getDate } from "../utils/getDate.js";
 
 class Controller {
   constructor(store) {
     this.store = store;
 
-    this.initialData = this.getLocalStorageData();
+    this.initialData = this.prepareDateForStore();
 
     this.store.onChangeLocalStorageData.add((data) =>
       this.toLocalStorageData(data)
@@ -15,8 +16,9 @@ class Controller {
       const { textareaText, selfBeliefPoints } = LocalStorageData.fromJson(
         JSON.parse(e.newValue || "")
       );
+      
       if (this.store.textareaText !== textareaText) this.store.textareaText = textareaText;
-      if (this.store.selfBeliefPoints !== selfBeliefPoints) this.store.selfBeliefPoints = selfBeliefPoints;
+      if (this.store.selfBeliefPoints !== selfBeliefPoints) this.store.selfBeliefPoints = (parseInt(selfBeliefPoints) || '0').toString();
     };
   }
 
@@ -43,12 +45,26 @@ class Controller {
     }
   };
 
+  prepareDateForStore = () => {
+    const initialDate = this.getLocalStorageData();
+    const date = getDate();
+    return { ...initialDate, ...date };
+  }
+  
+  runClock = () => {
+    setInterval(() => {
+      const date = getDate();
+      this.store.date = date;
+    }, intervalTime);
+  };
+  
   changeTextareaText = (text) => {
     this.store.textareaText = text;
   };
   changeSelfBeliefPoints = (points) => {
     this.store.selfBeliefPoints = points;
   };
+  openCalendar = () => {};
 }
 
 export { Controller };

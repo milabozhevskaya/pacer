@@ -26,6 +26,7 @@ class View extends Element {
   init = (initialData) => {
     this.main.updateTextareaText(initialData.textareaText);
     this.header.updateSelfBeliefPoints(initialData.selfBeliefPoints);
+    this.header.updateTime(initialData.time);
 
     this.store.onChangeTextareaText.add((textareaText) =>
       this.main.updateTextareaText(textareaText)

@@ -1,5 +1,5 @@
 import { Element } from "../Element.js";
-import { Calendar } from "../calendar/Calendar.js";
+import { DateWidget } from "../dateWidget/DateWidget.js";
 import { SelfBeliefPoints } from "../self-belief-points/SelfBeliefPoints.js";
 import { styles } from "./style.js";
 
@@ -21,16 +21,16 @@ class Header extends Element {
       className: "header",
       controller: controller.changeSelfBeliefPoints,
     });
-    this.calendar = new Calendar({
+    this.dateWidget = new DateWidget({
       parent: this.container.node,
       className: "header",
       controller: controller.openCalendar,
-      content: content.calendar,
+      content: content.dateWidget,
     })
   }
 
   updateSelfBeliefPoints = (points) => this.selfBeliefPoints.update(points);
-  updateTime = (time) => this.calendar.updateTime(time);
+  updateTime = (time) => this.dateWidget.updateTime(time);
 }
 
 export { Header };

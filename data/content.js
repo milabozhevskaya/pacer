@@ -1,6 +1,6 @@
 export const content = {
   header: {
-    calendar: {
+    dateWidget: {
       button: "Календарь",
     },
   },

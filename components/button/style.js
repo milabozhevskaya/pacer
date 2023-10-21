@@ -1,4 +1,7 @@
-export const styles = {
+export { styles as buttonStyles };
+
+const styles = {
+  position: "relative",
   minWidth: '130px',
   height: '40px',
   boxShadow: `#f6c3411f 0px 2px 4px 0px, #eb8d3c52 0px 2px 16px 0px`,

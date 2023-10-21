@@ -11,6 +11,24 @@ class DateWidget extends Element {
       className: `${className}__date-widget date-widget`,
       styles,
     });
+    this.popup = new Element({
+      parent: this.node,
+      tagName: "div",
+      className: "date-widget__popup popup",
+      styles: styles.popup,
+    });
+    this.popupWrapper = new Element({
+      parent: this.popup.node,
+      tagName: "div",
+      className: "popup__wrapper",
+      styles: styles.popup.wrapper,
+    });
+    this.calendar = new Calendar({
+      parent: this.popupWrapper.node,
+      className: "date-widget__calendar",
+      controller,
+      content: content.calendar,
+    });
     this.time = new Element({
       parent: this.node,
       tagName: "date",
@@ -23,13 +41,6 @@ class DateWidget extends Element {
       content: content.button,
       controller,
       styles: styles.button,
-    });
-    this.calendar = new Calendar({
-      parent: this.node,
-      className: "date-widget__calendar",
-      controller,
-      content: content.calendar,
-      styles: styles.calendar,
     });
   }
   

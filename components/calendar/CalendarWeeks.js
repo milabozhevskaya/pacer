@@ -22,10 +22,10 @@ class CalendarWeeks extends Element {
           className: "calendar__day",
           content: date.getDate(),
           styles: {
-            ...styles,
-            ...(isCurrentDay && styles.currentDay),
-            ...(isCurrentMonth && styles.currentMonth),
-            ...(isWeekend && styles.weekend),
+            ...styles.day,
+            ...(isCurrentMonth && styles.day.currentMonth),
+            ...(isCurrentMonth && isWeekend && styles.day.weekend),
+            ...(isCurrentDay && styles.day.currentDay),
           },
         });
       }

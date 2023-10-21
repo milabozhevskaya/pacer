@@ -15,6 +15,7 @@ class CalendarDays extends Element {
         tagName: "li",
         className: "calendar__day",
         content: day,
+        styles: styles.day,
       });
     });
   }

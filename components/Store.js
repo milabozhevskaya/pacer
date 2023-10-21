@@ -12,7 +12,7 @@ class Store {
     this.$textareaText = initialState.textareaText;
     this.$selfBeliefPoints = initialState.selfBeliefPoints;
     this.$time = initialState.time;
-    callback(this.computeDataForLocalStorage());
+    callback({...this.computeDataForLocalStorage(), time: this.$time });
   };
 
   get textareaText() {
@@ -35,12 +35,13 @@ class Store {
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   }
 
-  get date() {
+  get time() {
     return this.$time;
   }
 
-  set date(value) {
+  set time(value) {
     this.$time = value;
+    this.onChangeTime.emit(value);
   }
 
   get openCalendar() {
@@ -54,13 +55,13 @@ class Store {
 
   onChangeTextareaText = new Signal();
   onChangeSelfBeliefPoints = new Signal();
+  onChangeTime = new Signal();
   onChangeOpenCalendar = new Signal();
 
   onChangeLocalStorageData = new Signal();
   computeDataForLocalStorage = () => ({
     textareaText: this.$textareaText,
     selfBeliefPoints: this.$selfBeliefPoints,
-    time: this.$time,
   });
 }
 

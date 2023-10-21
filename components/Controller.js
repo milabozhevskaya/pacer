@@ -1,11 +1,13 @@
 import { LocalStorageData } from "./LocalStorage.js";
 import { getDate } from "../utils/getDate.js";
-
+const intervalTime = 999;
 class Controller {
   constructor(store) {
     this.store = store;
 
     this.initialData = this.prepareDateForStore();
+
+    this.runClock();
 
     this.store.onChangeLocalStorageData.add((data) =>
       this.toLocalStorageData(data)
@@ -16,9 +18,13 @@ class Controller {
       const { textareaText, selfBeliefPoints } = LocalStorageData.fromJson(
         JSON.parse(e.newValue || "")
       );
-      
-      if (this.store.textareaText !== textareaText) this.store.textareaText = textareaText;
-      if (this.store.selfBeliefPoints !== selfBeliefPoints) this.store.selfBeliefPoints = (parseInt(selfBeliefPoints) || '0').toString();
+
+      if (this.store.textareaText !== textareaText)
+        this.store.textareaText = textareaText;
+      if (this.store.selfBeliefPoints !== selfBeliefPoints)
+        this.store.selfBeliefPoints = (
+          parseInt(selfBeliefPoints) || "0"
+        ).toString();
     };
   }
 
@@ -47,17 +53,17 @@ class Controller {
 
   prepareDateForStore = () => {
     const initialDate = this.getLocalStorageData();
-    const date = getDate();
-    return { ...initialDate, ...date };
-  }
-  
+    const time = getDate();
+    return { ...initialDate, time };
+  };
+
   runClock = () => {
     setInterval(() => {
-      const date = getDate();
-      this.store.date = date;
+      const time = getDate();
+      if (this.store.time !== time) this.store.time = time;
     }, intervalTime);
   };
-  
+
   changeTextareaText = (text) => {
     this.store.textareaText = text;
   };

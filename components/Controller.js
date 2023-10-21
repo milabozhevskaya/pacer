@@ -64,7 +64,13 @@ class Controller {
   changeSelfBeliefPoints = (points) => {
     this.store.selfBeliefPoints = points;
   };
-  openCalendar = () => {};
+  openCalendar = () => {
+    if (this.store.openCalendar) this.store.openCalendar = false;
+    else this.store.openCalendar = true;
+  };
+  onClickView = () => {
+    if (this.store.openCalendar) this.store.openCalendar = false;
+  };
 }
 
 export { Controller };

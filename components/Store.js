@@ -5,6 +5,7 @@ class Store {
     this.$textareaText = "";
     this.$selfBeliefPoints = "0";
     this.$time = "";
+    this.$openCalendar = false;
   }
 
   init = (initialState, callback) => {
@@ -42,8 +43,18 @@ class Store {
     this.$time = value;
   }
 
+  get openCalendar() {
+    return this.$openCalendar;
+  }
+
+  set openCalendar(flag) {
+    this.$openCalendar = flag;
+    this.onChangeOpenCalendar.emit(flag);
+  }
+
   onChangeTextareaText = new Signal();
   onChangeSelfBeliefPoints = new Signal();
+  onChangeOpenCalendar = new Signal();
 
   onChangeLocalStorageData = new Signal();
   computeDataForLocalStorage = () => ({

@@ -11,24 +11,6 @@ class DateWidget extends Element {
       className: `${className}__date-widget date-widget`,
       styles,
     });
-    this.popup = new Element({
-      parent: this.node,
-      tagName: "div",
-      className: "date-widget__popup popup",
-      styles: styles.popup,
-    });
-    this.popupWrapper = new Element({
-      parent: this.popup.node,
-      tagName: "div",
-      className: "popup__wrapper",
-      styles: styles.popup.wrapper,
-    });
-    this.calendar = new Calendar({
-      parent: this.popupWrapper.node,
-      className: "date-widget__calendar",
-      controller,
-      content: content.calendar,
-    });
     this.time = new Element({
       parent: this.node,
       tagName: "date",
@@ -39,12 +21,30 @@ class DateWidget extends Element {
       parent: this.node,
       className: "date-widget__button",
       content: content.button,
-      controller,
+      controller: (event) => {
+        console.log(event);
+        event.stopPropagation();
+        controller();
+      },
       styles: styles.button,
     });
+    this.calendar = null;
+    this.popupStyles = styles.popup;
+    this.calendarContent = content.calendar;
   }
   
   updateTime = (time) => this.time.updateContent(time);
+  openCalendar = (popup) => {
+    this.calendar = new Calendar({
+      className: "date-widget__calendar calendar",
+      content: this.calendarContent,
+    });
+    popup.setContent(this.calendar);
+    popup.addStyles(this.popupStyles);
+    popup.append(this.node);
+  }
+  
+  closeCalendar = () => this.calendar = null;
 }
 
 export { DateWidget };

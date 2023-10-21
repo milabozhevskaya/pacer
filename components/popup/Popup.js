@@ -9,6 +9,11 @@ class Popup extends Element {
       className: `${className}__popup popup`,
       styles,
     });
+    this.after = new Element({
+      parent: this.node,
+      tagName: "style",
+      content: styles.after,
+    });
     this.popupWrapper = new Element({
       parent: this.node,
       tagName: "div",

@@ -4,6 +4,7 @@ export const styles = {
   flexDirection: "column",
   justifyContent: "center",
   alignItems: "center",
+  useSelect: "none",
   top: {
     width: "100%",
     display: "flex",

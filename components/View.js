@@ -38,6 +38,7 @@ class View extends Element {
     this.store.onChangeSelfBeliefPoints.add((selfBeliefPoints) =>
       this.header.updateSelfBeliefPoints(selfBeliefPoints)
     );
+    this.store.onChangeTime.add((time) => this.header.updateTime(time));
     this.store.onChangeOpenCalendar.add((flag) => {
       if (flag) {
         this.calendarPopup = new Popup({ className: "date-widget" })

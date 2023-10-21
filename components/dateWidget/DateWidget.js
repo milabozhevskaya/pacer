@@ -22,7 +22,6 @@ class DateWidget extends Element {
       className: "date-widget__button",
       content: content.button,
       controller: (event) => {
-        console.log(event);
         event.stopPropagation();
         controller();
       },

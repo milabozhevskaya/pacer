@@ -1,5 +1,6 @@
 import { Element } from "../Element.js";
 import { Button } from "../button/Button.js";
+import { Calendar } from "../calendar/Calendar.js";
 import { styles } from "./style.js";
 
 class DateWidget extends Element {
@@ -22,6 +23,13 @@ class DateWidget extends Element {
       content: content.button,
       controller,
       styles: styles.button,
+    });
+    this.calendar = new Calendar({
+      parent: this.node,
+      className: "date-widget__calendar",
+      controller,
+      content: content.calendar,
+      styles: styles.calendar,
     });
   }
   

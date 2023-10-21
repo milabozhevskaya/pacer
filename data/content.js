@@ -2,6 +2,23 @@ export const content = {
   header: {
     dateWidget: {
       button: "Календарь",
+      calendar: {
+        days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+        month: [
+          "January",
+          "February",
+          "March",
+          "April",
+          "May",
+          "June",
+          "July",
+          "August",
+          "September",
+          "October",
+          "November",
+          "December",
+        ],
+      },
     },
   },
   main: {

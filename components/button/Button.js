@@ -5,7 +5,7 @@ class Button extends Element {
   constructor({
     parent,
     className = "",
-    callback = () => ({}),
+    controller = () => ({}),
     content = "",
     styles = {},
   }) {
@@ -21,7 +21,6 @@ class Button extends Element {
       content,
       styles: buttonStyles.span,
     });
-    console.log(styles);
     Object.assign(this.node.style, styles);
 
     this.node.onmouseover = () => {
@@ -31,7 +30,9 @@ class Button extends Element {
       Object.assign(this.node.style, buttonStyles);
     };
 
-    this.node.onclick = () => callback();
+    this.node.onclick = (event) => {
+      controller(event);
+    };
   }
 }
 

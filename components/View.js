@@ -1,6 +1,7 @@
 import { Element } from "./Element.js";
 import { Main } from "./Main.js";
 import { Header } from "./header/Header.js";
+import { Popup } from "./popup/Popup.js";
 
 class View extends Element {
   constructor({ parent, controller, store, content }) {
@@ -21,6 +22,9 @@ class View extends Element {
       controller,
       content: main,
     });
+    this.node.onclick = () => {
+      this.controller.onClickView();
+    }
   }
 
   init = (initialData) => {
@@ -34,6 +38,15 @@ class View extends Element {
     this.store.onChangeSelfBeliefPoints.add((selfBeliefPoints) =>
       this.header.updateSelfBeliefPoints(selfBeliefPoints)
     );
+    this.store.onChangeOpenCalendar.add((flag) => {
+      if (flag) {
+        this.calendarPopup = new Popup({ className: "date-widget" })
+        this.header.openCalendar(this.calendarPopup);
+      } else {
+        this.calendarPopup.closePopup();
+        this.header.closeCalendar();
+      }
+    });
   };
 }
 

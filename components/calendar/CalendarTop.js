@@ -19,6 +19,7 @@ class CalendarTop extends Element {
       tagName: "span",
       className: "calendar__year",
       content: year,
+      styles: styles.year,
     });
   }
 }

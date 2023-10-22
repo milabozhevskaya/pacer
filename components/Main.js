@@ -47,12 +47,13 @@ class Main extends Element {
       content: content.notes.quest,
       key: "quest",
     });
-
-    this.textarea = new Textarea(
-      this.container.node,
-      controller.changeTextareaText
-    );
-
+    this.textarea = new NoteSection({
+      parent: this.container.node,
+      className: "main",
+      content: content.textarea,
+      callback: controller.changeTextareaText,
+      key: "textarea",
+    });
     this.rules = new Rules({
       parent: this.container.node,
       className: "main",

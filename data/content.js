@@ -23,6 +23,17 @@ export const content = {
   },
   main: {
     title: "PacerGame",
+    notes: {
+      endeavor: {
+        title: "Стремление",
+      },
+      action: {
+        title: "Действия",
+      },
+      quest: {
+        title: "Квесты",
+      },
+    },
     rules: {
       title: "Правила",
       text: [

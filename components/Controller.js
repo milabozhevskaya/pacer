@@ -64,7 +64,7 @@ class Controller {
     }, intervalTime);
   };
 
-  changeTextareaText = (text) => {
+  changeTextareaText = (key, text) => {
     this.store.textareaText = text;
   };
   changeSelfBeliefPoints = (points) => {

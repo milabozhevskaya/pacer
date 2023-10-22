@@ -1,4 +1,5 @@
 import { Element } from "./Element.js";
+import { NoteSection } from "./noteSaction/NoteSection.js";
 import { Rules } from "./rules/Rules.js";
 import { Textarea } from "./textarea/Textarea.js";
 
@@ -19,6 +20,32 @@ class Main extends Element {
       tagName: "h1",
       className: "main__title title",
       content: content.title,
+    });
+    this.notes = new Element({
+      parent: this.container.node,
+      className: "main__notes",
+      tagName: "div",
+    });
+    this.endeavor = new NoteSection({
+      parent: this.notes.node,
+      className: "main",
+      callback: controller.changeTextareaText,
+      content: content.notes.endeavor,
+      key: "endeavor",
+    });
+    this.action = new NoteSection({
+      parent: this.notes.node,
+      className: "main",
+      callback: controller.changeTextareaText,
+      content: content.notes.action,
+      key: "action",
+    });
+    this.quest = new NoteSection({
+      parent: this.notes.node,
+      className: "main",
+      callback: controller.changeTextareaText,
+      content: content.notes.quest,
+      key: "quest",
     });
 
     this.textarea = new Textarea(

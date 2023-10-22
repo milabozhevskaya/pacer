@@ -62,6 +62,9 @@ class Main extends Element {
   }
 
   updateTextareaText = (text) => this.textarea.update(text);
+  updateEndeavorText = (text) => this.endeavor.update(text);
+  updateActionText = (text) => this.action.update(text);
+  updateQuestText = (text) => this.quest.update(text);
 }
 
 export { Main };

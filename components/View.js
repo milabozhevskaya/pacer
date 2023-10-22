@@ -29,11 +29,23 @@ class View extends Element {
 
   init = (initialData) => {
     this.main.updateTextareaText(initialData.textareaText);
+    this.main.updateEndeavorText(initialData.endeavorText);
+    this.main.updateActionText(initialData.actionText);
+    this.main.updateQuestText(initialData.questText);
     this.header.updateSelfBeliefPoints(initialData.selfBeliefPoints);
     this.header.updateTime(initialData.time);
 
     this.store.onChangeTextareaText.add((textareaText) =>
       this.main.updateTextareaText(textareaText)
+    );
+    this.store.onChangeEndeavorText.add((endeavorText) =>
+      this.main.updateEndeavorText(endeavorText)
+    );
+    this.store.onChangeActionText.add((actionText) =>
+      this.main.updateActionText(actionText)
+    );
+    this.store.onChangeQuestText.add((questText) =>
+      this.main.updateQuestText(questText)
     );
     this.store.onChangeSelfBeliefPoints.add((selfBeliefPoints) =>
       this.header.updateSelfBeliefPoints(selfBeliefPoints)

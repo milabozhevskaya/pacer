@@ -3,6 +3,9 @@ import { Signal } from "./Signal.js";
 class Store {
   constructor() {
     this.$textareaText = "";
+    this.$endeavorText = "";
+    this.$actionText = "";
+    this.$questText = "";
     this.$selfBeliefPoints = "0";
     this.$time = "";
     this.$openCalendar = false;
@@ -10,6 +13,9 @@ class Store {
 
   init = (initialState, callback) => {
     this.$textareaText = initialState.textareaText;
+    this.$endeavorText = initialState.endeavorText;
+    this.$actionText = initialState.actionText;
+    this.$questText = initialState.questText;
     this.$selfBeliefPoints = initialState.selfBeliefPoints;
     this.$time = initialState.time;
     callback({...this.computeDataForLocalStorage(), time: this.$time });
@@ -22,6 +28,36 @@ class Store {
   set textareaText(value) {
     this.$textareaText = value;
     this.onChangeTextareaText.emit(value);
+    this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
+  }
+
+  get endeavorText() {
+    return this.$endeavorText;
+  }
+
+  set endeavorText(value) {
+    this.$endeavorText = value;
+    this.onChangeEndeavorText.emit(value);
+    this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
+  }
+
+  get actionText() {
+    return this.$actionText;
+  }
+
+  set actionText(value) {
+    this.$actionText = value;
+    this.onChangeActionText.emit(value);
+    this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
+  }
+
+  get questText() {
+    return this.$questText;
+  }
+
+  set questText(value) {
+    this.$questText = value;
+    this.onChangeQuestText.emit(value);
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   }
 
@@ -54,6 +90,9 @@ class Store {
   }
 
   onChangeTextareaText = new Signal();
+  onChangeEndeavorText = new Signal();
+  onChangeActionText = new Signal();
+  onChangeQuestText = new Signal();
   onChangeSelfBeliefPoints = new Signal();
   onChangeTime = new Signal();
   onChangeOpenCalendar = new Signal();
@@ -61,6 +100,9 @@ class Store {
   onChangeLocalStorageData = new Signal();
   computeDataForLocalStorage = () => ({
     textareaText: this.$textareaText,
+    endeavorText: this.$endeavorText,
+    actionText: this.$actionText,
+    questText: this.$questText,
     selfBeliefPoints: this.$selfBeliefPoints,
   });
 }

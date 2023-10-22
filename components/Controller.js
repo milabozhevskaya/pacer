@@ -15,12 +15,21 @@ class Controller {
 
     onstorage = (e) => {
       if (e.key !== "pacer") return;
-      const { textareaText, selfBeliefPoints } = LocalStorageData.fromJson(
+      const { textareaText, endeavorText, actionText, questText, selfBeliefPoints } = LocalStorageData.fromJson(
         JSON.parse(e.newValue || "")
       );
 
       if (this.store.textareaText !== textareaText)
         this.store.textareaText = textareaText;
+
+      if (this.store.endeavorText !== endeavorText)
+        this.store.endeavorText = endeavorText;
+
+      if (this.store.actionText !== actionText)
+        this.store.actionText = actionText;
+
+      if (this.store.questText !== questText)
+        this.store.questText = questText;
       if (this.store.selfBeliefPoints !== selfBeliefPoints)
         this.store.selfBeliefPoints = (
           parseInt(selfBeliefPoints) || "0"
@@ -46,6 +55,9 @@ class Controller {
     } catch (e) {
       return new LocalStorageData({
         textareaText: "",
+        endeavorText: "",
+        actionText: "",
+        questText: "",
         selfBeliefPoints: "0",
       });
     }
@@ -63,9 +75,24 @@ class Controller {
       if (this.store.time !== time) this.store.time = time;
     }, intervalTime);
   };
+  
+  changeText = {
+    textarea: (text) => {
+      this.store.textareaText = text;
+    },
+    endeavor: (text) => {
+      this.store.endeavorText = text;
+    },
+    action: (text) => {
+      this.store.actionText = text;
+    },
+    quest: (text) => {
+      this.store.questText = text;
+    },
+  }
 
   changeTextareaText = (key, text) => {
-    this.store.textareaText = text;
+    this.changeText[key](text);
   };
   changeSelfBeliefPoints = (points) => {
     this.store.selfBeliefPoints = points;

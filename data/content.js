@@ -34,6 +34,9 @@ export const content = {
         title: "Квесты",
       },
     },
+    textarea: {
+      title: "Заметки",
+    },
     rules: {
       title: "Правила",
       text: [

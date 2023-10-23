@@ -1,7 +1,7 @@
 import { Element } from "./Element.js";
 import { NoteSection } from "./noteSaction/NoteSection.js";
 import { Rules } from "./rules/Rules.js";
-import { Textarea } from "./textarea/Textarea.js";
+import { Notes } from "./notes/Notes.js";
 
 class Main extends Element {
   constructor({ parent, className, controller, content }) {
@@ -21,37 +21,17 @@ class Main extends Element {
       className: "main__title title",
       content: content.title,
     });
-    this.notes = new Element({
+    this.notes = new Notes({
       parent: this.container.node,
-      className: "main__notes",
-      tagName: "div",
-    });
-    this.endeavor = new NoteSection({
-      parent: this.notes.node,
       className: "main",
-      callback: controller.changeTextareaText,
-      content: content.notes.endeavor,
-      key: "endeavor",
-    });
-    this.action = new NoteSection({
-      parent: this.notes.node,
-      className: "main",
-      callback: controller.changeTextareaText,
-      content: content.notes.action,
-      key: "action",
-    });
-    this.quest = new NoteSection({
-      parent: this.notes.node,
-      className: "main",
-      callback: controller.changeTextareaText,
-      content: content.notes.quest,
-      key: "quest",
+      controller: controller.changeTextareaText,
+      content: content.notes,
     });
     this.textarea = new NoteSection({
       parent: this.container.node,
       className: "main",
       content: content.textarea,
-      callback: controller.changeTextareaText,
+      controller: controller.changeTextareaText,
       key: "textarea",
     });
     this.rules = new Rules({
@@ -62,9 +42,9 @@ class Main extends Element {
   }
 
   updateTextareaText = (text) => this.textarea.update(text);
-  updateEndeavorText = (text) => this.endeavor.update(text);
-  updateActionText = (text) => this.action.update(text);
-  updateQuestText = (text) => this.quest.update(text);
+  updateEndeavorText = (text) => this.notes.updateEndeavorText(text);
+  updateActionText = (text) => this.notes.updateActionText(text);
+  updateQuestText = (text) => this.notes.updateQuestText(text);
 }
 
 export { Main };

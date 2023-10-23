@@ -1,6 +1,9 @@
 .title {
-  font-size: 38px;
+  font-size: 73px;
   margin-bottom: 20px;
   text-align: center;
   user-select: none;
+  color: #58525247;
+  font-weight: bolder;
+  -webkit-text-stroke: 2px #585252cc;
 }

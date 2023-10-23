@@ -1,5 +1,6 @@
 import { Element } from "../Element.js";
 import { NoteSection } from "../noteSaction/NoteSection.js";
+import { styles } from "./style.js";
 
 class Notes extends Element {
   constructor({ parent, className, controller, content }) {
@@ -7,6 +8,7 @@ class Notes extends Element {
       parent,
       tagName: "div",
       className: `${className}__notes notes`,
+      styles,
     });
     this.endeavor = new NoteSection({
       parent: this.node,
@@ -29,6 +31,10 @@ class Notes extends Element {
       content: content.quest,
       key: "quest",
     });
+
+    Object.assign(this.endeavor.node.style, styles.note);
+    Object.assign(this.action.node.style, styles.note);
+    Object.assign(this.quest.node.style, styles.note);
   }
 
   updateEndeavorText = (text) => this.endeavor.update(text);

@@ -1,4 +1,5 @@
 export const getDate = () => {
-  const time = (new Date()).toISOString().replace('T', ' ').slice(0, 16);
+  const timeZoneOffset = new Date().getTimezoneOffset() * 60000;
+  const time = (new Date(Date.now() - timeZoneOffset)).toISOString().replace('T', ' ').slice(0, 16);
   return time;
-}
+};

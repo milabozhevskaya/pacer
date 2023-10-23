@@ -25,7 +25,7 @@ export const content = {
     title: "PacerGame",
     notes: {
       endeavor: {
-        title: "Стремление",
+        title: "Стремления",
       },
       action: {
         title: "Действия",

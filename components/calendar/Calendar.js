@@ -1,7 +1,5 @@
 import { Element } from "../Element.js";
-import { CalendarTop } from "./CalendarTop.js";
-import { CalendarDays } from "./CalendarDays.js";
-import { CalendarWeeks } from "./CalendarWeeks.js";
+import { CalendarList } from "./CalendarList.js";
 import { styles } from "./style.js";
 
 class Calendar extends Element {
@@ -12,33 +10,23 @@ class Calendar extends Element {
       className: `${className}__calendar calendar`,
       styles,
     });
-    const today = new Date();
+    this.today = new Date();
+    this.nowMonth = new Date();
+    this.lastMonth = new Date((new Date()).setMonth((new Date()).getMonth() - 1));
+    this.nextMonth = new Date((new Date()).setMonth((new Date()).getMonth() + 1));
 
-    this.top = new CalendarTop({
+    this.calendarList = new CalendarList({
       parent: this.node,
-      tagName: "div",
-      className: "calendar__top",
-      styles: styles.top,
-      month: content.month[today.getMonth()],
-      year: today.getFullYear(),
-    });
-    this.days = new CalendarDays({
-      parent: this.node,
-      tagName: "ul",
-      className: "calendar__days",
-      content: content.days,
-      styles: styles.days,
-    });
-    this.weeks = new CalendarWeeks({
-      parent: this.node,
-      tagName: "ul",
-      className: "calendar__weeks",
-      styles: styles.weeks,
-      today,
+      className: "calendar",
+      styles: styles,
+      content,
+      today: this.nowMonth,
+      last: this.lastMonth,
+      next: this.nextMonth,
     });
   }
 
-  updateTime = (time) => this.time.updateContent(time);
+  updateCalendarSwipingSteps = (steps) => {};
 }
 
 export { Calendar };

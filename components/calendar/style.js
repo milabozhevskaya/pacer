@@ -1,10 +1,8 @@
 export const styles = {
   width: "100%",
   display: "flex",
-  flexDirection: "column",
-  justifyContent: "center",
-  alignItems: "center",
-  userSelect: "none",
+  position: "relative",
+  aspectRatio: 1/1.0335,
   top: {
     width: "100%",
     display: "flex",
@@ -30,6 +28,22 @@ export const styles = {
       width: `calc(100% / 7)`,
       textAlign: "center",
     },
+  },
+  list: {
+    display: "flex",
+    position: "absolute",
+    left: "-50%",
+    width: "300%",
+  },
+  month: {
+    width: "calc(100% / 3)",
+    position: "absolute",
+    position: "relative",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    userSelect: "none",
   },
   weeks: {
     display: "flex",

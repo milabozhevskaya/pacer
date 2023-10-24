@@ -9,6 +9,7 @@ class Store {
     this.$selfBeliefPoints = "0";
     this.$time = "";
     this.$openCalendar = false;
+    this.$calendarSwipingSteps = 0;
   }
 
   init = (initialState, callback) => {
@@ -18,6 +19,7 @@ class Store {
     this.$questText = initialState.questText;
     this.$selfBeliefPoints = initialState.selfBeliefPoints;
     this.$time = initialState.time;
+    this.$calendarSwipingSteps = initialState.calendarSwipingSteps;
     callback({...this.computeDataForLocalStorage(), time: this.$time });
   };
 
@@ -87,6 +89,16 @@ class Store {
   set openCalendar(flag) {
     this.$openCalendar = flag;
     this.onChangeOpenCalendar.emit(flag);
+    if (!flag) this.$calendarSwipingSteps = 0;
+  }
+
+  get calendarSwipingSteps() {
+    return this.$calendarSwipingSteps;
+  }
+
+  set calendarSwipingSteps(steps) {
+    this.$calendarSwipingSteps = steps;
+    this.onChangeCalendarSwipingSteps.emit(steps);
   }
 
   onChangeTextareaText = new Signal();
@@ -96,6 +108,7 @@ class Store {
   onChangeSelfBeliefPoints = new Signal();
   onChangeTime = new Signal();
   onChangeOpenCalendar = new Signal();
+  onChangeCalendarSwipingSteps = new Signal();
 
   onChangeLocalStorageData = new Signal();
   computeDataForLocalStorage = () => ({

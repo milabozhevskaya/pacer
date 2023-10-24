@@ -66,7 +66,7 @@ class Controller {
   prepareDateForStore = () => {
     const initialDate = this.getLocalStorageData();
     const time = getDate();
-    return { ...initialDate, time };
+    return { ...initialDate, time, onChangeCalendarSwipingSteps: 0 };
   };
 
   runClock = () => {
@@ -101,6 +101,9 @@ class Controller {
     if (this.store.openCalendar) this.store.openCalendar = false;
     else this.store.openCalendar = true;
   };
+  setCalendarSwipingSteps = (steps) => {
+    if (this.store.calendarSwipingSteps !== steps) this.store.calendarSwipingSteps = steps;
+  }
   onClickView = () => {
     if (this.store.openCalendar) this.store.openCalendar = false;
   };

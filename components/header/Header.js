@@ -33,6 +33,7 @@ class Header extends Element {
   updateTime = (time) => this.dateWidget.updateTime(time);
   openCalendar = (popup) => this.dateWidget.openCalendar(popup);
   closeCalendar = () => this.dateWidget.closeCalendar();
+  updateCalendarSwipingSteps = (steps) => this.dateWidget.updateCalendarSwipingSteps(steps);
 }
 
 export { Header };

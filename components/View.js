@@ -52,12 +52,18 @@ class View extends Element {
     );
     this.store.onChangeTime.add((time) => this.header.updateTime(time));
     this.store.onChangeOpenCalendar.add((flag) => {
+      const updateCalendarSwipingSteps = (steps) => {
+        this.header.updateCalendarSwipingSteps(steps);
+      };
+      
       if (flag) {
         this.calendarPopup = new Popup({ className: "date-widget" })
         this.header.openCalendar(this.calendarPopup);
+        this.store.onChangeCalendarSwipingSteps.add(updateCalendarSwipingSteps);
       } else {
         this.calendarPopup.closePopup();
         this.header.closeCalendar();
+        this.store.onChangeCalendarSwipingSteps.remove(updateCalendarSwipingSteps);
       }
     });
   };

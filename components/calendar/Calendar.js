@@ -1,4 +1,5 @@
 import { Element } from "../Element.js";
+import { CalendarButtons } from "./CalendarButtons.js";
 import { CalendarList } from "./CalendarList.js";
 import { styles } from "./style.js";
 
@@ -23,6 +24,13 @@ class Calendar extends Element {
       today: this.nowMonth,
       last: this.lastMonth,
       next: this.nextMonth,
+    });
+    this.calendarButtons = new CalendarButtons({
+      parent: this.node,
+      className: "calendar",
+      styles: styles.buttons,
+      content: content.buttons,
+      controller,
     });
   }
 

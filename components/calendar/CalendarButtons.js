@@ -8,20 +8,32 @@ class CalendarButtons extends Element {
       className: `${className}__buttons`,
       styles,
     });
-    this.leftButton = new Element({
+    this.prevButton = new Element({
       parent: this.node,
       tagName: "button",
       className: "calendar__button",
-      styles: {...styles.button, ...styles.left},
-      content: content.button.left,
+      styles: {...styles.button, ...styles.prev},
+      content: content.button.prev,
     });
-    this.rightButton = new Element({
+    this.nextButton = new Element({
       parent: this.node,
       tagName: "button",
       className: "calendar__button",
-      styles: {...styles.button, ...styles.right},
-      content: content.button.right,
+      styles: {...styles.button, ...styles.next},
+      content: content.button.next,
     });
+    this.prevButton.node.onmouseover = () => {
+      Object.assign(this.prevButton.node.style, styles.button.hover);
+    };
+    this.prevButton.node.onmouseleave = () => {
+      Object.assign(this.prevButton.node.style, styles.button.leave);
+    };
+    this.nextButton.node.onmouseover = () => {
+      Object.assign(this.nextButton.node.style, styles.button.hover);
+    };
+    this.nextButton.node.onmouseleave = () => {
+      Object.assign(this.nextButton.node.style, styles.button.leave);
+    };
   }
 }
 

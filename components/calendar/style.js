@@ -2,7 +2,8 @@ export const styles = {
   width: "100%",
   display: "flex",
   position: "relative",
-  aspectRatio: 1/1.0335,
+  aspectRatio: 1 / 1.0991,
+  overflow: "hidden",
   top: {
     width: "100%",
     display: "flex",
@@ -12,12 +13,16 @@ export const styles = {
     color: "#ff4600",
     fontSize: "18px",
     fontWeight: "bold",
-    letterSpacing: "1.6px",
+    letterSpacing: "5px",
+    // letterSpacing: "1.6px",
+    flexShrink: 0,
+    textTransform: "uppercase",
     year: {
       fontSize: "14px",
     },
   },
   days: {
+    flexShrink: 0,
     width: "100%",
     display: "flex",
     justifyContent: "space-between",
@@ -32,11 +37,15 @@ export const styles = {
   list: {
     display: "flex",
     position: "absolute",
-    left: "-50%",
+    left: "-100%",
     width: "300%",
+    height: "calc(100% - 25px)",
+    top: "25px",
+    // top: "10px",
   },
   month: {
     width: "calc(100% / 3)",
+    height: "100%",
     position: "absolute",
     position: "relative",
     display: "flex",
@@ -44,6 +53,7 @@ export const styles = {
     justifyContent: "center",
     alignItems: "center",
     userSelect: "none",
+    padding: "0px 8px",
   },
   weeks: {
     display: "flex",
@@ -68,6 +78,50 @@ export const styles = {
       weekend: {
         color: "#b07151",
       },
+    },
+  },
+  buttons: {
+    position: "absolute",
+    top: "0",
+    left: "0",
+    width: "100%",
+    display: "flex",
+    justifyContent: "space-between",
+    button: {
+      padding: "0px 0px",
+      position: "relative",
+      textTransform: "lowercase",
+      color: "#41e717",
+      letterSpacing: "2.2px",
+      fontWeight: "600",
+      fontSize: "14px",
+      transition: "color .4s",
+      hover: {
+        color: "#ff4600ad",
+        transition: "color .4s",
+      },
+      leave: {
+        color: "#41e717",
+        transition: "color .4s",
+      },
+      disabled: {
+        color: "#7359345c",
+        cursor: "not-allowed",
+        transition: "color .4s",
+        pointerEvents: "none",
+      },
+      undisabled: {
+        cursor: "pointer",
+        pointerEvents: "auto",
+        transition: "color .4s",
+        color: "#41e717",
+      },
+    },
+    prev: {
+      padding: "0px 20px 10px 0px",
+    },
+    next: {
+      padding: "0px 0px 10px 20px",
     },
   },
 };

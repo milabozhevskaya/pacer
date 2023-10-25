@@ -10,6 +10,13 @@ class CalendarList extends Element {
       styles: styles.list,
     });
 
+    this.lastMonth = new CalendarMonth({
+      parent: this.node,
+      className,
+      styles,
+      content,
+      today: last,
+    });
 
     this.nowMonth = new CalendarMonth({
       parent: this.node,
@@ -19,18 +26,8 @@ class CalendarList extends Element {
       today,
     });
 
-    this.lastMonth = new CalendarMonth({
-      parent: this.node,
-      tagName: "li",
-      className,
-      styles,
-      content,
-      today: last,
-    });
-
     this.nextMonth = new CalendarMonth({
       parent: this.node,
-      tagName: "li",
       className,
       styles,
       content,

@@ -18,6 +18,12 @@ export const content = {
           "November",
           "December",
         ],
+        buttons: {
+          button: {
+            prev: "Предыдущий",
+            next: "Следующий",
+          },
+        }
       },
     },
   },

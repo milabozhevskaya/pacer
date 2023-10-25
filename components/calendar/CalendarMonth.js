@@ -11,7 +11,7 @@ class CalendarMonth extends Element {
       className: `${className}__month`,
       styles: styles.month,
     });
-
+    this.content = content;
     this.top = new CalendarTop({
       parent: this.node,
       tagName: "div",
@@ -36,8 +36,13 @@ class CalendarMonth extends Element {
     });
   }
 
-  updateTime = (time) => this.time.updateContent(time);
-  updateCalendarSwipingSteps = (steps) => {};
+  updateMonth = (today) => {
+    this.top.updateContent(
+      this.content.month[today.getMonth()],
+      today.getFullYear()
+    );
+    this.weeks.updateWeeks(today);
+  };
 }
 
 export { CalendarMonth };

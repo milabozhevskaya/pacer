@@ -22,6 +22,11 @@ class CalendarTop extends Element {
       styles: styles.year,
     });
   }
+
+  updateContent = (month, year) => {
+    this.month.updateContent(month);
+    this.year.updateContent(year);
+  };
 }
 
 export { CalendarTop };

@@ -24,16 +24,17 @@ class Header extends Element {
     this.dateWidget = new DateWidget({
       parent: this.container.node,
       className: "header",
-      controller: controller.openCalendar,
+      controller: controller,
       content: content.dateWidget,
-    })
+    });
   }
 
   updateSelfBeliefPoints = (points) => this.selfBeliefPoints.update(points);
   updateTime = (time) => this.dateWidget.updateTime(time);
   openCalendar = (popup) => this.dateWidget.openCalendar(popup);
   closeCalendar = () => this.dateWidget.closeCalendar();
-  updateCalendarSwipingSteps = (steps) => this.dateWidget.updateCalendarSwipingSteps(steps);
+  updateCalendarSwipingSteps = (steps) =>
+    this.dateWidget.updateCalendarSwipingSteps(steps);
 }
 
 export { Header };

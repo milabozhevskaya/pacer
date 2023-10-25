@@ -13,17 +13,15 @@ class Calendar extends Element {
     });
     this.today = new Date();
     this.nowMonth = new Date();
-    this.lastMonth = new Date((new Date()).setMonth((new Date()).getMonth() - 1));
-    this.nextMonth = new Date((new Date()).setMonth((new Date()).getMonth() + 1));
+    this.lastMonth = new Date(new Date().setMonth(new Date().getMonth() - 1));
+    this.nextMonth = new Date(new Date().setMonth(new Date().getMonth() + 1));
 
     this.calendarList = new CalendarList({
       parent: this.node,
       className: "calendar",
       styles: styles,
       content,
-      today: this.nowMonth,
-      last: this.lastMonth,
-      next: this.nextMonth,
+      month: [this.lastMonth, this.nowMonth, this.nextMonth],
     });
     this.calendarButtons = new CalendarButtons({
       parent: this.node,
@@ -34,7 +32,38 @@ class Calendar extends Element {
     });
   }
 
-  updateCalendarSwipingSteps = (steps) => {};
+  updateSwipingSteps = (steps) => {
+    if (steps > 0) {
+      [this.lastMonth, this.nowMonth] = [
+        new Date(this.nowMonth),
+        new Date(this.nextMonth),
+      ];
+
+      this.nextMonth = new Date(
+        this.nextMonth.setMonth(this.nextMonth.getMonth() + 1)
+      );
+
+      this.calendarList.swipeToRight(
+        this.nextMonth,
+        this.calendarButtons.removeDisabled
+      );
+      return;
+    }
+
+    [this.nowMonth, this.nextMonth] = [
+      new Date(this.lastMonth),
+      new Date(this.nowMonth),
+    ];
+
+    this.lastMonth = new Date(
+      this.lastMonth.setMonth(this.lastMonth.getMonth() - 1)
+    );
+
+    this.calendarList.swipeToLeft(
+      this.lastMonth,
+      this.calendarButtons.removeDisabled
+    );
+  };
 }
 
 export { Calendar };

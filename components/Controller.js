@@ -15,9 +15,13 @@ class Controller {
 
     onstorage = (e) => {
       if (e.key !== "pacer") return;
-      const { textareaText, endeavorText, actionText, questText, selfBeliefPoints } = LocalStorageData.fromJson(
-        JSON.parse(e.newValue || "")
-      );
+      const {
+        textareaText,
+        endeavorText,
+        actionText,
+        questText,
+        selfBeliefPoints,
+      } = LocalStorageData.fromJson(JSON.parse(e.newValue || ""));
 
       if (this.store.textareaText !== textareaText)
         this.store.textareaText = textareaText;
@@ -28,8 +32,7 @@ class Controller {
       if (this.store.actionText !== actionText)
         this.store.actionText = actionText;
 
-      if (this.store.questText !== questText)
-        this.store.questText = questText;
+      if (this.store.questText !== questText) this.store.questText = questText;
       if (this.store.selfBeliefPoints !== selfBeliefPoints)
         this.store.selfBeliefPoints = (
           parseInt(selfBeliefPoints) || "0"
@@ -75,7 +78,7 @@ class Controller {
       if (this.store.time !== time) this.store.time = time;
     }, intervalTime);
   };
-  
+
   changeText = {
     textarea: (text) => {
       this.store.textareaText = text;
@@ -89,7 +92,7 @@ class Controller {
     quest: (text) => {
       this.store.questText = text;
     },
-  }
+  };
 
   changeTextareaText = (key, text) => {
     this.changeText[key](text);
@@ -102,8 +105,8 @@ class Controller {
     else this.store.openCalendar = true;
   };
   setCalendarSwipingSteps = (steps) => {
-    if (this.store.calendarSwipingSteps !== steps) this.store.calendarSwipingSteps = steps;
-  }
+    this.store.calendarSwipingSteps = steps;
+  };
   onClickView = () => {
     if (this.store.openCalendar) this.store.openCalendar = false;
   };

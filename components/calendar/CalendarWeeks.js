@@ -9,28 +9,45 @@ class CalendarWeeks extends Element {
       className,
       styles,
     });
+    this.styles = styles;
+    this.lis = [];
+    this.containWeeks(today);
+  }
+
+  containWeeks = (today) => {
+    const isMonth =
+      new Date().getFullYear() === today.getFullYear() &&
+      new Date().getMonth() === today.getMonth();
     const dates = buildMonthDates(today);
-    this.prevMonthDays = buildMonthDays(dates.prevMonth, today, false);
-    this.monthDays = buildMonthDays(dates.currentMonth, today, true);
-    this.nextMonthDays = buildMonthDays(dates.nextMonth, today, false);
-    [...this.prevMonthDays, ...this.monthDays, ...this.nextMonthDays].forEach(
+    const prevMonthDays = buildMonthDays(dates.prevMonth, today, false);
+    const monthDays = buildMonthDays(dates.currentMonth, today, true);
+    const nextMonthDays = buildMonthDays(dates.nextMonth, today, false);
+    [...prevMonthDays, ...monthDays, ...nextMonthDays].forEach(
       ({ date, options }) => {
         const { isCurrentMonth, isCurrentDay, isWeekend } = options;
-        new Element({
-          parent: this.node,
-          tagName: "li",
-          className: "calendar__day",
-          content: date.getDate(),
-          styles: {
-            ...styles.day,
-            ...(isCurrentMonth && styles.day.currentMonth),
-            ...(isCurrentMonth && isWeekend && styles.day.weekend),
-            ...(isCurrentDay && styles.day.currentDay),
-          },
-        });
+        this.lis.push(
+          new Element({
+            parent: this.node,
+            tagName: "li",
+            className: "calendar__day",
+            content: date.getDate(),
+            styles: {
+              ...this.styles.day,
+              ...(isCurrentMonth && this.styles.day.currentMonth),
+              ...(isCurrentMonth && isWeekend && this.styles.day.weekend),
+              ...(isCurrentDay && isMonth && this.styles.day.currentDay),
+            },
+          })
+        );
       }
     );
-  }
+  };
+
+  updateWeeks = (today) => {
+    this.lis.forEach((li) => li.destroy());
+    this.lis = [];
+    this.containWeeks(today);
+  };
 }
 
 export { CalendarWeeks };

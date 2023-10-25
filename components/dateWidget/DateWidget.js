@@ -23,13 +23,14 @@ class DateWidget extends Element {
       content: content.button,
       controller: (event) => {
         event.stopPropagation();
-        controller();
+        controller.openCalendar();
       },
       styles: styles.button,
     });
     this.calendar = null;
     this.popupStyles = styles.popup;
     this.calendarContent = content.calendar;
+    this.swipeCalendar = controller.setCalendarSwipingSteps;
   }
 
   updateTime = (time) => this.time.updateContent(time);
@@ -37,6 +38,7 @@ class DateWidget extends Element {
     this.calendar = new Calendar({
       className: "date-widget__calendar calendar",
       content: this.calendarContent,
+      controller: this.swipeCalendar,
     });
     popup.setContent(this.calendar);
     popup.addStyles(this.popupStyles);

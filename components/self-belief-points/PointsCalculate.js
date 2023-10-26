@@ -9,6 +9,7 @@ class PointsCalculate extends Element {
       className: `${className}__points-calculate points-calculate`,
       styles,
     });
+    this.styles = styles;
     this.calculateWrapper = new Element({
       parent: this.node,
       tagName: "div",
@@ -28,7 +29,34 @@ class PointsCalculate extends Element {
       styles: styles.calculateButton,
       content,
     });
+    this.isDisabledButton = true;
+    this.updateButtonState();
+
+    this.calculateInput.node.oninput = (event) => {
+      controller.changeCalculateInput(event.target.value);
+    };
   }
+
+  updateInput = (value) => {
+    if (value.length === 0 && !this.isDisabledButton) {
+      this.isDisabledButton = true;
+      this.updateButtonState();
+    }
+    if (value.length > 0 && this.isDisabledButton) {
+      this.isDisabledButton = false;
+      this.updateButtonState();
+    }
+  };
+
+  updateButtonState = () => {
+    if (this.isDisabledButton) {
+      this.calculateButton.setDisableStyle(
+        this.styles.calculateButton.disabled
+      );
+    } else {
+      this.calculateButton.removeDisableStyle();
+    }
+  };
 }
 
 export { PointsCalculate };

@@ -7,6 +7,7 @@ class Store {
     this.$actionText = "";
     this.$questText = "";
     this.$selfBeliefPoints = "0";
+    this.$calculateSelfBeliefPoints = "";
     this.$time = "";
     this.$openCalendar = false;
     this.$calendarSwipingSteps = 0;
@@ -18,9 +19,10 @@ class Store {
     this.$actionText = initialState.actionText;
     this.$questText = initialState.questText;
     this.$selfBeliefPoints = initialState.selfBeliefPoints;
+    this.$calculateSelfBeliefPoints = initialState.calculateSelfBeliefPoints;
     this.$time = initialState.time;
     this.$calendarSwipingSteps = initialState.calendarSwipingSteps;
-    callback({...this.computeDataForLocalStorage(), time: this.$time });
+    callback({ ...this.computeDataForLocalStorage(), time: this.$time });
   };
 
   get textareaText() {
@@ -73,6 +75,15 @@ class Store {
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   }
 
+  get calculateSelfBeliefPoints() {
+    return this.$calculateSelfBeliefPoints;
+  }
+
+  set calculateSelfBeliefPoints(value) {
+    this.$calculateSelfBeliefPoints = value;
+    this.onChangeCalculateSelfBeliefPoints.emit(value);
+  }
+
   get time() {
     return this.$time;
   }
@@ -106,6 +117,7 @@ class Store {
   onChangeActionText = new Signal();
   onChangeQuestText = new Signal();
   onChangeSelfBeliefPoints = new Signal();
+  onChangeCalculateSelfBeliefPoints = new Signal();
   onChangeTime = new Signal();
   onChangeOpenCalendar = new Signal();
   onChangeCalendarSwipingSteps = new Signal();

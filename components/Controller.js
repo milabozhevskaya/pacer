@@ -69,7 +69,12 @@ class Controller {
   prepareDateForStore = () => {
     const initialDate = this.getLocalStorageData();
     const time = getDate();
-    return { ...initialDate, time, onChangeCalendarSwipingSteps: 0 };
+    return {
+      ...initialDate,
+      time,
+      calendarSwipingSteps: 0,
+      calculateSelfBeliefPoints: "",
+    };
   };
 
   runClock = () => {
@@ -101,6 +106,9 @@ class Controller {
     this.store.selfBeliefPoints = points;
   };
   calculatePoints = () => {};
+  changeCalculateInput = (value) => {
+    this.store.calculateSelfBeliefPoints = value;
+  };
   openCalendar = () => {
     if (this.store.openCalendar) this.store.openCalendar = false;
     else this.store.openCalendar = true;

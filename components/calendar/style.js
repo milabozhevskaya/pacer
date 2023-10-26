@@ -14,7 +14,6 @@ export const styles = {
     fontSize: "18px",
     fontWeight: "bold",
     letterSpacing: "5px",
-    // letterSpacing: "1.6px",
     flexShrink: 0,
     textTransform: "uppercase",
     year: {
@@ -95,6 +94,7 @@ export const styles = {
       fontWeight: "600",
       fontSize: "14px",
       transition: "color .4s",
+      userSelect: "none",
       hover: {
         color: "#ff4600ad",
         transition: "color .4s",

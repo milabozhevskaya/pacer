@@ -21,7 +21,7 @@ class SelfBeliefPoints extends Element {
     this.pointsCalculate = new PointsCalculate({
       parent: this.node,
       className: "self-belief-points",
-      controller: controller.changeSelfBeliefPoints,
+      controller: controller,
       styles: styles.pointsCalculate,
       content: content.calculateButton,
     });
@@ -35,6 +35,7 @@ class SelfBeliefPoints extends Element {
   }
   
   updatePoints = (points) => this.points.update(points);
+  updateCalculateInput = (value) => this.pointsCalculate.updateInput(value);
 }
 
 export { SelfBeliefPoints };

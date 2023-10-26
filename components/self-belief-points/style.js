@@ -54,8 +54,23 @@ export const styles = {
       display: "flex",
       alignItems: "center",
       border: "1px solid #eb8d3c54",
+      borderRadius: "5px",
+      color: "#7c4747",
     },
-    calculateButton: {},
+    calculateInput: {
+      outline: "none",
+      border: "none",
+      padding: "0px 5px 0px 14px",
+      width: "190px",
+      color: "currentColor",
+    },
+    calculateButton: {
+      disabled: {
+        cursor: "not-allowed",
+        color: "#a17f7fc9",
+        backgroundColor: "#65605b24",
+      }
+    },
   },
   changeButton: {},
 };

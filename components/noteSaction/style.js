@@ -10,5 +10,6 @@ export const styles = {
     letterSpacing: "4.2px",
     fontWeight: "600",
     fontSize: "20px",
+    userSelect: "none",
   },
 };

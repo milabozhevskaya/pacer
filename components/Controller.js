@@ -100,6 +100,7 @@ class Controller {
   changeSelfBeliefPoints = (points) => {
     this.store.selfBeliefPoints = points;
   };
+  calculatePoints = () => {};
   openCalendar = () => {
     if (this.store.openCalendar) this.store.openCalendar = false;
     else this.store.openCalendar = true;

@@ -26,6 +26,10 @@ export const content = {
         }
       },
     },
+    selfBeliefPoints: {
+      calculateButton: "Рассчитать",
+      changeButton: "Изменить",
+    },
   },
   main: {
     title: "PacerGame",

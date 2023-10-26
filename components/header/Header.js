@@ -19,7 +19,8 @@ class Header extends Element {
     this.selfBeliefPoints = new SelfBeliefPoints({
       parent: this.container.node,
       className: "header",
-      controller: controller.changeSelfBeliefPoints,
+      controller: controller,
+      content: content.selfBeliefPoints,
     });
     this.dateWidget = new DateWidget({
       parent: this.container.node,
@@ -29,7 +30,7 @@ class Header extends Element {
     });
   }
 
-  updateSelfBeliefPoints = (points) => this.selfBeliefPoints.update(points);
+  updateSelfBeliefPoints = (points) => this.selfBeliefPoints.updatePoints(points);
   updateTime = (time) => this.dateWidget.updateTime(time);
   openCalendar = (popup) => this.dateWidget.openCalendar(popup);
   closeCalendar = () => this.dateWidget.closeCalendar();

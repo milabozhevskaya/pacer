@@ -9,6 +9,7 @@ class PointsCalculate extends Element {
       className: `${className}__points-calculate points-calculate`,
       styles,
     });
+    this.controller = controller;
     this.styles = styles;
     this.calculateWrapper = new Element({
       parent: this.node,
@@ -25,37 +26,43 @@ class PointsCalculate extends Element {
     this.calculateButton = new Button({
       parent: this.calculateWrapper.node,
       className: "points-calculate__calculate-button",
-      controller: controller.calculatePoints,
+      controller: this.calculatePoints,
       styles: styles.calculateButton,
       content,
     });
-    this.isDisabledButton = true;
-    this.updateButtonState();
-
+    this.calculateButton.setDisableStyle(this.styles.calculateButton.disabled);
     this.calculateInput.node.oninput = (event) => {
-      controller.changeCalculateInput(event.target.value);
+      controller.changeInputSelfBeliefPoints(event.target.value);
     };
+    Object.assign(this.node.style, this.styles.close);
   }
 
-  updateInput = (value) => {
-    if (value.length === 0 && !this.isDisabledButton) {
-      this.isDisabledButton = true;
-      this.updateButtonState();
-    }
-    if (value.length > 0 && this.isDisabledButton) {
-      this.isDisabledButton = false;
-      this.updateButtonState();
-    }
-  };
+  updateInput = (value) => (this.calculateInput.node.value = value);
 
-  updateButtonState = () => {
-    if (this.isDisabledButton) {
+  updateButton = (state) => {
+    if (state === "disable") {
       this.calculateButton.setDisableStyle(
         this.styles.calculateButton.disabled
       );
-    } else {
-      this.calculateButton.removeDisableStyle();
     }
+    if (state === "wait") {
+      this.calculateButton.setWaitingStyle(this.styles.calculateButton.waiting);
+    }
+    if (state === "") {
+      this.calculateButton.setDefaultStyle();
+    }
+  };
+
+  calculatePoints = (event) => {
+    event.preventDefault();
+    this.controller.calculatePoints(this.calculateInput.node.value);
+  };
+  open = () => {
+    Object.assign(this.node.style, this.styles.open);
+    this.calculateInput.node.focus();
+  };
+  close = () => {
+    Object.assign(this.node.style, this.styles.close);
   };
 }
 

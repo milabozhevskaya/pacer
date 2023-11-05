@@ -30,8 +30,14 @@ class Header extends Element {
     });
   }
 
-  updateSelfBeliefPoints = (points) => this.selfBeliefPoints.updatePoints(points);
-  updateCalculateSelfBeliefPoints = (value) => this.selfBeliefPoints.updateCalculateInput(value);
+  updateSelfBeliefPoints = (points) =>
+    this.selfBeliefPoints.updatePoints(points);
+  updateInputSelfBeliefPoints = (value) =>
+    this.selfBeliefPoints.updatePointsCalculateInput(value);
+  updateButtonSelfBeliefPoints = (value) =>
+    this.selfBeliefPoints.updatePointsCalculateButton(value);
+  updateOpenPointsCalculate = (value) =>
+    this.selfBeliefPoints.openPointsCalculate(value);
   updateTime = (time) => this.dateWidget.updateTime(time);
   openCalendar = (popup) => this.dateWidget.openCalendar(popup);
   closeCalendar = () => this.dateWidget.closeCalendar();

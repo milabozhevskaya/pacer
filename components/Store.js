@@ -7,7 +7,9 @@ class Store {
     this.$actionText = "";
     this.$questText = "";
     this.$selfBeliefPoints = "0";
-    this.$calculateSelfBeliefPoints = "";
+    this.$inputSelfBeliefPoints = "";
+    this.$buttonSelfBeliefPoints = "";
+    this.$openPointsCalculate = false;
     this.$time = "";
     this.$openCalendar = false;
     this.$calendarSwipingSteps = 0;
@@ -19,7 +21,9 @@ class Store {
     this.$actionText = initialState.actionText;
     this.$questText = initialState.questText;
     this.$selfBeliefPoints = initialState.selfBeliefPoints;
-    this.$calculateSelfBeliefPoints = initialState.calculateSelfBeliefPoints;
+    this.$inputSelfBeliefPoints = initialState.inputSelfBeliefPoints;
+    this.$buttonSelfBeliefPoints = initialState.buttonSelfBeliefPoints;
+    this.$openPointsCalculate = initialState.openPointsCalculate;
     this.$time = initialState.time;
     this.$calendarSwipingSteps = initialState.calendarSwipingSteps;
     callback({ ...this.computeDataForLocalStorage(), time: this.$time });
@@ -75,13 +79,31 @@ class Store {
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   }
 
-  get calculateSelfBeliefPoints() {
-    return this.$calculateSelfBeliefPoints;
+  get inputSelfBeliefPoints() {
+    return this.$inputSelfBeliefPoints;
   }
 
-  set calculateSelfBeliefPoints(value) {
-    this.$calculateSelfBeliefPoints = value;
-    this.onChangeCalculateSelfBeliefPoints.emit(value);
+  set inputSelfBeliefPoints(value) {
+    this.$inputSelfBeliefPoints = value;
+    this.onChangeInputSelfBeliefPoints.emit(value);
+  }
+
+  get buttonSelfBeliefPoints() {
+    return this.$buttonSelfBeliefPoints;
+  }
+
+  set buttonSelfBeliefPoints(state) {
+    this.$buttonSelfBeliefPoints = state;
+    this.onChangeButtonSelfBeliefPoints.emit(state);
+  }
+
+  get openPointsCalculate() {
+    return this.$openPointsCalculate;
+  }
+
+  set openPointsCalculate(state) {
+    this.$openPointsCalculate = state;
+    this.onChangeOpenPointsCalculate.emit(state);
   }
 
   get time() {
@@ -117,7 +139,9 @@ class Store {
   onChangeActionText = new Signal();
   onChangeQuestText = new Signal();
   onChangeSelfBeliefPoints = new Signal();
-  onChangeCalculateSelfBeliefPoints = new Signal();
+  onChangeInputSelfBeliefPoints = new Signal();
+  onChangeButtonSelfBeliefPoints = new Signal();
+  onChangeOpenPointsCalculate = new Signal();
   onChangeTime = new Signal();
   onChangeOpenCalendar = new Signal();
   onChangeCalendarSwipingSteps = new Signal();

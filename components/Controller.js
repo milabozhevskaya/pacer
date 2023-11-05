@@ -1,5 +1,7 @@
 import { LocalStorageData } from "./LocalStorage.js";
 import { getDate } from "../utils/getDate.js";
+import { CustomError } from "./CustomError.js";
+
 const intervalTime = 999;
 class Controller {
   constructor(store) {
@@ -73,7 +75,9 @@ class Controller {
       ...initialDate,
       time,
       calendarSwipingSteps: 0,
-      calculateSelfBeliefPoints: "",
+      inputSelfBeliefPoints: "",
+      buttonSelfBeliefPoints: "",
+      openPointsCalculate: false,
     };
   };
 
@@ -105,9 +109,37 @@ class Controller {
   changeSelfBeliefPoints = (points) => {
     this.store.selfBeliefPoints = points;
   };
-  calculatePoints = () => {};
-  changeCalculateInput = (value) => {
-    this.store.calculateSelfBeliefPoints = value;
+  openPointsCalculate = () => {
+    const state = !this.store.openPointsCalculate;
+    this.store.openPointsCalculate = state;
+    if (!state) {
+      this.store.inputSelfBeliefPoints = "";
+      this.store.buttonSelfBeliefPoints = "disable";
+    }
+  };
+  calculatePoints = (value) => {
+    this.store.buttonSelfBeliefPoints = "wait";
+    try {
+      const text = this.store.selfBeliefPoints + " " + value;
+      const expression = eval(text);
+      const points = parseFloat(expression);
+      if (Number.isNaN(points) || !Number.isInteger(points) || points < 0)
+        throw new CustomError("Incorrect calculation input");
+      this.store.selfBeliefPoints = points;
+      this.changeInputSelfBeliefPoints("");
+      this.store.buttonSelfBeliefPoints = "disable";
+    } catch (error) {
+      if (error instanceof CustomError) {
+        this.store.errorSelfBeliefPoints = error.message;
+      } else {
+        this.store.errorSelfBeliefPoints = "Something went wrong";
+      }
+      this.store.buttonSelfBeliefPoints = "";
+    }
+  };
+  changeInputSelfBeliefPoints = (value) => {
+    this.store.inputSelfBeliefPoints = value;
+    if (value !== "") this.store.buttonSelfBeliefPoints = "";
   };
   openCalendar = () => {
     if (this.store.openCalendar) this.store.openCalendar = false;

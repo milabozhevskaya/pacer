@@ -69,8 +69,24 @@ export const styles = {
         cursor: "not-allowed",
         color: "#a17f7fc9",
         backgroundColor: "#65605b24",
-      }
+      },
+      waiting: {
+        cursor: "wait",
+        color: "#a17f7fc9",
+        backgroundColor: "#65605b24",
+      },
+    },
+    open: {
+      display: "flex",
+    },
+    close: {
+      display: "none",
     },
   },
-  changeButton: {},
+  openButton: {
+    minWidth: "30px",
+    span: {
+      padding: "0px 15px 0px 15px",
+    },
+  },
 };

@@ -3,12 +3,13 @@ import { formatContentForTable, formatContentFromTable } from "../../utils/table
 import { styles } from "./style.js";
 
 class Table extends Element {
-  constructor({ parent }) {
+  constructor({ parent, controller }) {
     super({ parent, tagName: "table", styles });
+    this.controller = controller;
     this.content = formatContentForTable(3);
     this.row = [];
     this.content.forEach((row, i) => {
-      this.row[i] = new TableRow(this.node, row);
+      this.row[i] = new TableRow(this.node, row, (cell, cellNumber) => this.changeTable(cell, cellNumber, i));
     });
   }
   
@@ -16,7 +17,7 @@ class Table extends Element {
     this.content = formatContentForTable(3, text);
     this.content.forEach((row, i) => {
       if (this.row[i] === undefined) {
-        this.row[i] = new TableRow(this.node, row);
+        this.row[i] = new TableRow(this.node, row, (cell, cellNumber) => this.changeTable(cell, cellNumber, i));
       } else {
         this.row[i].update(row);
       }
@@ -29,14 +30,22 @@ class Table extends Element {
     }
   };
   getContent = () => formatContentFromTable(this.content);
+  changeTable = (cell, cellNumber, rowNumber) => {
+    this.content[rowNumber][cellNumber] = cell;
+    if (rowNumber === this.content.length - 1) {
+      this.content = [...this.content, ['', '', '']];
+      this.row[this.row.length] = new TableRow(this.node, ['', '', ''], (cell, cellNumber) => this.changeTable(cell, cellNumber, this.row.length));
+    }
+    this.controller(this.content);
+  };
 }
 
 class TableRow extends Element {
-  constructor(parent, content) {
+  constructor(parent, content, changeRow) {
     super({ parent, tagName: "tr", styles: styles.row });
     this.cell = {};
     content.forEach((cell, i) => {
-      this.cell[i] = new TableCell(this.node, cell);
+      this.cell[i] = new TableCell(this.node, cell, (cell) => changeRow(cell, i));
     });
   }
   
@@ -48,9 +57,13 @@ class TableRow extends Element {
 }
 
 class TableCell extends Element {
-  constructor(parent, content) {
+  constructor(parent, content, changeCell) {
     super({ parent, tagName: "td", styles: styles.cell });
     this.node.innerHTML = content;
+    this.node.setAttribute("contenteditable", true);
+    this.node.oninput = (event) => {
+      changeCell(event.target.innerText);
+    }
   }
 }
 

@@ -43,8 +43,8 @@ export const content = {
       action: {
         title: "Действия",
         button: {
-          table: "Таблица",
-          text: "Текст",
+          text: "Таблица",
+          table: "Текст",
         },
       },
       quest: {

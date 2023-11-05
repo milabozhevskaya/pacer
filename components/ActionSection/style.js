@@ -24,10 +24,11 @@ export const styles = {
     position: "absolute",
     right: "0",
     bottom: "0",
-    minWidth: "40px",
+    minWidth: "65px",
     height: "20px",
     display: "flex",
     alignItems: "center",
+    justifyContent: "center",
     span: {
       fontSize: "12px",
       padding: "0 5px",

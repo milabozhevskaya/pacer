@@ -1,5 +1,6 @@
 export const styles = {
   width: "100%",
+  height: "100%",
   padding: "10px",
   fontSize: "22px",
   border: "3px solid #7e797659",

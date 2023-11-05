@@ -1,5 +1,8 @@
 import { Element } from "../Element.js";
-import { formatContentForTable, formatContentFromTable } from "../../utils/tableFormatContent.js";
+import {
+  formatContentForTable,
+  formatContentFromTable,
+} from "../../utils/tableFormatContent.js";
 import { styles } from "./style.js";
 
 class Table extends Element {
@@ -9,15 +12,19 @@ class Table extends Element {
     this.content = formatContentForTable(3);
     this.row = [];
     this.content.forEach((row, i) => {
-      this.row[i] = new TableRow(this.node, row, (cell, cellNumber) => this.changeTable(cell, cellNumber, i));
+      this.row[i] = new TableRow(this.node, row, (cell, cellNumber) =>
+        this.changeTable(cell, cellNumber, i)
+      );
     });
   }
-  
+
   update = (text) => {
     this.content = formatContentForTable(3, text);
     this.content.forEach((row, i) => {
       if (this.row[i] === undefined) {
-        this.row[i] = new TableRow(this.node, row, (cell, cellNumber) => this.changeTable(cell, cellNumber, i));
+        this.row[i] = new TableRow(this.node, row, (cell, cellNumber) =>
+          this.changeTable(cell, cellNumber, i)
+        );
       } else {
         this.row[i].update(row);
       }
@@ -31,10 +38,24 @@ class Table extends Element {
   };
   getContent = () => formatContentFromTable(this.content);
   changeTable = (cell, cellNumber, rowNumber) => {
-    this.content[rowNumber][cellNumber] = cell;
-    if (rowNumber === this.content.length - 1) {
-      this.content = [...this.content, ['', '', '']];
-      this.row[this.row.length] = new TableRow(this.node, ['', '', ''], (cell, cellNumber) => this.changeTable(cell, cellNumber, this.row.length));
+    this.content[rowNumber][cellNumber] = cell.trim();
+    if (rowNumber === this.content.length - 2 && cell === "") {
+      const isEmptyRow = this.content[rowNumber].filter(
+        (cell) => cell !== ""
+      ).length;
+      if (!isEmptyRow) {
+        this.content.pop();
+        this.row[this.row.length - 1].destroy();
+        this.row.pop();
+      }
+    } else if (rowNumber === this.content.length - 1) {
+      this.content = [...this.content, ["", "", ""]];
+      this.row[this.row.length] = new TableRow(
+        this.node,
+        ["", "", ""],
+        (cell, cellNumber) =>
+          this.changeTable(cell, cellNumber, this.row.length)
+      );
     }
     this.controller(this.content);
   };
@@ -45,10 +66,12 @@ class TableRow extends Element {
     super({ parent, tagName: "tr", styles: styles.row });
     this.cell = {};
     content.forEach((cell, i) => {
-      this.cell[i] = new TableCell(this.node, cell, (cell) => changeRow(cell, i));
+      this.cell[i] = new TableCell(this.node, cell, (cell) =>
+        changeRow(cell, i)
+      );
     });
   }
-  
+
   update = (content) => {
     content.forEach((cell, i) => {
       this.cell[i].updateContent(cell);
@@ -63,7 +86,7 @@ class TableCell extends Element {
     this.node.setAttribute("contenteditable", true);
     this.node.oninput = (event) => {
       changeCell(event.target.innerText);
-    }
+    };
   }
 }
 

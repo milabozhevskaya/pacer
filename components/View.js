@@ -31,6 +31,7 @@ class View extends Element {
     this.main.updateTextareaText(initialData.textareaText);
     this.main.updateEndeavorText(initialData.endeavorText);
     this.main.updateActionText(initialData.actionText);
+    this.main.updateActionMode(initialData.actionMode);
     this.main.updateQuestText(initialData.questText);
     this.header.updateSelfBeliefPoints(initialData.selfBeliefPoints);
     this.header.updateTime(initialData.time);
@@ -43,6 +44,9 @@ class View extends Element {
     );
     this.store.onChangeActionText.add((actionText) =>
       this.main.updateActionText(actionText)
+    );
+    this.store.onChangeActionMode.add((actionMode) =>
+      this.main.updateActionMode(actionMode)
     );
     this.store.onChangeQuestText.add((questText) =>
       this.main.updateQuestText(questText)

@@ -24,7 +24,7 @@ class Notes extends Element {
       controller,
       content: content.action,
       key: "action",
-      mode: 'table',
+      mode: 'text',
     });
     this.quest = new NoteSection({
       parent: this.node,
@@ -41,6 +41,7 @@ class Notes extends Element {
 
   updateEndeavorText = (text) => this.endeavor.update(text);
   updateActionText = (text) => this.action.update(text);
+  updateActionMode = (mode) => this.action.updateMode(mode);
   updateQuestText = (text) => this.quest.update(text);
 }
 

@@ -5,6 +5,7 @@ class Store {
     this.$textareaText = "";
     this.$endeavorText = "";
     this.$actionText = "";
+    this.$actionMode = "text";
     this.$questText = "";
     this.$selfBeliefPoints = "0";
     this.$inputSelfBeliefPoints = "";
@@ -19,6 +20,7 @@ class Store {
     this.$textareaText = initialState.textareaText;
     this.$endeavorText = initialState.endeavorText;
     this.$actionText = initialState.actionText;
+    this.$actionMode = initialState.actionMode;
     this.$questText = initialState.questText;
     this.$selfBeliefPoints = initialState.selfBeliefPoints;
     this.$inputSelfBeliefPoints = initialState.inputSelfBeliefPoints;
@@ -56,6 +58,16 @@ class Store {
   set actionText(value) {
     this.$actionText = value;
     this.onChangeActionText.emit(value);
+    this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
+  }
+
+  get actionMode() {
+    return this.$actionMode;
+  }
+
+  set actionMode(mode) {
+    this.$actionMode = mode;
+    this.onChangeActionMode.emit(mode);
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   }
 
@@ -137,6 +149,7 @@ class Store {
   onChangeTextareaText = new Signal();
   onChangeEndeavorText = new Signal();
   onChangeActionText = new Signal();
+  onChangeActionMode = new Signal();
   onChangeQuestText = new Signal();
   onChangeSelfBeliefPoints = new Signal();
   onChangeInputSelfBeliefPoints = new Signal();
@@ -153,6 +166,7 @@ class Store {
     actionText: this.$actionText,
     questText: this.$questText,
     selfBeliefPoints: this.$selfBeliefPoints,
+    actionMode: this.$actionMode,
   });
 }
 

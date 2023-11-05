@@ -1,5 +1,5 @@
 import { Element } from "../Element.js";
-import { formatContentForTable } from "../../utils/formatContentForTable.js";
+import { formatContentForTable, formatContentFromTable } from "../../utils/tableFormatContent.js";
 import { styles } from "./style.js";
 
 class Table extends Element {
@@ -28,6 +28,7 @@ class Table extends Element {
       this.row = this.row.slice(0, this.content.length);
     }
   };
+  getContent = () => formatContentFromTable(this.content);
 }
 
 class TableRow extends Element {

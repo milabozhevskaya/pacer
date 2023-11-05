@@ -13,3 +13,12 @@ export const formatContentForTable = (cellCount = 3, text = "") => {
   });
   return formattedContent;
 };
+
+export const formatContentFromTable = (content = []) => {
+  if (content.length === 0) return "";
+  const text = content
+    .slice(0, -1)
+    .map((row) => row.join(", "))
+    .join("\n");
+  return text;
+};

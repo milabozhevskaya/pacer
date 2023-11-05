@@ -58,6 +58,9 @@ class ActionSection extends Element {
     this.activeChild.destroy();
     this.activeChild = this.mode === "text" ? this.textarea : this.table;
     this.node.append(this.activeChild.node);
+    if (this.mode !== "text") {
+      this.textarea.update(this.table.getContent());
+    }
   };
 }
 

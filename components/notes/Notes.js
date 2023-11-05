@@ -1,5 +1,6 @@
 import { Element } from "../Element.js";
 import { NoteSection } from "../noteSaction/NoteSection.js";
+import { ActionSection } from "../ActionSection/ActionSection.js";
 import { styles } from "./style.js";
 
 class Notes extends Element {
@@ -17,12 +18,13 @@ class Notes extends Element {
       content: content.endeavor,
       key: "endeavor",
     });
-    this.action = new NoteSection({
+    this.action = new ActionSection({
       parent: this.node,
       className: "notes",
       controller,
       content: content.action,
       key: "action",
+      mode: 'table',
     });
     this.quest = new NoteSection({
       parent: this.node,

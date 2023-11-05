@@ -8,6 +8,9 @@ class NoteSection extends Element {
     this.key = key;
     this.title = new Element({ parent: this.node, tagName: "h2", className: "note__title", content: content.title, styles: styles.title });
     this.textarea = new Textarea(this.node, (text) => controller.changeTextareaText(key, text));
+    if (key === "textarea") {
+      Object.assign(this.textarea.node.style, styles.anotherNote);
+    }
   }
 
   update = (text) => this.textarea.update(text);

@@ -12,4 +12,8 @@ export const styles = {
     fontSize: "20px",
     userSelect: "none",
   },
+  anotherNote: {
+    maxHeight: "120px",
+    marginBottom: "20px",
+  },
 };

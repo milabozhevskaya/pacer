@@ -40,7 +40,7 @@ class Notes extends Element {
   }
 
   updateEndeavorText = (text) => this.endeavor.update(text);
-  updateActionText = (text) => this.action.update(text);
+  updateActionText = (text) => this.action.updateText(text);
   updateActionMode = (mode) => this.action.updateMode(mode);
   updateQuestText = (text) => this.quest.update(text);
 }

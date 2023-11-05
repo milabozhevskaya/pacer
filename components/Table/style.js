@@ -1,0 +1,27 @@
+export const styles = {
+  width: "100%",
+  display: "flex",
+  flexDirection: "column",
+  border: "2px solid #7e797659",
+  borderRadius: "3px",
+  tableLayout: "auto",
+  row: {
+    width: "100%",
+    display: 'flex',
+  },
+  cell: {
+    flexGrow: "1",
+    padding: "5px",
+    fontSize: "22px",
+    border: "1px solid #7e797659",
+    borderRadius: "3px",
+    backgroundColor: "#ddd2cc59",
+    color: "#6f6161",
+    outline: "none",
+    fontSize: "17px",
+    lineHeight: "1.4",
+    width: "calc(100% / 3)",
+    whiteSpace: "break-spaces",
+    wordBreak: "break-all",
+  },
+};

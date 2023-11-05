@@ -1,6 +1,6 @@
 export const formatContentForTable = (cellCount = 3, text = "") => {
   const lastRowContent = ",".repeat(cellCount - 1);
-  const content = text.trim().replace(lastRowContent, "");
+  const content = text.trim().replace(lastRowContent + "\n", "");
   const rowContent = content.split("\n").filter((row) => row !== "");
   const formattedContent = [...rowContent, lastRowContent].map((row) => {
     let cells = row.split(",").map((cell) => cell.trim());

@@ -50,15 +50,23 @@ class View extends Element {
     this.store.onChangeSelfBeliefPoints.add((selfBeliefPoints) =>
       this.header.updateSelfBeliefPoints(selfBeliefPoints)
     );
-    this.store.onChangeCalculateSelfBeliefPoints.add((value) =>
-      this.header.updateCalculateSelfBeliefPoints(value)
+    this.store.onChangeInputSelfBeliefPoints.add((value) =>
+      this.header.updateInputSelfBeliefPoints(value)
+    );
+    this.store.onChangeButtonSelfBeliefPoints.add((value) =>
+      this.header.updateButtonSelfBeliefPoints(value)
+    );
+    this.store.onChangeOpenPointsCalculate.add((value) =>
+      this.header.updateOpenPointsCalculate(value)
     );
     this.store.onChangeTime.add((time) => this.header.updateTime(time));
     this.store.onChangeOpenCalendar.add((flag) => {
       if (flag) {
         this.calendarPopup = new Popup({ className: "date-widget" });
         this.header.openCalendar(this.calendarPopup);
-        this.store.onChangeCalendarSwipingSteps.add(this.updateCalendarSwipingSteps);
+        this.store.onChangeCalendarSwipingSteps.add(
+          this.updateCalendarSwipingSteps
+        );
       } else {
         this.calendarPopup.closePopup();
         this.calendarPopup = null;

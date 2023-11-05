@@ -23,12 +23,15 @@ export const content = {
             prev: "Предыдущий",
             next: "Следующий",
           },
-        }
+        },
       },
     },
     selfBeliefPoints: {
       calculateButton: "Рассчитать",
-      changeButton: "Изменить",
+      openButton: {
+        open: "▶",
+        close: "◀",
+      },
     },
   },
   main: {

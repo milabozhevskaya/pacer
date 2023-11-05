@@ -1,8 +1,9 @@
 class LocalStorageData {
-  constructor({ textareaText, endeavorText, actionText, questText, selfBeliefPoints }) {
+  constructor({ textareaText, endeavorText, actionText, actionMode, questText, selfBeliefPoints }) {
     this.textareaText = textareaText;
     this.endeavorText = endeavorText;
     this.actionText = actionText;
+    this.actionMode = actionMode;
     this.questText = questText;
     this.selfBeliefPoints = selfBeliefPoints;
   }
@@ -35,6 +36,12 @@ class LocalStorageData {
 
     if (this.instanceOfISourcesLStorage(data, "actionText")) {
       initData.actionText = data.actionText;
+    } else {
+      throw new Error("Not property in localstorage");
+    }
+
+    if (this.instanceOfISourcesLStorage(data, "actionMode")) {
+      initData.actionMode = data.actionMode;
     } else {
       throw new Error("Not property in localstorage");
     }

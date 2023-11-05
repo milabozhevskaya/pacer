@@ -23,6 +23,7 @@ class Controller {
         actionText,
         questText,
         selfBeliefPoints,
+        actionMode,
       } = LocalStorageData.fromJson(JSON.parse(e.newValue || ""));
 
       if (this.store.textareaText !== textareaText)
@@ -33,6 +34,9 @@ class Controller {
 
       if (this.store.actionText !== actionText)
         this.store.actionText = actionText;
+
+      if (this.store.actionMode !== actionMode)
+        this.store.actionMode = actionMode;
 
       if (this.store.questText !== questText) this.store.questText = questText;
       if (this.store.selfBeliefPoints !== selfBeliefPoints)
@@ -64,6 +68,7 @@ class Controller {
         actionText: "",
         questText: "",
         selfBeliefPoints: "0",
+        actionMode: "text",
       });
     }
   };
@@ -86,6 +91,11 @@ class Controller {
       const time = getDate();
       if (this.store.time !== time) this.store.time = time;
     }, intervalTime);
+  };
+
+  changeActionMode = (mode) => {
+    if (this.store.actionMode === mode) return;
+    this.store.actionMode = mode;
   };
 
   changeText = {

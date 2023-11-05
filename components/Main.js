@@ -24,7 +24,7 @@ class Main extends Element {
     this.notes = new Notes({
       parent: this.container.node,
       className: "main",
-      controller: controller.changeTextareaText,
+      controller: controller,
       content: content.notes,
     });
     this.textarea = new NoteSection({
@@ -44,6 +44,7 @@ class Main extends Element {
   updateTextareaText = (text) => this.textarea.update(text);
   updateEndeavorText = (text) => this.notes.updateEndeavorText(text);
   updateActionText = (text) => this.notes.updateActionText(text);
+  updateActionMode = (mode) => this.notes.updateActionMode(mode);
   updateQuestText = (text) => this.notes.updateQuestText(text);
 }
 

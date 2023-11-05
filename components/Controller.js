@@ -1,6 +1,7 @@
 import { LocalStorageData } from "./LocalStorage.js";
 import { getDate } from "../utils/getDate.js";
 import { CustomError } from "./CustomError.js";
+import { formatContentFromTable } from "../utils/tableFormatContent.js";
 
 const intervalTime = 999;
 class Controller {
@@ -106,7 +107,8 @@ class Controller {
       this.store.endeavorText = text;
     },
     action: (text) => {
-      this.store.actionText = text;
+      this.store.actionText =
+        this.store.actionMode === "text" ? text : formatContentFromTable(text);
     },
     quest: (text) => {
       this.store.questText = text;

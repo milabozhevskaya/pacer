@@ -4,7 +4,7 @@ import { CalendarDays } from "./CalendarDays.js";
 import { CalendarWeeks } from "./CalendarWeeks.js";
 
 class CalendarMonth extends Element {
-  constructor({ parent, className, content, styles, today }) {
+  constructor({ parent, className, content, styles, monthContent }) {
     super({
       parent,
       tagName: "li",
@@ -17,8 +17,8 @@ class CalendarMonth extends Element {
       tagName: "div",
       className: "calendar__top",
       styles: styles.top,
-      month: content.month[today.getMonth()],
-      year: today.getFullYear(),
+      month: content.month[monthContent.month],
+      year: monthContent.year,
     });
     this.days = new CalendarDays({
       parent: this.node,
@@ -32,16 +32,13 @@ class CalendarMonth extends Element {
       tagName: "ul",
       className: "calendar__weeks",
       styles: styles.weeks,
-      today,
+      days: monthContent.days,
     });
   }
 
-  updateMonth = (today) => {
-    this.top.updateContent(
-      this.content.month[today.getMonth()],
-      today.getFullYear()
-    );
-    this.weeks.updateWeeks(today);
+  updateMonth = ({ month, year, days }) => {
+    this.top.updateContent(this.content.month[month], year);
+    this.weeks.updateWeeks(days);
   };
 }
 

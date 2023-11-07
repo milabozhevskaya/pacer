@@ -39,10 +39,12 @@ class Header extends Element {
   updateOpenPointsCalculate = (value) =>
     this.selfBeliefPoints.openPointsCalculate(value);
   updateTime = (time) => this.dateWidget.updateTime(time);
-  openCalendar = (popup) => this.dateWidget.openCalendar(popup);
+  updateDate = (date) => this.dateWidget.updateDate(date);
+  openCalendar = ({ popup, month }) =>
+    this.dateWidget.openCalendar({ popup, month });
   closeCalendar = () => this.dateWidget.closeCalendar();
-  updateCalendarSwipingSteps = (steps) =>
-    this.dateWidget.updateCalendarSwipingSteps(steps);
+  updateCalendarSwipingSteps = ({ direction, month }) =>
+    this.dateWidget.updateCalendarSwipingSteps({ direction, month });
 }
 
 export { Header };

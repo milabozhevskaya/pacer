@@ -64,10 +64,11 @@ class View extends Element {
       this.header.updateOpenPointsCalculate(value)
     );
     this.store.onChangeTime.add((time) => this.header.updateTime(time));
-    this.store.onChangeOpenCalendar.add((flag) => {
+    this.store.onChangeDate.add((date) => this.header.updateDate(date));
+    this.store.onChangeIsOpenCalendar.add(({ flag, month }) => {
       if (flag) {
         this.calendarPopup = new Popup({ className: "date-widget" });
-        this.header.openCalendar(this.calendarPopup);
+        this.header.openCalendar({ popup: this.calendarPopup, month });
         this.store.onChangeCalendarSwipingSteps.add(
           this.updateCalendarSwipingSteps
         );
@@ -82,8 +83,8 @@ class View extends Element {
     });
   };
 
-  updateCalendarSwipingSteps = (steps) => {
-    this.header.updateCalendarSwipingSteps(steps);
+  updateCalendarSwipingSteps = ({ direction, month }) => {
+    this.header.updateCalendarSwipingSteps({ direction, month });
   };
 }
 

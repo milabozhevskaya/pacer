@@ -12,7 +12,9 @@ class Store {
     this.$buttonSelfBeliefPoints = "";
     this.$openPointsCalculate = false;
     this.$time = "";
-    this.$openCalendar = false;
+    this.$date = 0;
+    this.$isOpenCalendar = false;
+    this.$calendarContent = null;
     this.$calendarSwipingSteps = 0;
   }
 
@@ -27,6 +29,9 @@ class Store {
     this.$buttonSelfBeliefPoints = initialState.buttonSelfBeliefPoints;
     this.$openPointsCalculate = initialState.openPointsCalculate;
     this.$time = initialState.time;
+    this.$date = initialState.date;
+    this.$isOpenCalendar = initialState.isOpenCalendar;
+    this.$calendarContent = initialState.calendarContent;
     this.$calendarSwipingSteps = initialState.calendarSwipingSteps;
     callback({ ...this.computeDataForLocalStorage(), time: this.$time });
   };
@@ -127,14 +132,34 @@ class Store {
     this.onChangeTime.emit(value);
   }
 
-  get openCalendar() {
-    return this.$openCalendar;
+  get date() {
+    return this.$date;
   }
 
-  set openCalendar(flag) {
-    this.$openCalendar = flag;
-    this.onChangeOpenCalendar.emit(flag);
-    if (!flag) this.$calendarSwipingSteps = 0;
+  set date(value) {
+    this.$date = value;
+    if (this.$isOpenCalendar) this.onChangeDate.emit(value);
+  }
+
+  get isOpenCalendar() {
+    return this.$isOpenCalendar;
+  }
+
+  set isOpenCalendar(flag) {
+    this.$isOpenCalendar = flag;
+    if (!flag) {
+      this.$calendarSwipingSteps = 0;
+      this.$calendarContent = null;
+    }
+    this.onChangeIsOpenCalendar.emit({ flag, month: this.$calendarContent });
+  }
+
+  get calendarContent() {
+    return this.$calendarContent;
+  }
+
+  set calendarContent(month) {
+    this.$calendarContent = month;
   }
 
   get calendarSwipingSteps() {
@@ -142,8 +167,19 @@ class Store {
   }
 
   set calendarSwipingSteps(steps) {
+    const prevSteps = this.$calendarSwipingSteps;
     this.$calendarSwipingSteps = steps;
-    this.onChangeCalendarSwipingSteps.emit(steps);
+    if (prevSteps < steps) {
+      this.onChangeCalendarSwipingSteps.emit({
+        direction: "next",
+        month: this.$calendarContent[2],
+      });
+    } else {
+      this.onChangeCalendarSwipingSteps.emit({
+        direction: "last",
+        month: this.$calendarContent[0],
+      });
+    }
   }
 
   onChangeTextareaText = new Signal();
@@ -156,7 +192,8 @@ class Store {
   onChangeButtonSelfBeliefPoints = new Signal();
   onChangeOpenPointsCalculate = new Signal();
   onChangeTime = new Signal();
-  onChangeOpenCalendar = new Signal();
+  onChangeDate = new Signal();
+  onChangeIsOpenCalendar = new Signal();
   onChangeCalendarSwipingSteps = new Signal();
 
   onChangeLocalStorageData = new Signal();

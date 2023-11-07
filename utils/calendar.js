@@ -6,7 +6,25 @@ function isToday(date, today) {
   );
 }
 
-function buildMonthDays({ startDate, endDate }, today, isCurrentMonth = true) {
+function buildMonth(month) {
+  const today = new Date();
+
+  const monthDates = buildMonthDates(month);
+
+  const monthDays = [
+    ...buildMonthDays(monthDates.prevMonth, today, false),
+    ...buildMonthDays(monthDates.currentMonth, today, true),
+    ...buildMonthDays(monthDates.nextMonth, today, false),
+  ];
+
+  return monthDays;
+}
+
+function buildMonthDays(
+  { startDate, endDate },
+  currentDate,
+  isActiveMonth = true
+) {
   const year = startDate.getFullYear();
   const month = startDate.getMonth();
   const endDay = endDate.getDate();
@@ -15,10 +33,10 @@ function buildMonthDays({ startDate, endDate }, today, isCurrentMonth = true) {
   for (let day = startDate.getDate(); day <= endDay; day++) {
     const date = new Date(year, month, day);
     const isWeekend = date.getDay() === 6 || date.getDay() === 0;
-    const isCurrentDay = isCurrentMonth && isToday(date, today);
+    const isCurrentDay = isToday(date, currentDate);
     const monthDay = {
       date,
-      options: { isCurrentMonth, isCurrentDay, isWeekend },
+      options: { isActiveMonth, isCurrentDay, isWeekend },
     };
 
     monthDays.push(monthDay);
@@ -57,4 +75,4 @@ function buildMonthDates(date) {
     },
   };
 }
-export { buildMonthDates, buildMonthDays };
+export { buildMonthDates, buildMonthDays, buildMonth };

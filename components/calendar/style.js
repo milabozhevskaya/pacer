@@ -2,7 +2,7 @@ export const styles = {
   width: "100%",
   display: "flex",
   position: "relative",
-  aspectRatio: 1 / 1.0991,
+  aspectRatio: 1 / 1.114,
   overflow: "hidden",
   top: {
     width: "100%",
@@ -61,20 +61,30 @@ export const styles = {
     width: "100%",
     rowGap: "8px",
     day: {
-      color: "#492e2e63",
+      color: "#492e2e70",
+      // color: "#492e2e63",
       width: `calc(100% / 7)`,
       textAlign: "center",
       padding: "2px",
-      currentMonth: {
+      activeMonth: {
         color: "#492e2e",
+        currentDay: {
+          color: "#e10a0a",
+          border: "1px solid #e8862d",
+          borderRadius: "50%",
+        },
+        weekend: {
+          color: "#b07151",
+        },
+  
       },
       currentDay: {
-        color: "#e10a0a",
-        border: "1px solid #e8862d",
+        color: "#e10a0a63",
+        border: "1px solid #492e2e63",
         borderRadius: "50%",
       },
       weekend: {
-        color: "#b07151",
+        color: "#b0715163",
       },
     },
   },

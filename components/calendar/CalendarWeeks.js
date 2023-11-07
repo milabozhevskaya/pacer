@@ -2,7 +2,7 @@ import { Element } from "../Element.js";
 import { buildMonthDates, buildMonthDays } from "../../utils/calendar.js";
 
 class CalendarWeeks extends Element {
-  constructor({ parent, tagName, className, styles, today }) {
+  constructor({ parent, tagName, className, styles, days }) {
     super({
       parent,
       tagName,
@@ -10,22 +10,15 @@ class CalendarWeeks extends Element {
       styles,
     });
     this.styles = styles;
-    this.lis = [];
-    this.containWeeks(today);
+    this.li = [];
+    this.containWeeks(days);
   }
 
-  containWeeks = (today) => {
-    const isMonth =
-      new Date().getFullYear() === today.getFullYear() &&
-      new Date().getMonth() === today.getMonth();
-    const dates = buildMonthDates(today);
-    const prevMonthDays = buildMonthDays(dates.prevMonth, today, false);
-    const monthDays = buildMonthDays(dates.currentMonth, today, true);
-    const nextMonthDays = buildMonthDays(dates.nextMonth, today, false);
-    [...prevMonthDays, ...monthDays, ...nextMonthDays].forEach(
+  containWeeks = (days) => {
+    days.forEach(
       ({ date, options }) => {
-        const { isCurrentMonth, isCurrentDay, isWeekend } = options;
-        this.lis.push(
+        const { isActiveMonth, isCurrentDay, isWeekend } = options;
+        this.li.push(
           new Element({
             parent: this.node,
             tagName: "li",
@@ -33,9 +26,11 @@ class CalendarWeeks extends Element {
             content: date.getDate(),
             styles: {
               ...this.styles.day,
-              ...(isCurrentMonth && this.styles.day.currentMonth),
-              ...(isCurrentMonth && isWeekend && this.styles.day.weekend),
-              ...(isCurrentDay && isMonth && this.styles.day.currentDay),
+              ...(isWeekend && this.styles.day.weekend),
+              ...(isCurrentDay && this.styles.day.currentDay),
+              ...(isActiveMonth && this.styles.day.activeMonth),
+              ...(isActiveMonth && isWeekend && this.styles.day.activeMonth.weekend),
+              ...(isActiveMonth && isCurrentDay && this.styles.day.activeMonth.currentDay),
             },
           })
         );
@@ -43,10 +38,10 @@ class CalendarWeeks extends Element {
     );
   };
 
-  updateWeeks = (today) => {
-    this.lis.forEach((li) => li.destroy());
-    this.lis = [];
-    this.containWeeks(today);
+  updateWeeks = (days) => {
+    this.li.forEach((li) => li.destroy());
+    this.li = [];
+    this.containWeeks(days);
   };
 }
 

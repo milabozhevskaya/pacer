@@ -1,7 +1,8 @@
 import { LocalStorageData } from "./LocalStorage.js";
-import { getDate } from "../utils/getDate.js";
+import { getTime } from "../utils/getTime.js";
 import { CustomError } from "./CustomError.js";
 import { formatContentFromTable } from "../utils/tableFormatContent.js";
+import { buildMonth } from "../utils/calendar.js";
 
 const intervalTime = 999;
 class Controller {
@@ -76,10 +77,14 @@ class Controller {
 
   prepareDateForStore = () => {
     const initialDate = this.getLocalStorageData();
-    const time = getDate();
+    const time = getTime();
+    const date = new Date(time).getDate();
     return {
       ...initialDate,
       time,
+      date,
+      isOpenCalendar: false,
+      calendarContent: null,
       calendarSwipingSteps: 0,
       inputSelfBeliefPoints: "",
       buttonSelfBeliefPoints: "",
@@ -89,7 +94,11 @@ class Controller {
 
   runClock = () => {
     setInterval(() => {
-      const time = getDate();
+      const time = getTime();
+      const date = new Date(time).getDate();
+      if (date !== new Date(this.store.time).getDate()) {
+        this.store.date = date;
+      }
       if (this.store.time !== time) this.store.time = time;
     }, intervalTime);
   };
@@ -154,14 +163,76 @@ class Controller {
     if (value !== "") this.store.buttonSelfBeliefPoints = "";
   };
   openCalendar = () => {
-    if (this.store.openCalendar) this.store.openCalendar = false;
-    else this.store.openCalendar = true;
+    if (this.store.isOpenCalendar) {
+      this.store.isOpenCalendar = false;
+      return;
+    }
+    const nowMonth = new Date();
+    const nowMonthContent = {
+      month: nowMonth.getMonth(),
+      year: nowMonth.getFullYear(),
+      days: buildMonth(nowMonth),
+    };
+
+    const nextMonth = new Date(new Date().setMonth(new Date().getMonth() + 1));
+    const nextMonthContent = {
+      month: nextMonth.getMonth(),
+      year: nextMonth.getFullYear(),
+      days: buildMonth(nextMonth),
+    };
+
+    const lastMonth = new Date(new Date().setMonth(new Date().getMonth() - 1));
+    const lastMonthContent = {
+      month: lastMonth.getMonth(),
+      year: lastMonth.getFullYear(),
+      days: buildMonth(lastMonth),
+    };
+
+    this.store.calendarContent = [
+      lastMonthContent,
+      nowMonthContent,
+      nextMonthContent,
+    ];
+    this.store.isOpenCalendar = true;
   };
+
   setCalendarSwipingSteps = (steps) => {
-    this.store.calendarSwipingSteps = steps;
+    const newSteps = this.store.calendarSwipingSteps + steps;
+    let [lastMonthContent, nowMonthContent, nextMonthContent] =
+      this.store.calendarContent;
+    if (steps > 0) {
+      [lastMonthContent, nowMonthContent] = [nowMonthContent, nextMonthContent];
+
+      const nextMonth = new Date(
+        new Date().setMonth(new Date().getMonth() + newSteps + 1)
+      );
+      nextMonthContent = {
+        month: nextMonth.getMonth(),
+        year: nextMonth.getFullYear(),
+        days: buildMonth(nextMonth),
+      };
+    } else {
+      [nowMonthContent, nextMonthContent] = [lastMonthContent, nowMonthContent];
+
+      const lastMonth = new Date(
+        new Date().setMonth(new Date().getMonth() + newSteps - 1)
+      );
+      lastMonthContent = {
+        month: lastMonth.getMonth(),
+        year: lastMonth.getFullYear(),
+        days: buildMonth(lastMonth),
+      };
+    }
+
+    this.store.calendarContent = [
+      lastMonthContent,
+      nowMonthContent,
+      nextMonthContent,
+    ];
+    this.store.calendarSwipingSteps = newSteps;
   };
   onClickView = () => {
-    if (this.store.openCalendar) this.store.openCalendar = false;
+    if (this.store.isOpenCalendar) this.store.isOpenCalendar = false;
   };
 }
 

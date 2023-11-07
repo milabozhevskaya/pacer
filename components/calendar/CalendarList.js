@@ -21,7 +21,7 @@ class CalendarList extends Element {
             month: { ...styles.month, transform: `translateX(${i * 100}%)` },
           },
           content,
-          today: item,
+          monthContent: item,
         })
       );
     });

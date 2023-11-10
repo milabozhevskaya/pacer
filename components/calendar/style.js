@@ -2,7 +2,7 @@ export const styles = {
   width: "100%",
   display: "flex",
   position: "relative",
-  aspectRatio: 1 / 1.114,
+  aspectRatio: 1 / 1.16,
   overflow: "hidden",
   top: {
     width: "100%",
@@ -66,6 +66,7 @@ export const styles = {
       width: `calc(100% / 7)`,
       textAlign: "center",
       padding: "2px",
+      border: "1px solid transparent",
       activeMonth: {
         color: "#492e2e",
         currentDay: {
@@ -76,7 +77,6 @@ export const styles = {
         weekend: {
           color: "#b07151",
         },
-  
       },
       currentDay: {
         color: "#e10a0a63",

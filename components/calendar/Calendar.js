@@ -28,7 +28,7 @@ class Calendar extends Element {
     });
   }
 
-  updateDate = (date) => {};
+  updateDate = (changedMonth) => this.calendarList.updateDate(changedMonth);
   updateSwipingSteps = ({ direction, month }) => {
     if (direction === "next") {
       this.calendarList.swipeToRight(

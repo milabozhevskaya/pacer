@@ -27,6 +27,12 @@ class CalendarList extends Element {
     });
   }
 
+  updateDate = (changedMonth) => {
+    changedMonth.forEach(({ monthIndex, dayIndex, options }) => {
+      this.month[monthIndex].updateDay(dayIndex, options);
+    });
+  };
+
   swipeToRight = (nextMonth, callback) => {
     for (let i = 0; i < this.month.length; i++) {
       const slide = this.month[i];

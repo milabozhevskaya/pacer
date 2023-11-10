@@ -136,9 +136,9 @@ class Store {
     return this.$date;
   }
 
-  set date(value) {
-    this.$date = value;
-    if (this.$isOpenCalendar) this.onChangeDate.emit(value);
+  set date({ date, changedMonth }) {
+    this.$date = date;
+    if (this.$isOpenCalendar) this.onChangeDate.emit(changedMonth);
   }
 
   get isOpenCalendar() {

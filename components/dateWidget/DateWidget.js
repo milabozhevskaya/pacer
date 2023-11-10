@@ -34,7 +34,7 @@ class DateWidget extends Element {
   }
 
   updateTime = (time) => this.time.updateContent(time);
-  updateDate = (date) => this.calendar.updateDate(date);
+  updateDate = (changedMonth) => this.calendar.updateDate(changedMonth);
   openCalendar = ({ popup, month }) => {
     this.calendar = new Calendar({
       className: "date-widget__calendar calendar",

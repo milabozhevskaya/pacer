@@ -40,6 +40,7 @@ class CalendarMonth extends Element {
     this.top.updateContent(this.content.month[month], year);
     this.weeks.updateWeeks(days);
   };
+  updateDay = (dayIndex, options) => this.weeks.updateDay(dayIndex, options);
 }
 
 export { CalendarMonth };

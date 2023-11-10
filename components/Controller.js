@@ -95,9 +95,49 @@ class Controller {
   runClock = () => {
     setInterval(() => {
       const time = getTime();
-      const date = new Date(time).getDate();
-      if (date !== new Date(this.store.time).getDate()) {
-        this.store.date = date;
+      const newDate = new Date(time);
+      if (newDate.getDate() !== new Date(this.store.time).getDate()) {
+        const changedMonth = [];
+
+        if (this.store.isOpenCalendar) {
+          for (let i = 0; i < this.store.calendarContent.length; i++) {
+            const month = this.store.calendarContent[i];
+
+            const prevDayIndex = month.days.findIndex(
+              (day) =>
+                day.date.getDate() === new Date(this.store.time).getDate() &&
+                day.date.getMonth() === new Date(this.store.time).getMonth() &&
+                day.date.getFullYear() ===
+                  new Date(this.store.time).getFullYear()
+            );
+            if (prevDayIndex > -1) {
+              const day = month.days[prevDayIndex];
+              day.options = { ...day.options, isCurrentDay: false };
+              changedMonth.push({
+                monthIndex: i,
+                dayIndex: prevDayIndex,
+                options: day.options,
+              });
+            }
+
+            const dayIndex = month.days.findIndex(
+              (day) =>
+                day.date.getDate() === newDate.getDate() &&
+                day.date.getMonth() === newDate.getMonth() &&
+                day.date.getFullYear() === newDate.getFullYear()
+            );
+            if (dayIndex > -1) {
+              const day = month.days[dayIndex];
+              day.options = { ...day.options, isCurrentDay: true };
+              changedMonth.push({
+                monthIndex: i,
+                dayIndex,
+                options: day.options,
+              });
+            }
+          }
+        }
+        this.store.date = { date: newDate, changedMonth };
       }
       if (this.store.time !== time) this.store.time = time;
     }, intervalTime);

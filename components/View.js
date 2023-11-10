@@ -64,7 +64,9 @@ class View extends Element {
       this.header.updateOpenPointsCalculate(value)
     );
     this.store.onChangeTime.add((time) => this.header.updateTime(time));
-    this.store.onChangeDate.add((date) => this.header.updateDate(date));
+    this.store.onChangeDate.add((changedMonth) =>
+      this.header.updateDate(changedMonth)
+    );
     this.store.onChangeIsOpenCalendar.add(({ flag, month }) => {
       if (flag) {
         this.calendarPopup = new Popup({ className: "date-widget" });

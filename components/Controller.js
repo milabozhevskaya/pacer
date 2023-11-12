@@ -20,16 +20,21 @@ class Controller {
     onstorage = (e) => {
       if (e.key !== "pacer") return;
       const {
-        textareaText,
         endeavorText,
         actionText,
-        questText,
-        selfBeliefPoints,
         actionMode,
+        logText,
+        noteText,
+        questText,
+        todoText,
+        selfBeliefPoints,
       } = LocalStorageData.fromJson(JSON.parse(e.newValue || ""));
 
-      if (this.store.textareaText !== textareaText)
-        this.store.textareaText = textareaText;
+      if (this.store.noteText !== noteText) this.store.noteText = noteText;
+
+      if (this.store.logText !== logText) this.store.logText = logText;
+
+      if (this.store.todoText !== todoText) this.store.todoText = todoText;
 
       if (this.store.endeavorText !== endeavorText)
         this.store.endeavorText = endeavorText;
@@ -65,10 +70,12 @@ class Controller {
       return data;
     } catch (e) {
       return new LocalStorageData({
-        textareaText: "",
+        noteText: "",
         endeavorText: "",
         actionText: "",
         questText: "",
+        todoText: "",
+        logText: "",
         selfBeliefPoints: "0",
         actionMode: "text",
       });
@@ -149,8 +156,8 @@ class Controller {
   };
 
   changeText = {
-    textarea: (text) => {
-      this.store.textareaText = text;
+    note: (text) => {
+      this.store.noteText = text;
     },
     endeavor: (text) => {
       this.store.endeavorText = text;
@@ -161,6 +168,12 @@ class Controller {
     },
     quest: (text) => {
       this.store.questText = text;
+    },
+    todo: (text) => {
+      this.store.todoText = text;
+    },
+    log: (text) => {
+      this.store.logText = text;
     },
   };
 

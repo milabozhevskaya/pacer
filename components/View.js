@@ -28,16 +28,20 @@ class View extends Element {
   }
 
   init = (initialData) => {
-    this.main.updateTextareaText(initialData.textareaText);
     this.main.updateEndeavorText(initialData.endeavorText);
     this.main.updateActionText(initialData.actionText);
     this.main.updateActionMode(initialData.actionMode);
+    this.main.updateLogText(initialData.logText);
+
+    this.main.updateNoteText(initialData.noteText);
     this.main.updateQuestText(initialData.questText);
+    this.main.updateTodoText(initialData.todoText);
+
     this.header.updateSelfBeliefPoints(initialData.selfBeliefPoints);
     this.header.updateTime(initialData.time);
 
-    this.store.onChangeTextareaText.add((textareaText) =>
-      this.main.updateTextareaText(textareaText)
+    this.store.onChangeNoteText.add((noteText) =>
+      this.main.updateNoteText(noteText)
     );
     this.store.onChangeEndeavorText.add((endeavorText) =>
       this.main.updateEndeavorText(endeavorText)
@@ -50,6 +54,12 @@ class View extends Element {
     );
     this.store.onChangeQuestText.add((questText) =>
       this.main.updateQuestText(questText)
+    );
+    this.store.onChangeTodoText.add((todoText) =>
+      this.main.updateTodoText(todoText)
+    );
+    this.store.onChangeLogText.add((logText) =>
+      this.main.updateLogText(logText)
     );
     this.store.onChangeSelfBeliefPoints.add((selfBeliefPoints) =>
       this.header.updateSelfBeliefPoints(selfBeliefPoints)

@@ -50,9 +50,15 @@ export const content = {
       quest: {
         title: "Квесты",
       },
-    },
-    textarea: {
-      title: "Заметки",
+      note: {
+        title: "Заметки",
+      },
+      todo: {
+        title: "Выполнения",
+      },
+      log: {
+        title: "Журнал",
+      },
     },
     rules: {
       title: "Правила",

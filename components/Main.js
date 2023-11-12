@@ -21,18 +21,19 @@ class Main extends Element {
       className: "main__title title",
       content: content.title,
     });
-    this.notes = new Notes({
+    this.topNotes = new Notes({
       parent: this.container.node,
       className: "main",
       controller: controller,
       content: content.notes,
+      notes: ["note", "quest", "todo"],
     });
-    this.textarea = new NoteSection({
+    this.downNotes = new Notes({
       parent: this.container.node,
       className: "main",
-      content: content.textarea,
-      controller: controller.changeTextareaText,
-      key: "textarea",
+      controller: controller,
+      content: content.notes,
+      notes: ["endeavor", "action", "log"],
     });
     this.rules = new Rules({
       parent: this.container.node,
@@ -41,11 +42,14 @@ class Main extends Element {
     });
   }
 
-  updateTextareaText = (text) => this.textarea.update(text);
-  updateEndeavorText = (text) => this.notes.updateEndeavorText(text);
-  updateActionText = (text) => this.notes.updateActionText(text);
-  updateActionMode = (mode) => this.notes.updateActionMode(mode);
-  updateQuestText = (text) => this.notes.updateQuestText(text);
+  updateEndeavorText = (text) => this.downNotes.updateEndeavorText(text);
+  updateActionText = (text) => this.downNotes.updateActionText(text);
+  updateActionMode = (mode) => this.downNotes.updateActionMode(mode);
+  updateLogText = (text) => this.downNotes.updateLogText(text);
+
+  updateNoteText = (text) => this.topNotes.updateNoteText(text);
+  updateQuestText = (text) => this.topNotes.updateQuestText(text);
+  updateTodoText = (text) => this.topNotes.updateTodoText(text);
 }
 
 export { Main };

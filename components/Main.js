@@ -2,6 +2,7 @@ import { Element } from "./Element.js";
 import { NoteSection } from "./noteSaction/NoteSection.js";
 import { Rules } from "./rules/Rules.js";
 import { Notes } from "./notes/Notes.js";
+import { SavingButton } from "./SavingButton/SavingButton.js";
 
 class Main extends Element {
   constructor({ parent, className, controller, content }) {
@@ -21,14 +22,14 @@ class Main extends Element {
       className: "main__title title",
       content: content.title,
     });
-    this.topNotes = new Notes({
+    this.firstLineNotes = new Notes({
       parent: this.container.node,
       className: "main",
       controller: controller,
       content: content.notes,
       notes: ["note", "quest", "todo"],
     });
-    this.downNotes = new Notes({
+    this.secondLineNotes = new Notes({
       parent: this.container.node,
       className: "main",
       controller: controller,
@@ -40,16 +41,22 @@ class Main extends Element {
       className: "main",
       content: content.rules,
     });
+    this.savingButton = new SavingButton({
+      parent: this.container.node,
+      className: "main",
+      controller: controller,
+      content: content.savingButton,
+    });
   }
 
-  updateEndeavorText = (text) => this.downNotes.updateEndeavorText(text);
-  updateActionText = (text) => this.downNotes.updateActionText(text);
-  updateActionMode = (mode) => this.downNotes.updateActionMode(mode);
-  updateLogText = (text) => this.downNotes.updateLogText(text);
+  updateEndeavorText = (text) => this.secondLineNotes.updateEndeavorText(text);
+  updateActionText = (text) => this.secondLineNotes.updateActionText(text);
+  updateActionMode = (mode) => this.secondLineNotes.updateActionMode(mode);
+  updateLogText = (text) => this.secondLineNotes.updateLogText(text);
 
-  updateNoteText = (text) => this.topNotes.updateNoteText(text);
-  updateQuestText = (text) => this.topNotes.updateQuestText(text);
-  updateTodoText = (text) => this.topNotes.updateTodoText(text);
+  updateNoteText = (text) => this.firstLineNotes.updateNoteText(text);
+  updateQuestText = (text) => this.firstLineNotes.updateQuestText(text);
+  updateTodoText = (text) => this.firstLineNotes.updateTodoText(text);
 }
 
 export { Main };

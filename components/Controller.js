@@ -284,8 +284,17 @@ class Controller {
     ];
     this.store.calendarSwipingSteps = newSteps;
   };
+
   onClickView = () => {
     if (this.store.isOpenCalendar) this.store.isOpenCalendar = false;
+  };
+
+  downloadDateFile = () => {
+    console.log("h");
+  };
+
+  uploadDateFile = () => {
+    console.log("hr");
   };
 }
 

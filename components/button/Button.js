@@ -35,6 +35,7 @@ class Button extends Element {
     this.node.onmouseleave = () => {
       if (this.isDisable || this.isWaiting) return;
 
+      Object.assign(this.node.style, buttonStyles);
       Object.assign(this.node.style, styles);
     };
 

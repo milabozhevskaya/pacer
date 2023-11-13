@@ -301,7 +301,23 @@ class Controller {
   };
 
   uploadDateFile = () => {
-    console.log("hr");
+    const input = document.createElement("input");
+    input.type = "file";
+    input.accept = ".json";
+    input.click();
+    input.onchange = () => {
+      const file = input.files[0];
+      const reader = new FileReader();
+      reader.readAsText(file);
+      reader.onload = () => {
+        const data = JSON.parse(reader.result);
+        console.log(data);
+      };
+      reader.onerror = () => {
+        console.log("error");
+      };
+    };
+    
   };
 }
 

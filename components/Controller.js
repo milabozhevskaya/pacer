@@ -290,7 +290,14 @@ class Controller {
   };
 
   downloadDateFile = () => {
-    console.log("h");
+    const a = document.createElement("a");
+    const date = this.getLocalStorageData();
+    const file = new Blob([JSON.stringify(date, null, 2)], {
+      type: "application/json;charset=" + document.characterSet,
+    });
+    a.href = URL.createObjectURL(file);
+    a.download = "pacer.json";
+    a.click();
   };
 
   uploadDateFile = () => {

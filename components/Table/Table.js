@@ -50,12 +50,11 @@ class Table extends Element {
       }
     } else if (rowNumber === this.content.length - 1) {
       this.content = [...this.content, ["", "", ""]];
-      this.row.push(new TableRow(
-        this.node,
-        ["", "", ""],
-        (cell, cellNumber) =>
+      this.row.push(
+        new TableRow(this.node, ["", "", ""], (cell, cellNumber) =>
           this.changeTable(cell, cellNumber, rowNumber + 1)
-      ));
+        )
+      );
     }
     this.controller(this.content);
   };

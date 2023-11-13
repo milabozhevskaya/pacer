@@ -11,7 +11,7 @@ class Controller {
 
     this.initialData = this.prepareDateForStore();
 
-    this.runClock();
+    this.timeInterval = this.runClock();
 
     this.store.onChangeLocalStorageData.add((data) =>
       this.toLocalStorageData(data)
@@ -54,6 +54,26 @@ class Controller {
   }
 
   init = (callback) => this.store.init(this.initialData, callback);
+
+  restart = (data) => {
+    clearInterval(this.timeInterval);
+    const time = getTime();
+    const date = new Date(time).getDate();
+    const reInitialDate = {
+      ...data,
+      time,
+      date,
+      isOpenCalendar: false,
+      calendarContent: null,
+      calendarSwipingSteps: 0,
+      inputSelfBeliefPoints: "",
+      buttonSelfBeliefPoints: "disable",
+      openPointsCalculate: false,
+    };
+
+    this.store.restart(reInitialDate);
+    this.timeInterval = this.runClock();
+  };
 
   toLocalStorageData = (dataFromLocalStorage) => {
     localStorage.setItem(
@@ -100,7 +120,7 @@ class Controller {
   };
 
   runClock = () => {
-    setInterval(() => {
+    const id = setInterval(() => {
       const time = getTime();
       const newDate = new Date(time);
       if (newDate.getDate() !== new Date(this.store.time).getDate()) {
@@ -148,6 +168,7 @@ class Controller {
       }
       if (this.store.time !== time) this.store.time = time;
     }, intervalTime);
+    return id;
   };
 
   changeActionMode = (mode) => {
@@ -214,6 +235,9 @@ class Controller {
   changeInputSelfBeliefPoints = (value) => {
     this.store.inputSelfBeliefPoints = value;
     if (value !== "") this.store.buttonSelfBeliefPoints = "";
+    if (value === "") {
+      this.store.buttonSelfBeliefPoints = "disable";
+    }
   };
   openCalendar = () => {
     if (this.store.isOpenCalendar) {
@@ -310,14 +334,20 @@ class Controller {
       const reader = new FileReader();
       reader.readAsText(file);
       reader.onload = () => {
-        const data = JSON.parse(reader.result);
-        console.log(data);
+        try {
+          const data = JSON.parse(reader.result);
+          if (data === null || typeof data !== "object") {
+            throw new Error("Not object in this file");
+          }
+          this.restart(data);
+        } catch (e) {
+          console.log(e.message);
+        }
       };
       reader.onerror = () => {
-        console.log("error");
+        console.log("Uploading file is wrong");
       };
     };
-    
   };
 }
 

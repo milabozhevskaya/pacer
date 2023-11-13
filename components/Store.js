@@ -40,6 +40,30 @@ class Store {
     callback({ ...this.computeDataForLocalStorage(), time: this.$time });
   };
 
+  restart = (reInitialDate) => {
+    this.$noteText = reInitialDate.noteText;
+    this.$logText = reInitialDate.logText;
+    this.$todoText = reInitialDate.todoText;
+    this.$endeavorText = reInitialDate.endeavorText;
+    this.$actionText = reInitialDate.actionText;
+    this.$actionMode = reInitialDate.actionMode;
+    this.$questText = reInitialDate.questText;
+
+    this.$selfBeliefPoints = reInitialDate.selfBeliefPoints;
+    this.$inputSelfBeliefPoints = reInitialDate.inputSelfBeliefPoints;
+    this.$buttonSelfBeliefPoints = reInitialDate.buttonSelfBeliefPoints;
+    this.$openPointsCalculate = reInitialDate.openPointsCalculate;
+
+    this.$time = reInitialDate.time;
+    this.$date = reInitialDate.date;
+    this.$isOpenCalendar = reInitialDate.isOpenCalendar;
+    this.$calendarContent = reInitialDate.calendarContent;
+    this.$calendarSwipingSteps = reInitialDate.calendarSwipingSteps;
+
+    this.onReInit.emit(reInitialDate);
+    this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
+  };
+
   get noteText() {
     return this.$noteText;
   }
@@ -205,6 +229,8 @@ class Store {
       });
     }
   }
+
+  onReInit = new Signal();
 
   onChangeNoteText = new Signal();
   onChangeLogText = new Signal();

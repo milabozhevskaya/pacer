@@ -40,18 +40,21 @@ class ActionSection extends Element {
       controller.changeTextareaText(key, text)
     );
     this.table = new Table({
-      parent: null, controller: (text) =>
-      controller.changeTextareaText(key, text)
+      parent: null,
+      controller: (text) => controller.changeTextareaText(key, text),
     });
     this.activeChild = this.mode === "text" ? this.textarea : this.table;
     this.node.append(this.activeChild.node);
   }
 
   changeMode = () => (this.mode === "text" ? "table" : "text");
-  updateText = (text) => {
+  updateText = (text, reinit = "") => {
     this.text = text;
     this.textarea.update(text);
     if (this.mode === "text") {
+      this.table.update(text);
+    }
+    if (reinit === "reinit" && this.mode === "table") {
       this.table.update(text);
     }
   };

@@ -40,6 +40,29 @@ class View extends Element {
     this.header.updateSelfBeliefPoints(initialData.selfBeliefPoints);
     this.header.updateTime(initialData.time);
 
+    this.store.onReInit.add((date) => {
+      this.main.updateNoteText(date.noteText);
+      this.main.updateEndeavorText(date.endeavorText);
+      this.main.updateActionText(date.actionText, "reinit");
+      this.main.updateActionMode(date.actionMode);
+      this.main.updateLogText(date.logText);
+      this.main.updateQuestText(date.questText);
+      this.main.updateTodoText(date.todoText);
+      this.header.updateSelfBeliefPoints(date.selfBeliefPoints);
+      this.header.updateTime(date.time);
+      this.header.updateInputSelfBeliefPoints(date.inputSelfBeliefPoints);
+      this.header.updateButtonSelfBeliefPoints(date.buttonSelfBeliefPoints);
+      this.header.updateOpenPointsCalculate(date.openPointsCalculate);
+      if (this.calendarPopup) {
+        this.calendarPopup.closePopup();
+        this.calendarPopup = null;
+        this.header.closeCalendar();
+        this.store.onChangeCalendarSwipingSteps.remove(
+          this.updateCalendarSwipingSteps
+        );
+      }
+    });
+
     this.store.onChangeNoteText.add((noteText) =>
       this.main.updateNoteText(noteText)
     );

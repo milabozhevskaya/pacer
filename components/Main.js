@@ -50,7 +50,8 @@ class Main extends Element {
   }
 
   updateEndeavorText = (text) => this.secondLineNotes.updateEndeavorText(text);
-  updateActionText = (text) => this.secondLineNotes.updateActionText(text);
+  updateActionText = (text, reinit = "") =>
+    this.secondLineNotes.updateActionText(text, reinit);
   updateActionMode = (mode) => this.secondLineNotes.updateActionMode(mode);
   updateLogText = (text) => this.secondLineNotes.updateLogText(text);
 

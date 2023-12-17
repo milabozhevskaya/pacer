@@ -11,21 +11,48 @@ class DateWidget extends Element {
       className: `${className}__date-widget date-widget`,
       styles,
     });
-    this.time = new Element({
+    this.timeDisplay = new Element({
       parent: this.node,
+      tagName: "date",
+      className: "date-widget__time-display",
+      styles: styles.timeDisplay,
+    });
+    this.time = new Element({
+      parent: this.timeDisplay.node,
       tagName: "date",
       className: "date-widget__time",
       styles: styles.time,
     });
-    this.button = new Button({
+    this.inputTime = new Element({
+      parent: this.timeDisplay.node,
+      tagName: "input",
+      className: "date-widget__time-input",
+      styles: styles.timeInput,
+    });
+    this.inputTime.node.type = "date";
+    this.changeTimeButton = new Button({
       parent: this.node,
-      className: "date-widget__button",
-      content: content.button,
+      className: "date-widget__change-time-button",
+      content: content.changeTimeButton,
+      controller: () => {},
+      styles: styles.changeTimeButton,
+    });
+    this.timeModeButton = new Button({
+      parent: this.node,
+      className: "date-widget__time-mode-button",
+      content: content.timeModeButton,
+      controller: () => {},
+      styles: styles.timeModeButton,
+    });
+    this.calendarButton = new Button({
+      parent: this.node,
+      className: "date-widget__open-calendar-button",
+      content: content.calendarButton,
       controller: (event) => {
         event.stopPropagation();
         controller.openCalendar();
       },
-      styles: styles.button,
+      styles: styles.calendarButton,
     });
     this.calendar = null;
     this.popupStyles = styles.popup;

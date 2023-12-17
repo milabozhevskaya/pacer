@@ -1,7 +1,10 @@
 export const content = {
   header: {
     dateWidget: {
-      button: "Календарь",
+      timeModeButton: "Р",
+      changeTimeButton: "Изменить",
+      useTimeButton: "Применить",
+      calendarButton: "Календарь",
       calendar: {
         days: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
         month: [

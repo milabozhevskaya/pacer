@@ -9,19 +9,19 @@ class SelfBeliefPoints extends Element {
     super({
       parent,
       tagName: "div",
-      className: `${className}__self-belief-points self-belief-points`,
+      className: `${className}__confidence-points confidence-points`,
       styles,
     });
     this.content = content;
     this.points = new Points({
       parent: this.node,
-      className: "self-belief-points",
-      controller: controller.changeSelfBeliefPoints,
+      className: "cofidence-points",
+      controller: controller.changeConfidencePoints,
       styles: styles.points,
     });
     this.pointsCalculate = new PointsCalculate({
       parent: this.node,
-      className: "self-belief-points",
+      className: "cofidence-points",
       controller: controller,
       styles: styles.pointsCalculate,
       content: content.calculateButton,

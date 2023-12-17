@@ -20,35 +20,35 @@ class Controller {
     onstorage = (e) => {
       if (e.key !== "pacer") return;
       const {
-        endeavorText,
-        actionText,
-        actionMode,
-        logText,
-        noteText,
-        questText,
-        todoText,
-        selfBeliefPoints,
+        endeavors: endeavors,
+        activities: activities,
+        activitiesMode: activitiesMode,
+        logs: logs,
+        notes: notes,
+        quests: quests,
+        todos: todos,
+        confidencePoints: confidencePoints,
       } = LocalStorageData.fromJson(JSON.parse(e.newValue || ""));
 
-      if (this.store.noteText !== noteText) this.store.noteText = noteText;
+      if (this.store.notes !== notes) this.store.notes = notes;
 
-      if (this.store.logText !== logText) this.store.logText = logText;
+      if (this.store.logs !== logs) this.store.logs = logs;
 
-      if (this.store.todoText !== todoText) this.store.todoText = todoText;
+      if (this.store.todos !== todos) this.store.todos = todos;
 
-      if (this.store.endeavorText !== endeavorText)
-        this.store.endeavorText = endeavorText;
+      if (this.store.endeavors !== endeavors)
+        this.store.endeavors = endeavors;
 
-      if (this.store.actionText !== actionText)
-        this.store.actionText = actionText;
+      if (this.store.activities !== activities)
+        this.store.activities = activities;
 
-      if (this.store.actionMode !== actionMode)
-        this.store.actionMode = actionMode;
+      if (this.store.activitiesMode !== activitiesMode)
+        this.store.activitiesMode = activitiesMode;
 
-      if (this.store.questText !== questText) this.store.questText = questText;
-      if (this.store.selfBeliefPoints !== selfBeliefPoints)
-        this.store.selfBeliefPoints = (
-          parseInt(selfBeliefPoints) || "0"
+      if (this.store.quests !== quests) this.store.quests = quests;
+      if (this.store.confidencePoints !== confidencePoints)
+        this.store.confidencePoints = (
+          parseInt(confidencePoints) || "0"
         ).toString();
     };
   }
@@ -66,8 +66,8 @@ class Controller {
       isOpenCalendar: false,
       calendarContent: null,
       calendarSwipingSteps: 0,
-      inputSelfBeliefPoints: "",
-      buttonSelfBeliefPoints: "disable",
+      inputConfidencePoints: "",
+      buttonConfidencePoints: "disable",
       openPointsCalculate: false,
     };
 
@@ -90,14 +90,14 @@ class Controller {
       return data;
     } catch (e) {
       return new LocalStorageData({
-        noteText: "",
-        endeavorText: "",
-        actionText: "",
-        questText: "",
-        todoText: "",
-        logText: "",
-        selfBeliefPoints: "0",
-        actionMode: "text",
+        endeavors: "",
+        activities: "",
+        quests: "",
+        confidencePoints: "0",
+        notes: "",
+        todos: "",
+        logs: "",
+        activitiesMode: "text",
       });
     }
   };
@@ -113,8 +113,8 @@ class Controller {
       isOpenCalendar: false,
       calendarContent: null,
       calendarSwipingSteps: 0,
-      inputSelfBeliefPoints: "",
-      buttonSelfBeliefPoints: "",
+      inputConfidencePoints: "",
+      buttonConfidencePoints: "",
       openPointsCalculate: false,
     };
   };
@@ -171,9 +171,9 @@ class Controller {
     return id;
   };
 
-  changeActionMode = (mode) => {
-    if (this.store.actionMode === mode) return;
-    this.store.actionMode = mode;
+  changeActivitiesMode = (mode) => {
+    if (this.store.activitiesMode === mode) return;
+    this.store.activitiesMode = mode;
   };
 
   changeText = {
@@ -181,62 +181,65 @@ class Controller {
       this.store.noteText = text;
     },
     endeavor: (text) => {
-      this.store.endeavorText = text;
+      this.store.endeavors = text;
     },
-    action: (text) => {
-      this.store.actionText =
-        this.store.actionMode === "text" ? text : formatContentFromTable(text);
+    activity: (text) => {
+      this.store.activities =
+        this.store.activitiesMode === "text" ? text : formatContentFromTable(text);
     },
     quest: (text) => {
-      this.store.questText = text;
+      this.store.quests = text;
     },
     todo: (text) => {
-      this.store.todoText = text;
+      this.store.todos = text;
     },
     log: (text) => {
-      this.store.logText = text;
+      this.store.logs = text;
     },
   };
 
   changeTextareaText = (key, text) => {
     this.changeText[key](text);
   };
-  changeSelfBeliefPoints = (points) => {
-    this.store.selfBeliefPoints = points;
+  
+  changeConfidencePoints = (points) => {
+    this.store.confidencePoints = points;
   };
+  
   openPointsCalculate = () => {
     const state = !this.store.openPointsCalculate;
     this.store.openPointsCalculate = state;
     if (!state) {
-      this.store.inputSelfBeliefPoints = "";
-      this.store.buttonSelfBeliefPoints = "disable";
+      this.store.inputConfidencePoints = "";
+      this.store.buttonConfidence = "disable";
     }
   };
+  
   calculatePoints = (value) => {
-    this.store.buttonSelfBeliefPoints = "wait";
+    this.store.buttonConfidence = "wait";
     try {
-      const text = this.store.selfBeliefPoints + " " + value;
+      const text = this.store.confidencePoints + " " + value;
       const expression = eval(text);
       const points = parseFloat(expression);
       if (Number.isNaN(points) || !Number.isInteger(points) || points < 0)
         throw new CustomError("Incorrect calculation input");
-      this.store.selfBeliefPoints = points;
-      this.changeInputSelfBeliefPoints("");
-      this.store.buttonSelfBeliefPoints = "disable";
+      this.store.confidencePoints = points;
+      this.changeInputConfidencePoints("");
+      this.store.buttonConfidencePoints = "disable";
     } catch (error) {
       if (error instanceof CustomError) {
-        this.store.errorSelfBeliefPoints = error.message;
+        this.store.errorConfidencePoints = error.message;
       } else {
-        this.store.errorSelfBeliefPoints = "Something went wrong";
+        this.store.errorConfidencePoints = "Something went wrong";
       }
-      this.store.buttonSelfBeliefPoints = "";
+      this.store.buttonConfidencePoints = "";
     }
   };
-  changeInputSelfBeliefPoints = (value) => {
-    this.store.inputSelfBeliefPoints = value;
-    if (value !== "") this.store.buttonSelfBeliefPoints = "";
+  changeInputConfidencePoints = (value) => {
+    this.store.inputConfidencePoints = value;
+    if (value !== "") this.store.buttonConfidencePoints = "";
     if (value === "") {
-      this.store.buttonSelfBeliefPoints = "disable";
+      this.store.buttonConfidencePoints = "disable";
     }
   };
   openCalendar = () => {

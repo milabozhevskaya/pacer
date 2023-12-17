@@ -1,6 +1,6 @@
 import { Element } from "../Element.js";
 import { NoteSection } from "../noteSaction/NoteSection.js";
-import { ActionSection } from "../ActionSection/ActionSection.js";
+import { ActivitySection } from "../ActivitySection/ActivitySection.js";
 import { styles } from "./style.js";
 
 class Notes extends Element {
@@ -12,13 +12,13 @@ class Notes extends Element {
       styles,
     });
     notes.forEach((note) => {
-      if (note === "action") {
-        this.action = new ActionSection({
+      if (note === "activity") {
+        this.activity = new ActivitySection({
           parent: this.node,
           className: "notes",
           controller,
-          content: content.action,
-          key: "action",
+          content: content.activity,
+          key: "activity",
           mode: "text",
         });
       } else {
@@ -35,14 +35,14 @@ class Notes extends Element {
     });
   }
 
-  updateEndeavorText = (text) => this.endeavor.update(text);
-  updateActionText = (text, reinit = "") =>
-    this.action.updateText(text, reinit);
-  updateActionMode = (mode) => this.action.updateMode(mode);
-  updateLogText = (text) => this.log.update(text);
-  updateQuestText = (text) => this.quest.update(text);
-  updateNoteText = (text) => this.note.update(text);
-  updateTodoText = (text) => this.todo.update(text);
+  updateEndeavors = (text) => this.endeavor.update(text);
+  updateActivitiesText = (text, reinit = "") =>
+    this.activity.updateText(text, reinit);
+  updateActivitiesMode = (mode) => this.activity.updateMode(mode);
+  updateLogs = (text) => this.log.update(text);
+  updateQuests = (text) => this.quest.update(text);
+  updateNotes = (text) => this.note.update(text);
+  updateTodos = (text) => this.todo.update(text);
 }
 
 export { Notes };

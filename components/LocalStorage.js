@@ -1,22 +1,22 @@
 class LocalStorageData {
   constructor({
-    noteText,
-    endeavorText,
-    actionText,
-    actionMode,
-    questText,
-    todoText,
-    logText,
-    selfBeliefPoints,
+    endeavors,
+    notes,
+    activities,
+    activitiesMode,
+    quests,
+    todos,
+    logs,
+    confidencePoints,
   }) {
-    this.noteText = noteText;
-    this.endeavorText = endeavorText;
-    this.actionText = actionText;
-    this.actionMode = actionMode;
-    this.questText = questText;
-    this.todoText = todoText;
-    this.logText = logText;
-    this.selfBeliefPoints = selfBeliefPoints;
+    this.endeavors = endeavors;
+    this.notes = notes;
+    this.activities = activities;
+    this.activitiesMode = activitiesMode;
+    this.quests = quests;
+    this.todos = todos;
+    this.logs = logs;
+    this.confidencePoints = confidencePoints;
   }
 
   static toJson(data) {
@@ -33,51 +33,51 @@ class LocalStorageData {
       throw new Error("Not object in localstorage");
     }
 
-    if (this.instanceOfISourcesLStorage(data, "noteText")) {
-      initData.noteText = data.noteText;
+    if (this.instanceOfISourcesLStorage(data, "notes")) {
+      initData.notes = data.notes;
     } else {
       throw new Error("Not property in localstorage");
     }
 
-    if (this.instanceOfISourcesLStorage(data, "endeavorText")) {
-      initData.endeavorText = data.endeavorText;
+    if (this.instanceOfISourcesLStorage(data, "endeavors")) {
+      initData.endeavors = data.endeavors;
     } else {
       throw new Error("Not property in localstorage");
     }
 
-    if (this.instanceOfISourcesLStorage(data, "actionText")) {
-      initData.actionText = data.actionText;
+    if (this.instanceOfISourcesLStorage(data, "activities")) {
+      initData.activities = data.activities;
     } else {
       throw new Error("Not property in localstorage");
     }
 
-    if (this.instanceOfISourcesLStorage(data, "actionMode")) {
-      initData.actionMode = data.actionMode;
+    if (this.instanceOfISourcesLStorage(data, "activitiesMode")) {
+      initData.activitiesMode = data.activitiesMode;
     } else {
       throw new Error("Not property in localstorage");
     }
 
-    if (this.instanceOfISourcesLStorage(data, "questText")) {
-      initData.questText = data.questText;
+    if (this.instanceOfISourcesLStorage(data, "quests")) {
+      initData.quests = data.quests;
     } else {
       throw new Error("Not property in localstorage");
     }
 
-    if (this.instanceOfISourcesLStorage(data, "logText")) {
-      initData.logText = data.logText;
+    if (this.instanceOfISourcesLStorage(data, "logs")) {
+      initData.logs = data.logs;
     } else {
       throw new Error("Not property in localstorage");
     }
 
-    if (this.instanceOfISourcesLStorage(data, "todoText")) {
-      initData.todoText = data.todoText;
+    if (this.instanceOfISourcesLStorage(data, "todos")) {
+      initData.todos = data.todos;
     } else {
       throw new Error("Not property in localstorage");
     }
 
-    if (this.instanceOfISourcesLStorage(data, "selfBeliefPoints")) {
+    if (this.instanceOfISourcesLStorage(data, "confidencePoints")) {
       initData.textareaText = data.textareaText;
-      initData.selfBeliefPoints = data.selfBeliefPoints;
+      initData.confidencePoints = data.confidencePoints;
     } else {
       throw new Error("Not property in localstorage");
     }

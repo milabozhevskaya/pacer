@@ -1,5 +1,4 @@
 import { Element } from "./Element.js";
-import { NoteSection } from "./noteSaction/NoteSection.js";
 import { Rules } from "./rules/Rules.js";
 import { Notes } from "./notes/Notes.js";
 import { SavingButton } from "./SavingButton/SavingButton.js";
@@ -34,7 +33,7 @@ class Main extends Element {
       className: "main",
       controller: controller,
       content: content.notes,
-      notes: ["endeavor", "action", "log"],
+      notes: ["endeavor", "activity", "log"],
     });
     this.rules = new Rules({
       parent: this.container.node,
@@ -49,15 +48,15 @@ class Main extends Element {
     });
   }
 
-  updateEndeavorText = (text) => this.secondLineNotes.updateEndeavorText(text);
-  updateActionText = (text, reinit = "") =>
-    this.secondLineNotes.updateActionText(text, reinit);
-  updateActionMode = (mode) => this.secondLineNotes.updateActionMode(mode);
-  updateLogText = (text) => this.secondLineNotes.updateLogText(text);
+  updateEndeavors = (text) => this.secondLineNotes.updateEndeavors(text);
+  updateActivities = (text, reinit = "") =>
+    this.secondLineNotes.updateActivitiesText(text, reinit);
+  updateActivitiesMode = (mode) => this.secondLineNotes.updateActivitiesMode(mode);
+  updateLogs = (text) => this.secondLineNotes.updateLogs(text);
 
-  updateNoteText = (text) => this.firstLineNotes.updateNoteText(text);
-  updateQuestText = (text) => this.firstLineNotes.updateQuestText(text);
-  updateTodoText = (text) => this.firstLineNotes.updateTodoText(text);
+  updateNotes = (text) => this.firstLineNotes.updateNotes(text);
+  updateQuests = (text) => this.firstLineNotes.updateQuests(text);
+  updateTodos = (text) => this.firstLineNotes.updateTodos(text);
 }
 
 export { Main };

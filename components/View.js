@@ -28,30 +28,30 @@ class View extends Element {
   }
 
   init = (initialData) => {
-    this.main.updateEndeavorText(initialData.endeavorText);
-    this.main.updateActionText(initialData.actionText);
-    this.main.updateActionMode(initialData.actionMode);
-    this.main.updateLogText(initialData.logText);
+    this.main.updateEndeavors(initialData.endeavors);
+    this.main.updateActivities(initialData.activities);
+    this.main.updateActivitiesMode(initialData.activitiesMode);
+    this.main.updateLogs(initialData.logs);
 
-    this.main.updateNoteText(initialData.noteText);
-    this.main.updateQuestText(initialData.questText);
-    this.main.updateTodoText(initialData.todoText);
+    this.main.updateNotes(initialData.notes);
+    this.main.updateQuests(initialData.quests);
+    this.main.updateTodos(initialData.todos);
 
-    this.header.updateSelfBeliefPoints(initialData.selfBeliefPoints);
+    this.header.updateConfidencePoints(initialData.confidencePoints);
     this.header.updateTime(initialData.time);
 
     this.store.onReInit.add((date) => {
-      this.main.updateNoteText(date.noteText);
-      this.main.updateEndeavorText(date.endeavorText);
-      this.main.updateActionText(date.actionText, "reinit");
-      this.main.updateActionMode(date.actionMode);
-      this.main.updateLogText(date.logText);
-      this.main.updateQuestText(date.questText);
-      this.main.updateTodoText(date.todoText);
-      this.header.updateSelfBeliefPoints(date.selfBeliefPoints);
+      this.main.updateNotes(date.notes);
+      this.main.updateEndeavors(date.endeavors);
+      this.main.updateActivities(date.activities, "reinit");
+      this.main.updateActivitiesMode(date.activitiesMode);
+      this.main.updateLogs(date.logs);
+      this.main.updateQuests(date.quests);
+      this.main.updateTodos(date.todos);
+      this.header.updateConfidencePoints(date.confidencePoints);
       this.header.updateTime(date.time);
-      this.header.updateInputSelfBeliefPoints(date.inputSelfBeliefPoints);
-      this.header.updateButtonSelfBeliefPoints(date.buttonSelfBeliefPoints);
+      this.header.updateInputConfidencePoints(date.inputConfidencePoints);
+      this.header.updateButtonConfidencePoints(date.buttonConfidencePoints);
       this.header.updateOpenPointsCalculate(date.openPointsCalculate);
       if (this.calendarPopup) {
         this.calendarPopup.closePopup();
@@ -63,35 +63,35 @@ class View extends Element {
       }
     });
 
-    this.store.onChangeNoteText.add((noteText) =>
-      this.main.updateNoteText(noteText)
+    this.store.onChangeNotes.add((notes) =>
+      this.main.updateNotes(notes)
     );
-    this.store.onChangeEndeavorText.add((endeavorText) =>
-      this.main.updateEndeavorText(endeavorText)
+    this.store.onChangeEndeavors.add((endeavors) =>
+      this.main.updateEndeavors(endeavors)
     );
-    this.store.onChangeActionText.add((actionText) =>
-      this.main.updateActionText(actionText)
+    this.store.onChangeActivities.add((activities) =>
+      this.main.updateActivities(activities)
     );
-    this.store.onChangeActionMode.add((actionMode) =>
-      this.main.updateActionMode(actionMode)
+    this.store.onChangeActivitiesMode.add((activitiesMode) =>
+      this.main.updateActivitiesMode(activitiesMode)
     );
-    this.store.onChangeQuestText.add((questText) =>
-      this.main.updateQuestText(questText)
+    this.store.onChangeQuests.add((quests) =>
+      this.main.updateQuests(quests)
     );
-    this.store.onChangeTodoText.add((todoText) =>
-      this.main.updateTodoText(todoText)
+    this.store.onChangeTodos.add((todos) =>
+      this.main.updateTodos(todos)
     );
-    this.store.onChangeLogText.add((logText) =>
-      this.main.updateLogText(logText)
+    this.store.onChangeLogs.add((logs) =>
+      this.main.updateLogs(logs)
     );
-    this.store.onChangeSelfBeliefPoints.add((selfBeliefPoints) =>
-      this.header.updateSelfBeliefPoints(selfBeliefPoints)
+    this.store.onChangeConfidencePoints.add((confidencePoints) =>
+      this.header.updateConfidencePoints(confidencePoints)
     );
-    this.store.onChangeInputSelfBeliefPoints.add((value) =>
-      this.header.updateInputSelfBeliefPoints(value)
+    this.store.onChangeInputConfidencePoints.add((value) =>
+      this.header.updateInputConfidencePoints(value)
     );
-    this.store.onChangeButtonSelfBeliefPoints.add((value) =>
-      this.header.updateButtonSelfBeliefPoints(value)
+    this.store.onChangeButtonConfidencePoints.add((value) =>
+      this.header.updateButtonConfidencePoints(value)
     );
     this.store.onChangeOpenPointsCalculate.add((value) =>
       this.header.updateOpenPointsCalculate(value)

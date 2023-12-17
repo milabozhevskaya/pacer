@@ -32,7 +32,7 @@ class PointsCalculate extends Element {
     });
     this.calculateButton.setDisableStyle(this.styles.calculateButton.disabled);
     this.calculateInput.node.oninput = (event) => {
-      controller.changeInputSelfBeliefPoints(event.target.value);
+      controller.changeInputConfidencePoints(event.target.value);
     };
     Object.assign(this.node.style, this.styles.close);
   }

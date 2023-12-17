@@ -26,7 +26,7 @@ export const content = {
         },
       },
     },
-    selfBeliefPoints: {
+    confidencePoints: {
       calculateButton: "Рассчитать",
       openButton: {
         open: "▶",
@@ -40,7 +40,7 @@ export const content = {
       endeavor: {
         title: "Стремления",
       },
-      action: {
+      activity: {
         title: "Действия",
         button: {
           text: "Таблица",

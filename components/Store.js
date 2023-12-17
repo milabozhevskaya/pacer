@@ -2,16 +2,16 @@ import { Signal } from "./Signal.js";
 
 class Store {
   constructor() {
-    this.$noteText = "";
-    this.$todoText = "";
-    this.$logText = "";
-    this.$endeavorText = "";
-    this.$actionText = "";
-    this.$actionMode = "text";
-    this.$questText = "";
-    this.$selfBeliefPoints = "0";
-    this.$inputSelfBeliefPoints = "";
-    this.$buttonSelfBeliefPoints = "";
+    this.$notes = "";
+    this.$todos = "";
+    this.$logs = "";
+    this.$endeavors = "";
+    this.$activities = "";
+    this.$activitiesMode = "text";
+    this.$quests = "";
+    this.$confidencePoints = "0";
+    this.$inputConfidencePoints = "";
+    this.$buttonConfidencePoints = "";
     this.$openPointsCalculate = false;
     this.$time = "";
     this.$date = 0;
@@ -21,16 +21,16 @@ class Store {
   }
 
   init = (initialState, callback) => {
-    this.$noteText = initialState.noteText;
-    this.$logText = initialState.logText;
-    this.$todoText = initialState.todoText;
-    this.$endeavorText = initialState.endeavorText;
-    this.$actionText = initialState.actionText;
-    this.$actionMode = initialState.actionMode;
-    this.$questText = initialState.questText;
-    this.$selfBeliefPoints = initialState.selfBeliefPoints;
-    this.$inputSelfBeliefPoints = initialState.inputSelfBeliefPoints;
-    this.$buttonSelfBeliefPoints = initialState.buttonSelfBeliefPoints;
+    this.$notes = initialState.notes;
+    this.$logs = initialState.logs;
+    this.$todos = initialState.todos;
+    this.$endeavors = initialState.endeavors;
+    this.$activities = initialState.activities;
+    this.$activitiesMode = initialState.activitiesMode;
+    this.$quests = initialState.quests;
+    this.$confidencePoints = initialState.confidencePoints;
+    this.$inputConfidencePoints = initialState.inputConfidencePoints;
+    this.$buttonConfidencePoints = initialState.buttonConfidencePoints;
     this.$openPointsCalculate = initialState.openPointsCalculate;
     this.$time = initialState.time;
     this.$date = initialState.date;
@@ -41,17 +41,17 @@ class Store {
   };
 
   restart = (reInitialDate) => {
-    this.$noteText = reInitialDate.noteText;
-    this.$logText = reInitialDate.logText;
-    this.$todoText = reInitialDate.todoText;
-    this.$endeavorText = reInitialDate.endeavorText;
-    this.$actionText = reInitialDate.actionText;
-    this.$actionMode = reInitialDate.actionMode;
-    this.$questText = reInitialDate.questText;
+    this.$notes = reInitialDate.notes;
+    this.$logs = reInitialDate.logs;
+    this.$todos = reInitialDate.todos;
+    this.$endeavors = reInitialDate.endeavors;
+    this.$activities = reInitialDate.activities;
+    this.$activitiesMode = reInitialDate.activitiesMode;
+    this.$quests = reInitialDate.quests;
 
-    this.$selfBeliefPoints = reInitialDate.selfBeliefPoints;
-    this.$inputSelfBeliefPoints = reInitialDate.inputSelfBeliefPoints;
-    this.$buttonSelfBeliefPoints = reInitialDate.buttonSelfBeliefPoints;
+    this.$confidencePoints = reInitialDate.confidencePoints;
+    this.$inputConfidencePoints = reInitialDate.inputConfidencePoints;
+    this.$buttonConfidencePoints = reInitialDate.buttonConfidencePoints;
     this.$openPointsCalculate = reInitialDate.openPointsCalculate;
 
     this.$time = reInitialDate.time;
@@ -64,102 +64,102 @@ class Store {
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   };
 
-  get noteText() {
-    return this.$noteText;
+  get notes() {
+    return this.$notes;
   }
 
-  set noteText(value) {
-    this.$noteText = value;
-    this.onChangeNoteText.emit(value);
+  set notes(value) {
+    this.$notes = value;
+    this.onChangeNotes.emit(value);
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   }
 
-  get logText() {
-    return this.$logText;
+  get logs() {
+    return this.$logs;
   }
 
-  set logText(value) {
-    this.$logText = value;
-    this.onChangeLogText.emit(value);
+  set logs(value) {
+    this.$logs = value;
+    this.onChangeLogs.emit(value);
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   }
 
-  get todoText() {
-    return this.$noteText;
+  get todos() {
+    return this.$todos;
   }
 
-  set todoText(value) {
-    this.$todoText = value;
-    this.onChangeTodoText.emit(value);
+  set todos(value) {
+    this.$todos = value;
+    this.onChangeTodos.emit(value);
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   }
 
-  get endeavorText() {
-    return this.$endeavorText;
+  get endeavors() {
+    return this.$endeavors;
   }
 
-  set endeavorText(value) {
-    this.$endeavorText = value;
-    this.onChangeEndeavorText.emit(value);
+  set endeavors(value) {
+    this.$endeavors = value;
+    this.onChangeEndeavors.emit(value);
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   }
 
-  get actionText() {
-    return this.$actionText;
+  get activities() {
+    return this.$activities;
   }
 
-  set actionText(value) {
-    this.$actionText = value;
-    this.onChangeActionText.emit(value);
+  set activities(value) {
+    this.$activities = value;
+    this.onChangeActivities.emit(value);
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   }
 
-  get actionMode() {
-    return this.$actionMode;
+  get activitiesMode() {
+    return this.$activitiesMode;
   }
 
-  set actionMode(mode) {
-    this.$actionMode = mode;
-    this.onChangeActionMode.emit(mode);
+  set activitiesMode(mode) {
+    this.$activitiesMode = mode;
+    this.onChangeActivitiesMode.emit(mode);
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   }
 
-  get questText() {
-    return this.$questText;
+  get quests() {
+    return this.$quests;
   }
 
-  set questText(value) {
-    this.$questText = value;
-    this.onChangeQuestText.emit(value);
+  set quests(value) {
+    this.$quests = value;
+    this.onChangeQuests.emit(value);
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   }
 
-  get selfBeliefPoints() {
-    return this.$selfBeliefPoints;
+  get confidencePoints() {
+    return this.$confidencePoints;
   }
 
-  set selfBeliefPoints(value) {
-    this.$selfBeliefPoints = value;
-    this.onChangeSelfBeliefPoints.emit(value);
+  set confidencePoints(value) {
+    this.$confidencePoints = value;
+    this.onChangeConfidencePoints.emit(value);
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   }
 
-  get inputSelfBeliefPoints() {
-    return this.$inputSelfBeliefPoints;
+  get inputConfidencePoints() {
+    return this.$inputConfidencePoints;
   }
 
-  set inputSelfBeliefPoints(value) {
-    this.$inputSelfBeliefPoints = value;
-    this.onChangeInputSelfBeliefPoints.emit(value);
+  set inputConfidencePoints(value) {
+    this.$inputConfidencePoints = value;
+    this.onChangeInputConfidencePoints.emit(value);
   }
 
-  get buttonSelfBeliefPoints() {
-    return this.$buttonSelfBeliefPoints;
+  get buttonConfidencePoints() {
+    return this.$buttonConfidencePoints;
   }
 
-  set buttonSelfBeliefPoints(state) {
-    this.$buttonSelfBeliefPoints = state;
-    this.onChangeButtonSelfBeliefPoints.emit(state);
+  set buttonConfidencePoints(state) {
+    this.$buttonConfidencePoints = state;
+    this.onChangeButtonConfidencePoints.emit(state);
   }
 
   get openPointsCalculate() {
@@ -232,16 +232,16 @@ class Store {
 
   onReInit = new Signal();
 
-  onChangeNoteText = new Signal();
-  onChangeLogText = new Signal();
-  onChangeTodoText = new Signal();
-  onChangeEndeavorText = new Signal();
-  onChangeActionText = new Signal();
-  onChangeActionMode = new Signal();
-  onChangeQuestText = new Signal();
-  onChangeSelfBeliefPoints = new Signal();
-  onChangeInputSelfBeliefPoints = new Signal();
-  onChangeButtonSelfBeliefPoints = new Signal();
+  onChangeNotes = new Signal();
+  onChangeLogs = new Signal();
+  onChangeTodos = new Signal();
+  onChangeEndeavors = new Signal();
+  onChangeActivities = new Signal();
+  onChangeActivitiesMode = new Signal();
+  onChangeQuests = new Signal();
+  onChangeConfidencePoints = new Signal();
+  onChangeInputConfidencePoints = new Signal();
+  onChangeButtonConfidencePoints = new Signal();
   onChangeOpenPointsCalculate = new Signal();
   onChangeTime = new Signal();
   onChangeDate = new Signal();
@@ -250,14 +250,14 @@ class Store {
 
   onChangeLocalStorageData = new Signal();
   computeDataForLocalStorage = () => ({
-    noteText: this.$noteText,
-    logText: this.$logText,
-    todoText: this.$todoText,
-    endeavorText: this.$endeavorText,
-    actionText: this.$actionText,
-    questText: this.$questText,
-    selfBeliefPoints: this.$selfBeliefPoints,
-    actionMode: this.$actionMode,
+    notes: this.$notes,
+    logs: this.$logs,
+    todos: this.$todos,
+    endeavors: this.$endeavors,
+    activities: this.$activities,
+    quests: this.$quests,
+    confidencePoints: this.$confidencePoints,
+    activitiesMode: this.$activitiesMode,
   });
 }
 

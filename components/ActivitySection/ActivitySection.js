@@ -4,7 +4,7 @@ import { Button } from "../button/Button.js";
 import { Textarea } from "../textarea/Textarea.js";
 import { styles } from "./style.js";
 
-class ActionSection extends Element {
+class ActivitySection extends Element {
   constructor({ parent, className, content, key, controller, mode = "text" }) {
     super({
       parent,
@@ -34,7 +34,7 @@ class ActionSection extends Element {
       className: "note__button",
       content: content.button[mode],
       styles: styles.button,
-      controller: () => controller.changeActionMode(this.changeMode()),
+      controller: () => controller.changeActivitiesMode(this.changeMode()),
     });
     this.textarea = new Textarea(null, (text) =>
       controller.changeTextareaText(key, text)
@@ -70,4 +70,4 @@ class ActionSection extends Element {
   };
 }
 
-export { ActionSection };
+export { ActivitySection };

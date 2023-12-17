@@ -36,8 +36,7 @@ class Controller {
 
       if (this.store.todos !== todos) this.store.todos = todos;
 
-      if (this.store.endeavors !== endeavors)
-        this.store.endeavors = endeavors;
+      if (this.store.endeavors !== endeavors) this.store.endeavors = endeavors;
 
       if (this.store.activities !== activities)
         this.store.activities = activities;
@@ -69,6 +68,7 @@ class Controller {
       inputConfidencePoints: "",
       buttonConfidencePoints: "disable",
       openPointsCalculate: false,
+      timeMode: "auto",
     };
 
     this.store.restart(reInitialDate);
@@ -116,6 +116,7 @@ class Controller {
       inputConfidencePoints: "",
       buttonConfidencePoints: "",
       openPointsCalculate: false,
+      timeMode: "auto",
     };
   };
 
@@ -185,7 +186,9 @@ class Controller {
     },
     activity: (text) => {
       this.store.activities =
-        this.store.activitiesMode === "text" ? text : formatContentFromTable(text);
+        this.store.activitiesMode === "text"
+          ? text
+          : formatContentFromTable(text);
     },
     quest: (text) => {
       this.store.quests = text;
@@ -201,11 +204,11 @@ class Controller {
   changeTextareaText = (key, text) => {
     this.changeText[key](text);
   };
-  
+
   changeConfidencePoints = (points) => {
     this.store.confidencePoints = points;
   };
-  
+
   openPointsCalculate = () => {
     const state = !this.store.openPointsCalculate;
     this.store.openPointsCalculate = state;
@@ -214,7 +217,7 @@ class Controller {
       this.store.buttonConfidence = "disable";
     }
   };
-  
+
   calculatePoints = (value) => {
     this.store.buttonConfidence = "wait";
     try {
@@ -351,6 +354,10 @@ class Controller {
         console.log("Uploading file is wrong");
       };
     };
+  };
+
+  changeTimeMode = () => {
+    this.store.timeMode = this.store.timeMode === "auto" ? "manual" : "auto";
   };
 }
 

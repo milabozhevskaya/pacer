@@ -63,9 +63,9 @@ class View extends Element {
       }
     });
 
-    this.store.onChangeNotes.add((notes) =>
-      this.main.updateNotes(notes)
-    );
+    this.store.onChangeTimeMode.add((mode) => this.header.updateTimeMode(mode));
+
+    this.store.onChangeNotes.add((notes) => this.main.updateNotes(notes));
     this.store.onChangeEndeavors.add((endeavors) =>
       this.main.updateEndeavors(endeavors)
     );
@@ -75,15 +75,9 @@ class View extends Element {
     this.store.onChangeActivitiesMode.add((activitiesMode) =>
       this.main.updateActivitiesMode(activitiesMode)
     );
-    this.store.onChangeQuests.add((quests) =>
-      this.main.updateQuests(quests)
-    );
-    this.store.onChangeTodos.add((todos) =>
-      this.main.updateTodos(todos)
-    );
-    this.store.onChangeLogs.add((logs) =>
-      this.main.updateLogs(logs)
-    );
+    this.store.onChangeQuests.add((quests) => this.main.updateQuests(quests));
+    this.store.onChangeTodos.add((todos) => this.main.updateTodos(todos));
+    this.store.onChangeLogs.add((logs) => this.main.updateLogs(logs));
     this.store.onChangeConfidencePoints.add((confidencePoints) =>
       this.header.updateConfidencePoints(confidencePoints)
     );

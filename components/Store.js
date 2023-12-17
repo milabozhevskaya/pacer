@@ -18,6 +18,7 @@ class Store {
     this.$isOpenCalendar = false;
     this.$calendarContent = null;
     this.$calendarSwipingSteps = 0;
+    this.$timeMode = "auto";
   }
 
   init = (initialState, callback) => {
@@ -37,6 +38,7 @@ class Store {
     this.$isOpenCalendar = initialState.isOpenCalendar;
     this.$calendarContent = initialState.calendarContent;
     this.$calendarSwipingSteps = initialState.calendarSwipingSteps;
+    this.$timeMode = initialState.timeMode;
     callback({ ...this.computeDataForLocalStorage(), time: this.$time });
   };
 
@@ -59,6 +61,7 @@ class Store {
     this.$isOpenCalendar = reInitialDate.isOpenCalendar;
     this.$calendarContent = reInitialDate.calendarContent;
     this.$calendarSwipingSteps = reInitialDate.calendarSwipingSteps;
+    this.$timeMode = reInitialDate.timeMode;
 
     this.onReInit.emit(reInitialDate);
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
@@ -229,6 +232,15 @@ class Store {
       });
     }
   }
+  
+  get timeMode() {
+    return this.$timeMode;
+  }
+  
+  set timeMode(mode) {
+    this.$timeMode = mode;
+    this.onChangeTimeMode.emit(mode);
+  }
 
   onReInit = new Signal();
 
@@ -247,6 +259,7 @@ class Store {
   onChangeDate = new Signal();
   onChangeIsOpenCalendar = new Signal();
   onChangeCalendarSwipingSteps = new Signal();
+  onChangeTimeMode = new Signal();
 
   onChangeLocalStorageData = new Signal();
   computeDataForLocalStorage = () => ({

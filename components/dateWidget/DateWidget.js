@@ -11,15 +11,16 @@ class DateWidget extends Element {
       className: `${className}__date-widget date-widget`,
       styles,
     });
+    this.curentTime = "";
     this.timeDisplay = new Element({
       parent: this.node,
-      tagName: "date",
+      tagName: "div",
       className: "date-widget__time-display",
       styles: styles.timeDisplay,
     });
     this.time = new Element({
       parent: this.timeDisplay.node,
-      tagName: "date",
+      tagName: "div",
       className: "date-widget__time",
       styles: styles.time,
     });
@@ -34,14 +35,16 @@ class DateWidget extends Element {
       parent: this.node,
       className: "date-widget__change-time-button",
       content: content.changeTimeButton,
-      controller: () => {},
+      controller: () => {
+        console.log(38);
+      },
       styles: styles.changeTimeButton,
     });
     this.timeModeButton = new Button({
       parent: this.node,
       className: "date-widget__time-mode-button",
       content: content.timeModeButton,
-      controller: () => {},
+      controller: controller.changeTimeMode,
       styles: styles.timeModeButton,
     });
     this.calendarButton = new Button({
@@ -58,9 +61,13 @@ class DateWidget extends Element {
     this.popupStyles = styles.popup;
     this.calendarContent = content.calendar;
     this.swipeCalendar = controller.setCalendarSwipingSteps;
+    this.updateTimeMode("auto");
   }
 
-  updateTime = (time) => this.time.updateContent(time);
+  updateTime = (time) => {
+    this.curentTime = time;
+    this.time.updateContent(time);
+  };
   updateDate = (changedMonth) => this.calendar.updateDate(changedMonth);
   openCalendar = ({ popup, month }) => {
     this.calendar = new Calendar({
@@ -79,6 +86,18 @@ class DateWidget extends Element {
   };
   updateCalendarSwipingSteps = ({ direction, month }) =>
     this.calendar?.updateSwipingSteps({ direction, month });
+  updateTimeMode = (timeMode) => {
+    if (timeMode === "auto") {
+      this.changeTimeButton.node.style.display = "none";
+      this.inputTime.node.style.display = "none";
+      this.time.node.style.display = "flex";
+      return;
+    }
+    this.changeTimeButton.node.style.display = "block";
+    this.inputTime.node.style.display = "flex";
+    this.inputTime.node.value = this.curentTime.slice(0, 10);
+    this.time.node.style.display = "none";
+  };
 }
 
 export { DateWidget };

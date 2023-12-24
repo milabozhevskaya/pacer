@@ -49,6 +49,9 @@ class Button extends Element {
   updateText = (text) => {
     this.span.updateContent(text);
   };
+  updateContent = (content) => {
+    this.span.updateContent(content);
+  };
   setDisableStyle = (disableStyles) => {
     this.isDisable = true;
     Object.assign(this.node.style, disableStyles);

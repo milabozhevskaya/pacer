@@ -1,7 +1,10 @@
 export const content = {
   header: {
     dateWidget: {
-      timeModeButton: "Р",
+      autoTimeModeButton: "Ручное",
+      manualTimeModeButton: "Aвто",
+      autoTimeModeButtonTitle: "Ручное",
+      manualTimeModeButtonTitle: "Aвтоматическое",
       changeTimeButton: "Изменить",
       useTimeButton: "Применить",
       calendarButton: "Календарь",

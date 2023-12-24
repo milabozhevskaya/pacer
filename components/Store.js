@@ -179,6 +179,7 @@ class Store {
   }
 
   set time(value) {
+    console.log(value)
     this.$time = value;
     this.onChangeTime.emit(value);
   }

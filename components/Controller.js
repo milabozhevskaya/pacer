@@ -124,7 +124,10 @@ class Controller {
     const id = setInterval(() => {
       const time = getTime();
       const newDate = new Date(time);
-      if (newDate.getDate() !== new Date(this.store.time).getDate()) {
+      if (
+        newDate.getDate() !== new Date(this.store.time).getDate() &&
+        this.store.timeMode === "auto"
+      ) {
         const changedMonth = [];
 
         if (this.store.isOpenCalendar) {
@@ -357,7 +360,11 @@ class Controller {
   };
 
   changeTimeMode = () => {
-    this.store.timeMode = this.store.timeMode === "auto" ? "manual" : "auto";
+    if (this.store.timeMode === "auto") {
+      this.store.timeMode = "manual";
+      return;
+    }
+    this.store.timeMode = "auto";
   };
 }
 

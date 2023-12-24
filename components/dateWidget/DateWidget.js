@@ -12,6 +12,7 @@ class DateWidget extends Element {
       styles,
     });
     this.curentTime = "";
+    this.content = content;
     this.timeDisplay = new Element({
       parent: this.node,
       tagName: "div",
@@ -43,7 +44,7 @@ class DateWidget extends Element {
     this.timeModeButton = new Button({
       parent: this.node,
       className: "date-widget__time-mode-button",
-      content: content.timeModeButton,
+      content: content.autoTimeModeButton,
       controller: controller.changeTimeMode,
       styles: styles.timeModeButton,
     });
@@ -88,11 +89,15 @@ class DateWidget extends Element {
     this.calendar?.updateSwipingSteps({ direction, month });
   updateTimeMode = (timeMode) => {
     if (timeMode === "auto") {
+      this.timeModeButton.updateText(this.content.autoTimeModeButton);
+      this.timeModeButton.node.title = this.content.autoTimeModeButtonTitle;
       this.changeTimeButton.node.style.display = "none";
       this.inputTime.node.style.display = "none";
       this.time.node.style.display = "flex";
       return;
     }
+    this.timeModeButton.updateText(this.content.manualTimeModeButton);
+    this.timeModeButton.node.title = this.content.manualTimeModeButtonTitle;
     this.changeTimeButton.node.style.display = "block";
     this.inputTime.node.style.display = "flex";
     this.inputTime.node.value = this.curentTime.slice(0, 10);

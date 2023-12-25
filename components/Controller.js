@@ -365,10 +365,8 @@ class Controller {
       reader.readAsText(file);
       reader.onload = () => {
         try {
-          const data = JSON.parse(reader.result);
-          if (data === null || typeof data !== "object") {
-            throw new Error("Not object in this file");
-          }
+          const data = LocalStorageData.fromJson(JSON.parse(reader.result));
+
           this.restart(data);
         } catch (e) {
           console.log(e.message);

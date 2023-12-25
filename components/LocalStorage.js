@@ -36,50 +36,57 @@ class LocalStorageData {
     if (this.instanceOfISourcesLStorage(data, "notes")) {
       initData.notes = data.notes;
     } else {
-      throw new Error("Not property in localstorage");
+      initData.notes = "";
+      // throw new Error("Not property in localstorage");
     }
 
     if (this.instanceOfISourcesLStorage(data, "endeavors")) {
       initData.endeavors = data.endeavors;
     } else {
-      throw new Error("Not property in localstorage");
+      initData.endeavors = "";
+      // throw new Error("Not property in localstorage");
     }
 
     if (this.instanceOfISourcesLStorage(data, "activities")) {
       initData.activities = data.activities;
     } else {
-      throw new Error("Not property in localstorage");
+      initData.activities = "";
+      // throw new Error("Not property in localstorage");
     }
 
     if (this.instanceOfISourcesLStorage(data, "activitiesMode")) {
       initData.activitiesMode = data.activitiesMode;
     } else {
-      throw new Error("Not property in localstorage");
+      initData.activitiesMode = "text";
+      // throw new Error("Not property in localstorage");
     }
 
     if (this.instanceOfISourcesLStorage(data, "quests")) {
       initData.quests = data.quests;
     } else {
-      throw new Error("Not property in localstorage");
+      initData.quests = "";
+      // throw new Error("Not property in localstorage");
     }
 
     if (this.instanceOfISourcesLStorage(data, "logs")) {
       initData.logs = data.logs;
     } else {
-      throw new Error("Not property in localstorage");
+      initData.logs = "";
+      // throw new Error("Not property in localstorage");
     }
 
     if (this.instanceOfISourcesLStorage(data, "todos")) {
       initData.todos = data.todos;
     } else {
-      throw new Error("Not property in localstorage");
+      initData.todos = "";
+      // throw new Error("Not property in localstorage");
     }
 
     if (this.instanceOfISourcesLStorage(data, "confidencePoints")) {
-      initData.textareaText = data.textareaText;
       initData.confidencePoints = data.confidencePoints;
     } else {
-      throw new Error("Not property in localstorage");
+      initData.confidencePoints = 0;
+      // throw new Error("Not property in localstorage");
     }
 
     return new LocalStorageData(initData);

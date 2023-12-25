@@ -19,6 +19,7 @@ class Store {
     this.$calendarContent = null;
     this.$calendarSwipingSteps = 0;
     this.$timeMode = "auto";
+    this.$manualTime = "";
   }
 
   init = (initialState, callback) => {
@@ -39,6 +40,7 @@ class Store {
     this.$calendarContent = initialState.calendarContent;
     this.$calendarSwipingSteps = initialState.calendarSwipingSteps;
     this.$timeMode = initialState.timeMode;
+    this.$manualTime = initialState.manualTime;
     callback({ ...this.computeDataForLocalStorage(), time: this.$time });
   };
 
@@ -179,9 +181,16 @@ class Store {
   }
 
   set time(value) {
-    console.log(value)
     this.$time = value;
     this.onChangeTime.emit(value);
+  }
+
+  get manualTime() {
+    return this.$manualTime;
+  }
+
+  set manualTime(value) {
+    this.$manualTime = value;
   }
 
   get date() {
@@ -233,11 +242,11 @@ class Store {
       });
     }
   }
-  
+
   get timeMode() {
     return this.$timeMode;
   }
-  
+
   set timeMode(mode) {
     this.$timeMode = mode;
     this.onChangeTimeMode.emit(mode);

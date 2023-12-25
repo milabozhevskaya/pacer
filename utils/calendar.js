@@ -6,9 +6,7 @@ function isToday(date, today) {
   );
 }
 
-function buildMonth(month) {
-  const today = new Date();
-
+function buildMonth(month, today) {
   const monthDates = buildMonthDates(month);
 
   const monthDays = [
@@ -75,4 +73,5 @@ function buildMonthDates(date) {
     },
   };
 }
+
 export { buildMonthDates, buildMonthDays, buildMonth };

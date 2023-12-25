@@ -69,6 +69,7 @@ class Controller {
       buttonConfidencePoints: "disable",
       openPointsCalculate: false,
       timeMode: "auto",
+      manualTime: "",
     };
 
     this.store.restart(reInitialDate);
@@ -117,6 +118,7 @@ class Controller {
       buttonConfidencePoints: "",
       openPointsCalculate: false,
       timeMode: "auto",
+      manualTime: "",
     };
   };
 
@@ -253,25 +255,36 @@ class Controller {
       this.store.isOpenCalendar = false;
       return;
     }
-    const nowMonth = new Date();
+    const today =
+      this.store.timeMode === "auto"
+        ? new Date()
+        : Object.assign(this.store.manualTime);
+    const nowMonth = new Date(today.getFullYear(), today.getMonth(), 5);
     const nowMonthContent = {
+      today: nowMonth,
       month: nowMonth.getMonth(),
       year: nowMonth.getFullYear(),
-      days: buildMonth(nowMonth),
+      days: buildMonth(nowMonth, today),
     };
 
-    const nextMonth = new Date(new Date().setMonth(new Date().getMonth() + 1));
+    const nextMonth = new Date(
+      new Date(nowMonth).setMonth(nowMonth.getMonth() + 1)
+    );
     const nextMonthContent = {
+      today: nextMonth,
       month: nextMonth.getMonth(),
       year: nextMonth.getFullYear(),
-      days: buildMonth(nextMonth),
+      days: buildMonth(nextMonth, today),
     };
 
-    const lastMonth = new Date(new Date().setMonth(new Date().getMonth() - 1));
+    const lastMonth = new Date(
+      new Date(nowMonth).setMonth(nowMonth.getMonth() - 1)
+    );
     const lastMonthContent = {
+      today: lastMonth,
       month: lastMonth.getMonth(),
       year: lastMonth.getFullYear(),
-      days: buildMonth(lastMonth),
+      days: buildMonth(lastMonth, today),
     };
 
     this.store.calendarContent = [
@@ -286,27 +299,35 @@ class Controller {
     const newSteps = this.store.calendarSwipingSteps + steps;
     let [lastMonthContent, nowMonthContent, nextMonthContent] =
       this.store.calendarContent;
+    const today =
+      this.store.timeMode === "auto" ? new Date() : this.store.manualTime;
     if (steps > 0) {
       [lastMonthContent, nowMonthContent] = [nowMonthContent, nextMonthContent];
 
       const nextMonth = new Date(
-        new Date().setMonth(new Date().getMonth() + newSteps + 1)
+        new Date(today.getFullYear(), today.getMonth(), 5).setMonth(
+          today.getMonth() + newSteps + 1
+        )
       );
       nextMonthContent = {
+        today: nextMonth,
         month: nextMonth.getMonth(),
         year: nextMonth.getFullYear(),
-        days: buildMonth(nextMonth),
+        days: buildMonth(nextMonth, today),
       };
     } else {
       [nowMonthContent, nextMonthContent] = [lastMonthContent, nowMonthContent];
 
       const lastMonth = new Date(
-        new Date().setMonth(new Date().getMonth() + newSteps - 1)
+        new Date(today.getFullYear(), today.getMonth(), 5).setMonth(
+          today.getMonth() + newSteps - 1
+        )
       );
       lastMonthContent = {
+        today: lastMonth,
         month: lastMonth.getMonth(),
         year: lastMonth.getFullYear(),
-        days: buildMonth(lastMonth),
+        days: buildMonth(lastMonth, today),
       };
     }
 
@@ -362,10 +383,17 @@ class Controller {
   changeTimeMode = () => {
     if (this.store.timeMode === "auto") {
       this.store.timeMode = "manual";
+      this.store.manualTime = new Date(this.store.time);
       return;
     }
     this.store.timeMode = "auto";
   };
+
+  changeManualTime = (time) => {
+    this.store.manualTime = new Date(time);
+  };
+
+  setManualTime = () => {};
 }
 
 export { Controller };

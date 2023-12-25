@@ -31,14 +31,14 @@ class DateWidget extends Element {
       className: "date-widget__time-input",
       styles: styles.timeInput,
     });
+    this.inputTime.node.onchange = (event) =>
+      controller.changeManualTime(event.target.value);
     this.inputTime.node.type = "date";
     this.changeTimeButton = new Button({
       parent: this.node,
       className: "date-widget__change-time-button",
       content: content.changeTimeButton,
-      controller: () => {
-        console.log(38);
-      },
+      controller: () => this.setManualTime,
       styles: styles.changeTimeButton,
     });
     this.timeModeButton = new Button({
@@ -92,6 +92,7 @@ class DateWidget extends Element {
       this.timeModeButton.updateText(this.content.autoTimeModeButton);
       this.timeModeButton.node.title = this.content.autoTimeModeButtonTitle;
       this.changeTimeButton.node.style.display = "none";
+      this.inputTime.node.value = "";
       this.inputTime.node.style.display = "none";
       this.time.node.style.display = "flex";
       return;

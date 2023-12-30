@@ -184,7 +184,7 @@ class Controller {
 
   changeText = {
     note: (text) => {
-      this.store.noteText = text;
+      this.store.notes = text;
     },
     endeavor: (text) => {
       this.store.endeavors = text;

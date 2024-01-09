@@ -64,7 +64,7 @@ class Store {
     this.$calendarContent = reInitialDate.calendarContent;
     this.$calendarSwipingSteps = reInitialDate.calendarSwipingSteps;
     this.$timeMode = reInitialDate.timeMode;
-
+    this.$manualTime = reInitialDate.manualTime;
     this.onReInit.emit(reInitialDate);
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   };
@@ -191,6 +191,7 @@ class Store {
 
   set manualTime(value) {
     this.$manualTime = value;
+    this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   }
 
   get date() {
@@ -249,7 +250,8 @@ class Store {
 
   set timeMode(mode) {
     this.$timeMode = mode;
-    this.onChangeTimeMode.emit(mode);
+    this.onChangeTimeMode.emit({ mode, manualTime: this.$manualTime });
+    this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   }
 
   onReInit = new Signal();
@@ -281,6 +283,8 @@ class Store {
     quests: this.$quests,
     confidencePoints: this.$confidencePoints,
     activitiesMode: this.$activitiesMode,
+    timeMode: this.$timeMode,
+    manualTime: this.$manualTime,
   });
 }
 

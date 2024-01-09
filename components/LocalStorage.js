@@ -1,3 +1,5 @@
+import { getTime } from "../utils/getTime.js";
+
 class LocalStorageData {
   constructor({
     endeavors,
@@ -8,6 +10,8 @@ class LocalStorageData {
     todos,
     logs,
     confidencePoints,
+    timeMode,
+    manualTime,
   }) {
     this.endeavors = endeavors;
     this.notes = notes;
@@ -17,6 +21,8 @@ class LocalStorageData {
     this.todos = todos;
     this.logs = logs;
     this.confidencePoints = confidencePoints;
+    this.timeMode = timeMode;
+    this.manualTime = manualTime;
   }
 
   static toJson(data) {
@@ -86,6 +92,20 @@ class LocalStorageData {
       initData.confidencePoints = data.confidencePoints;
     } else {
       initData.confidencePoints = 0;
+      // throw new Error("Not property in localstorage");
+    }
+
+    if (this.instanceOfISourcesLStorage(data, "timeMode")) {
+      initData.timeMode = data.timeMode;
+    } else {
+      initData.timeMode = "auto";
+      // throw new Error("Not property in localstorage");
+    }
+
+    if (this.instanceOfISourcesLStorage(data, "manualTime")) {
+      initData.manualTime = data.manualTime;
+    } else {
+      initData.manualTime = getTime();
       // throw new Error("Not property in localstorage");
     }
 

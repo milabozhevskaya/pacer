@@ -45,7 +45,8 @@ class Header extends Element {
   closeCalendar = () => this.dateWidget.closeCalendar();
   updateCalendarSwipingSteps = ({ direction, month }) =>
     this.dateWidget.updateCalendarSwipingSteps({ direction, month });
-  updateTimeMode = (timeMode) => this.dateWidget.updateTimeMode(timeMode);
+  updateTimeMode = (timeMode, manualTime) =>
+    this.dateWidget.updateTimeMode(timeMode, manualTime);
 }
 
 export { Header };

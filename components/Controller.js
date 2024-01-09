@@ -68,8 +68,6 @@ class Controller {
       inputConfidencePoints: "",
       buttonConfidencePoints: "disable",
       openPointsCalculate: false,
-      timeMode: "auto",
-      manualTime: "",
     };
 
     this.store.restart(reInitialDate);
@@ -99,6 +97,8 @@ class Controller {
         todos: "",
         logs: "",
         activitiesMode: "text",
+        timeMode: "auto",
+        manualTime: getTime(),
       });
     }
   };
@@ -117,8 +117,6 @@ class Controller {
       inputConfidencePoints: "",
       buttonConfidencePoints: "",
       openPointsCalculate: false,
-      timeMode: "auto",
-      manualTime: "",
     };
   };
 
@@ -258,7 +256,7 @@ class Controller {
     const today =
       this.store.timeMode === "auto"
         ? new Date()
-        : Object.assign(this.store.manualTime);
+        : new Date(this.store.manualTime);
     const nowMonth = new Date(today.getFullYear(), today.getMonth(), 5);
     const nowMonthContent = {
       today: nowMonth,
@@ -300,7 +298,9 @@ class Controller {
     let [lastMonthContent, nowMonthContent, nextMonthContent] =
       this.store.calendarContent;
     const today =
-      this.store.timeMode === "auto" ? new Date() : this.store.manualTime;
+      this.store.timeMode === "auto"
+        ? new Date()
+        : new Date(this.store.manualTime);
     if (steps > 0) {
       [lastMonthContent, nowMonthContent] = [nowMonthContent, nextMonthContent];
 
@@ -380,8 +380,8 @@ class Controller {
 
   changeTimeMode = () => {
     if (this.store.timeMode === "auto") {
-      this.store.timeMode = "manual";
       this.store.manualTime = new Date(this.store.time);
+      this.store.timeMode = "manual";
       return;
     }
     this.store.timeMode = "auto";

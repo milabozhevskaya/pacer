@@ -39,6 +39,7 @@ class View extends Element {
 
     this.header.updateConfidencePoints(initialData.confidencePoints);
     this.header.updateTime(initialData.time);
+    this.header.updateTimeMode(initialData.timeMode, initialData.manualTime);
 
     this.store.onReInit.add((date) => {
       this.main.updateNotes(date.notes);
@@ -53,6 +54,8 @@ class View extends Element {
       this.header.updateInputConfidencePoints(date.inputConfidencePoints);
       this.header.updateButtonConfidencePoints(date.buttonConfidencePoints);
       this.header.updateOpenPointsCalculate(date.openPointsCalculate);
+      this.header.updateTimeMode(date.timeMode, date.manualTime);
+
       if (this.calendarPopup) {
         this.calendarPopup.closePopup();
         this.calendarPopup = null;
@@ -63,7 +66,9 @@ class View extends Element {
       }
     });
 
-    this.store.onChangeTimeMode.add((mode) => this.header.updateTimeMode(mode));
+    this.store.onChangeTimeMode.add(({ mode, manualTime }) =>
+      this.header.updateTimeMode(mode, manualTime)
+    );
 
     this.store.onChangeNotes.add((notes) => this.main.updateNotes(notes));
     this.store.onChangeEndeavors.add((endeavors) =>

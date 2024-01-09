@@ -62,7 +62,6 @@ class DateWidget extends Element {
     this.popupStyles = styles.popup;
     this.calendarContent = content.calendar;
     this.swipeCalendar = controller.setCalendarSwipingSteps;
-    this.updateTimeMode("auto");
   }
 
   updateTime = (time) => {
@@ -87,7 +86,7 @@ class DateWidget extends Element {
   };
   updateCalendarSwipingSteps = ({ direction, month }) =>
     this.calendar?.updateSwipingSteps({ direction, month });
-  updateTimeMode = (timeMode) => {
+  updateTimeMode = (timeMode, manualTime) => {
     if (timeMode === "auto") {
       this.timeModeButton.updateText(this.content.autoTimeModeButton);
       this.timeModeButton.node.title = this.content.autoTimeModeButtonTitle;
@@ -101,7 +100,7 @@ class DateWidget extends Element {
     this.timeModeButton.node.title = this.content.manualTimeModeButtonTitle;
     this.changeTimeButton.node.style.display = "block";
     this.inputTime.node.style.display = "flex";
-    this.inputTime.node.value = this.curentTime.slice(0, 10);
+    this.inputTime.node.value = new Date(manualTime).toISOString().slice(0, 10);
     this.time.node.style.display = "none";
   };
 }

@@ -34,6 +34,11 @@ class PointsCalculate extends Element {
     this.calculateInput.node.oninput = (event) => {
       controller.changeInputConfidencePoints(event.target.value);
     };
+    this.calculateInput.node.onkeyup = (event) => {
+      if (event.key === "Enter") {
+        this.calculatePoints(event);
+      }
+    };
     Object.assign(this.node.style, this.styles.close);
   }
 

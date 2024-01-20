@@ -45,6 +45,10 @@ export const content = {
     notes: {
       endeavor: {
         title: "Стремления",
+        button: {
+          text: "Лист",
+          list: "Текст",
+        },
       },
       activity: {
         title: "Действия",

@@ -1,0 +1,38 @@
+export const styles = {
+  // width: "100%",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  rowGap: "5px",
+  top: {
+    width: "100%",
+    display: "flex",
+    textAlign: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+  },
+  title: {
+    textTransform: "lowercase",
+    color: "#f14d23",
+    letterSpacing: "4.2px",
+    fontWeight: "600",
+    fontSize: "20px",
+    userSelect: "none",
+  },
+  button: {
+    position: "absolute",
+    right: "0",
+    bottom: "0",
+    minWidth: "65px",
+    height: "20px",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    span: {
+      fontSize: "12px",
+      padding: "0 5px",
+      letterSpacing: "1px",
+    },
+  },
+};

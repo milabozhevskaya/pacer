@@ -2,6 +2,7 @@ import { Element } from "../Element.js";
 import { NoteSection } from "../noteSaction/NoteSection.js";
 import { ActivitySection } from "../ActivitySection/ActivitySection.js";
 import { styles } from "./style.js";
+import { EndeavorSection } from "../EndeavorSection/EndeavorSection.js";
 
 class Notes extends Element {
   constructor({ parent, className, controller, content, notes }) {
@@ -21,6 +22,15 @@ class Notes extends Element {
           key: "activity",
           mode: "text",
         });
+      } else if (note === "endeavor") {
+        this.endeavor = new EndeavorSection({
+          parent: this.node,
+          className: "notes",
+          controller,
+          content: content.endeavor,
+          key: "endeavor",
+          mode: "text",
+        });
       } else {
         this[note] = new NoteSection({
           parent: this.node,
@@ -35,7 +45,8 @@ class Notes extends Element {
     });
   }
 
-  updateEndeavors = (text) => this.endeavor.update(text);
+  updateEndeavorsText = (text) => this.endeavor.updateText(text);
+  updateEndeavorMode = (mode) => this.endeavor.updateMode(mode);
   updateActivitiesText = (text, reinit = "") =>
     this.activity.updateText(text, reinit);
   updateActivitiesMode = (mode) => this.activity.updateMode(mode);

@@ -48,10 +48,12 @@ class Main extends Element {
     });
   }
 
-  updateEndeavors = (text) => this.secondLineNotes.updateEndeavors(text);
+  updateEndeavors = (text) => this.secondLineNotes.updateEndeavorsText(text);
+  updateEndeavorMode = (mode) => this.secondLineNotes.updateEndeavorMode(mode);
   updateActivities = (text, reinit = "") =>
     this.secondLineNotes.updateActivitiesText(text, reinit);
-  updateActivitiesMode = (mode) => this.secondLineNotes.updateActivitiesMode(mode);
+  updateActivitiesMode = (mode) =>
+    this.secondLineNotes.updateActivitiesMode(mode);
   updateLogs = (text) => this.secondLineNotes.updateLogs(text);
 
   updateNotes = (text) => this.firstLineNotes.updateNotes(text);

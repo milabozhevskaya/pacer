@@ -21,6 +21,7 @@ class Controller {
       if (e.key !== "pacer") return;
       const {
         endeavors: endeavors,
+        endeavorMode: endeavorMode,
         activities: activities,
         activitiesMode: activitiesMode,
         logs: logs,
@@ -43,6 +44,9 @@ class Controller {
 
       if (this.store.activitiesMode !== activitiesMode)
         this.store.activitiesMode = activitiesMode;
+
+      if (this.store.endeavorMode !== endeavorMode)
+        this.store.endeavorMode = endeavorMode;
 
       if (this.store.quests !== quests) this.store.quests = quests;
       if (this.store.confidencePoints !== confidencePoints)
@@ -97,6 +101,7 @@ class Controller {
         todos: "",
         logs: "",
         activitiesMode: "text",
+        endeavorMode: "text",
         timeMode: "auto",
         manualTime: getTime(),
       });
@@ -173,6 +178,11 @@ class Controller {
       if (this.store.time !== time) this.store.time = time;
     }, intervalTime);
     return id;
+  };
+
+  changeEndeavorMode = (mode) => {
+    if (this.store.endeavorMode === mode) return;
+    this.store.endeavorMode = mode;
   };
 
   changeActivitiesMode = (mode) => {

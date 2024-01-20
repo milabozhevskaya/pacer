@@ -6,6 +6,7 @@ class Store {
     this.$todos = "";
     this.$logs = "";
     this.$endeavors = "";
+    this.$endeavorMode = "text";
     this.$activities = "";
     this.$activitiesMode = "text";
     this.$quests = "";
@@ -27,6 +28,7 @@ class Store {
     this.$logs = initialState.logs;
     this.$todos = initialState.todos;
     this.$endeavors = initialState.endeavors;
+    this.$endeavorMode = initialState.endeavorMode;
     this.$activities = initialState.activities;
     this.$activitiesMode = initialState.activitiesMode;
     this.$quests = initialState.quests;
@@ -49,6 +51,7 @@ class Store {
     this.$logs = reInitialDate.logs;
     this.$todos = reInitialDate.todos;
     this.$endeavors = reInitialDate.endeavors;
+    this.$endeavorMode = reInitialDate.endeavorMode;
     this.$activities = reInitialDate.activities;
     this.$activitiesMode = reInitialDate.activitiesMode;
     this.$quests = reInitialDate.quests;
@@ -106,6 +109,16 @@ class Store {
   set endeavors(value) {
     this.$endeavors = value;
     this.onChangeEndeavors.emit(value);
+    this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
+  }
+
+  get endeavorMode() {
+    return this.$endeavorMode;
+  }
+
+  set endeavorMode(value) {
+    this.$endeavorMode = value;
+    this.onChangeEndeavorMode.emit(value);
     this.onChangeLocalStorageData.emit(this.computeDataForLocalStorage());
   }
 
@@ -260,6 +273,7 @@ class Store {
   onChangeLogs = new Signal();
   onChangeTodos = new Signal();
   onChangeEndeavors = new Signal();
+  onChangeEndeavorMode = new Signal();
   onChangeActivities = new Signal();
   onChangeActivitiesMode = new Signal();
   onChangeQuests = new Signal();
@@ -279,6 +293,7 @@ class Store {
     logs: this.$logs,
     todos: this.$todos,
     endeavors: this.$endeavors,
+    endeavorMode: this.$endeavorMode,
     activities: this.$activities,
     quests: this.$quests,
     confidencePoints: this.$confidencePoints,

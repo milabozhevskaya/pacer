@@ -3,6 +3,7 @@ import { getTime } from "../utils/getTime.js";
 class LocalStorageData {
   constructor({
     endeavors,
+    endeavorMode,
     notes,
     activities,
     activitiesMode,
@@ -14,6 +15,7 @@ class LocalStorageData {
     manualTime,
   }) {
     this.endeavors = endeavors;
+    this.endeavorMode = endeavorMode;
     this.notes = notes;
     this.activities = activities;
     this.activitiesMode = activitiesMode;
@@ -106,6 +108,13 @@ class LocalStorageData {
       initData.manualTime = data.manualTime;
     } else {
       initData.manualTime = getTime();
+      // throw new Error("Not property in localstorage");
+    }
+
+    if (this.instanceOfISourcesLStorage(data, "endeavorMode")) {
+      initData.endeavorMode = data.endeavorMode;
+    } else {
+      initData.endeavorMode = "text";
       // throw new Error("Not property in localstorage");
     }
 

@@ -61,6 +61,10 @@ class NewListRow extends Element {
     this.input.node.value = "";
     Object.assign(this.node.style, this.styles.newRow);
   };
+
+  clearNewRow = () => {
+    this.input.node.value = "";
+  };
 }
 
 export { NewListRow };

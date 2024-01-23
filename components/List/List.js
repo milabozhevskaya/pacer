@@ -88,8 +88,12 @@ class List extends Element {
 
   removeNewRowMode = () => {
     if (!this.addNewItemMode) return;
-    this.addNewItemMode = false;
-    this.newRow.cancelNewRow();
+    if (this.content.length !== 0) {
+      this.addNewItemMode = false;
+      this.newRow.cancelNewRow();
+      return;
+    }
+    this.newRow.clearNewRow();
   };
 }
 

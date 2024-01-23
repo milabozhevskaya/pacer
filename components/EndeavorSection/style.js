@@ -20,7 +20,27 @@ export const styles = {
     fontSize: "20px",
     userSelect: "none",
   },
-  button: {
+  addNewEndeavorButton: {
+    position: "absolute",
+    left: "0",
+    bottom: "0",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: "55px",
+    height: "19px",
+    pointerEvents: "auto",
+    span: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      pointerEvents: "none",
+    },
+    hide: {
+      display: "none",
+    },
+  },
+  changeModeButton: {
     position: "absolute",
     right: "0",
     bottom: "0",

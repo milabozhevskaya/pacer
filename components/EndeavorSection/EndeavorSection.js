@@ -61,6 +61,9 @@ class EndeavorSection extends Element {
     this.text = text;
     this.textarea.update(text);
     this.list.update(text);
+    if (text === "") {
+      this.list.addNewRowMode();
+    }
   };
 
   updateMode = (mode) => {
@@ -77,6 +80,9 @@ class EndeavorSection extends Element {
         this.addNewEndeavorButton.node.style,
         styles.addNewEndeavorButton
       );
+      if (this.text === "") {
+        this.list.addNewRowMode();
+      }
     }
     this.changeModeButton.updateText(this.content.buttons.mode[mode]);
     this.activeChild.destroy();

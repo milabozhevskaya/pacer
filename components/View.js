@@ -29,6 +29,7 @@ class View extends Element {
 
   init = (initialData) => {
     this.main.updateEndeavors(initialData.endeavors);
+    this.main.updateEndeavorMode(initialData.endeavorMode);
     this.main.updateActivities(initialData.activities);
     this.main.updateActivitiesMode(initialData.activitiesMode);
     this.main.updateLogs(initialData.logs);
@@ -44,6 +45,7 @@ class View extends Element {
     this.store.onReInit.add((date) => {
       this.main.updateNotes(date.notes);
       this.main.updateEndeavors(date.endeavors);
+      this.main.updateEndeavorMode(date.endeavorMode);
       this.main.updateActivities(date.activities, "reinit");
       this.main.updateActivitiesMode(date.activitiesMode);
       this.main.updateLogs(date.logs);
@@ -73,6 +75,9 @@ class View extends Element {
     this.store.onChangeNotes.add((notes) => this.main.updateNotes(notes));
     this.store.onChangeEndeavors.add((endeavors) =>
       this.main.updateEndeavors(endeavors)
+    );
+    this.store.onChangeEndeavorMode.add((endeavorMode) =>
+      this.main.updateEndeavorMode(endeavorMode)
     );
     this.store.onChangeActivities.add((activities) =>
       this.main.updateActivities(activities)

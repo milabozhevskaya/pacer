@@ -20,6 +20,8 @@ const styles = {
     padding: "0 15px",
     letterSpacing: "3px",
     userSelect: "none",
+    display: "flex",
+    alignItems: "center",
   },
   hover: {
     boxShadow: `#f6c3411f 0px 2px 4px 0px, #eb8d3ca1 0px 2px 16px 0px`,

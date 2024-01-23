@@ -7,14 +7,14 @@ export const styles = {
   tableLayout: "auto",
   row: {
     width: "100%",
-    display: 'flex',
+    display: "flex",
   },
   cell: {
     flexGrow: "1",
     padding: "5px",
     fontSize: "22px",
     border: "1px solid #7e797659",
-    borderRadius: "3px",
+    // borderRadius: "3px",
     backgroundColor: "#ddd2cc59",
     color: "#6f6161",
     outline: "none",

@@ -1,3 +1,11 @@
+import {
+  editIcon,
+  deleteIcon,
+  saveIcon,
+  cancelIcon,
+  addIcon,
+} from "./sprite.js";
+
 export const content = {
   header: {
     dateWidget: {
@@ -45,9 +53,35 @@ export const content = {
     notes: {
       endeavor: {
         title: "Стремления",
-        button: {
-          text: "Лист",
-          list: "Текст",
+        buttons: {
+          mode: {
+            text: "Лист",
+            list: "Текст",
+          },
+          add: {
+            icon: addIcon,
+            title: "Добавить",
+          },
+        },
+        list: {
+          buttons: {
+            edit: {
+              icon: editIcon,
+              title: "Редактировать",
+            },
+            delete: {
+              icon: deleteIcon,
+              title: "Удалить",
+            },
+            save: {
+              icon: saveIcon,
+              title: "Сохранить",
+            },
+            cancel: {
+              icon: cancelIcon,
+              title: "Отмена",
+            },
+          },
         },
       },
       activity: {

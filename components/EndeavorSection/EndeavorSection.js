@@ -32,7 +32,7 @@ class EndeavorSection extends Element {
     this.button = new Button({
       parent: this.top.node,
       className: "note__button",
-      content: content.button[mode],
+      content: content.buttons.mode[mode],
       styles: styles.button,
       controller: () => controller.changeEndeavorMode(this.changeMode()),
     });
@@ -41,26 +41,27 @@ class EndeavorSection extends Element {
     );
     this.list = new List({
       parent: null,
-      controller: (text) => controller.changeTextareaText(key, text),
+      changeText: (text) => controller.changeTextareaText(key, text),
+      buttons: content.list.buttons,
     });
     this.activeChild = this.mode === "text" ? this.textarea : this.list;
     this.node.append(this.activeChild.node);
   }
 
   changeMode = () => (this.mode === "text" ? "list" : "text");
+
   updateText = (text, reinit = "") => {
     this.text = text;
     this.textarea.update(text);
-    if (this.mode === "text") {
-      this.list.update(text);
-    }
-    if (reinit === "reinit" && this.mode === "list") {
-      this.list.update(text);
-    }
+    this.list.update(text);
   };
+
   updateMode = (mode) => {
     this.mode = mode;
-    this.button.updateText(this.content.button[mode]);
+    if (this.mode === "text") {
+      this.list.removeEditMode();
+    }
+    this.button.updateText(this.content.buttons.mode[mode]);
     this.activeChild.destroy();
     this.activeChild = this.mode === "text" ? this.textarea : this.list;
     this.node.append(this.activeChild.node);

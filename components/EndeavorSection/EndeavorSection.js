@@ -22,6 +22,13 @@ class EndeavorSection extends Element {
       className: "note__top",
       styles: styles.top,
     });
+    this.addNewEndeavorButton = new Button({
+      parent: this.top.node,
+      className: "note__add-item-button",
+      content: content.buttons.add.icon,
+      styles: styles.addNewEndeavorButton,
+      controller: this.addNewEndeavor,
+    });
     this.title = new Element({
       parent: this.top.node,
       tagName: "h2",
@@ -29,11 +36,11 @@ class EndeavorSection extends Element {
       content: content.title,
       styles: styles.title,
     });
-    this.button = new Button({
+    this.changeModeButton = new Button({
       parent: this.top.node,
       className: "note__button",
       content: content.buttons.mode[mode],
-      styles: styles.button,
+      styles: styles.changeModeButton,
       controller: () => controller.changeEndeavorMode(this.changeMode()),
     });
     this.textarea = new Textarea(null, (text) =>
@@ -59,9 +66,19 @@ class EndeavorSection extends Element {
   updateMode = (mode) => {
     this.mode = mode;
     if (this.mode === "text") {
+      Object.assign(
+        this.addNewEndeavorButton.node.style,
+        styles.addNewEndeavorButton.hide
+      );
       this.list.removeEditMode();
+      this.list.removeNewRowMode();
+    } else {
+      Object.assign(
+        this.addNewEndeavorButton.node.style,
+        styles.addNewEndeavorButton
+      );
     }
-    this.button.updateText(this.content.buttons.mode[mode]);
+    this.changeModeButton.updateText(this.content.buttons.mode[mode]);
     this.activeChild.destroy();
     this.activeChild = this.mode === "text" ? this.textarea : this.list;
     this.node.append(this.activeChild.node);
@@ -69,6 +86,8 @@ class EndeavorSection extends Element {
       this.textarea.update(this.list.getContent());
     }
   };
+
+  addNewEndeavor = () => this.list.addNewRowMode();
 }
 
 export { EndeavorSection };
